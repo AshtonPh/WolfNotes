@@ -18,6 +18,7 @@ Our web-application will be called ‘Wolfnotes’.
 Our primary audience comprises students seeking a seamless note-taking experience during lectures while maintaining a synchronized connection between their notes and lecture slides. To cater to this need, our proposed application will empower users by enabling them to effortlessly upload their lecture slides and create corresponding notes linked to specific slides.
 
 **4. General features**
+
 a.  Write along Slides: When creating a new set of notes, the user is given the option to upload a copy of the lecture slides. The user’s notes are segmented by what slide they were on while writing them. Moving through the slides moves through the accompanying sections of notes and vice versa. Accepted file types include: *.pptx, *.pdf
     
 b.  Class Glossary: The user can add words with definitions through the notes. When you hover over these words throughout the notes, it would show you the definition of the words and the usage of the words. As well as if these terms have been used in your other lecture notes, so the user can have a better understanding of the terms and create a stronger connection between different sections of the knowledge.
