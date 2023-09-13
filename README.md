@@ -1,5 +1,5 @@
 # WolfNotes
-## CSC 342 Group V Project
+### CSC 342 Group V Project
 
 # Table of Contents
-- [Proposal](/csc342-2023Fall-GroupV/Proposal/README.md)
+- [Proposal](/Proposal/README.md)
