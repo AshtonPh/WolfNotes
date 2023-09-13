@@ -45,11 +45,11 @@ e. Notes and Slides Synchronization: Sync sections of the notes to targeted lect
 The user will be asked to provide this information upon creating their account.
 
  **6. Draft wireframes**
-![Main Screen](https://github.ncsu.edu/engr-csc342/csc342-2023Fall-GroupV/blob/main/Proposal/Images/home.png)
+![Main Screen](https://github.ncsu.edu/engr-csc342/csc342-2023Fall-GroupV/blob/main/Proposal/Wireframes/home.png)
 
-![Notes](https://github.ncsu.edu/engr-csc342/csc342-2023Fall-GroupV/blob/main/Proposal/Images/notes.png)
+![Notes](https://github.ncsu.edu/engr-csc342/csc342-2023Fall-GroupV/blob/main/Proposal/Wireframes/notes.png)
 
-![Notes Expanded](https://github.ncsu.edu/engr-csc342/csc342-2023Fall-GroupV/blob/main/Proposal/Images/notes-expanded.png)
+![Notes Expanded](https://github.ncsu.edu/engr-csc342/csc342-2023Fall-GroupV/blob/main/Proposal/Wireframes/notes-expanded.png)
 
 
 
