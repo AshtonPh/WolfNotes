@@ -52,7 +52,12 @@ The user will be asked to provide this information upon creating their account.
 ![Notes Expanded](https://github.ncsu.edu/engr-csc342/csc342-2023Fall-GroupV/blob/main/Proposal/Wireframes/notes-expanded.png)
 
 
-
+**7. Team Contributions**
+| Team member | Team contributions                 |
+|----:|-------------------------|
+|  **Zelda Lu**  | -   Provided additional features to the project.<br />-   Write and edited majority of the details for general features and data requirements. |
+|  **Deci Horine**  | -   Designed the wireframes of the web application.<br />-   Provided the main idea for the project.<br />-   Created the table of contents.<br />-   Edited details for general features and data requirements. |
+|  **Nam Pham** | -   Formatted the markdown for the proposal.<br />-   Initialized the file structure.<br />-   Provided additional features to the project.<br />-   Edited target users and data requirement.<br />-   Edited the table of team contribution. |
 
 
 
