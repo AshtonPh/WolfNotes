@@ -4,7 +4,7 @@ const notesRouter = require('./notesRouter');
 const dataRouter = require('./dataRouter');
 
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3501;
 
 app.use(express.json());
 app.use('/auth', authenticationRouter);
