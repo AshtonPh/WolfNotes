@@ -48,9 +48,9 @@ router.post("/signin", (req, res) => {
   if (user) {
     // Respond with a token 
     //TODO: implement proper authentication
-    res.status(200).json({ token: "afj93sfjkljawef" });
+    res.status(200).send({ token: "afj93sfjkljawef" });
   } else {
-    res.status(401).json({ error: "Invalid username or password" });
+    res.status(401).send({ error: "Invalid username or password" });
   }
 });
 
@@ -67,9 +67,9 @@ router.post("/user-agreement", (req, res) => {
     //TODO: use a real database later 
     acceptedAgreements.push(userID);
 
-    res.status(200).json({ message: "User agreement accepted successfully" });
+    res.status(200).send({ message: "User agreement accepted successfully" });
   } else {
-    res.status(400).json({ error: "Invalid request data" });
+    res.status(400).send({ error: "Invalid request data" });
   }
 });
 
@@ -81,7 +81,7 @@ router.post("/user-settings", (req, res) => {
   //TODO: use a real database
   userSettings[userName] = { institution, currentCourses };
 
-  res.status(200).json({ message: "User settings updated successfully" });
+  res.status(200).send({ message: "User settings updated successfully" });
 });
 
 // User Profile Setting
@@ -92,7 +92,7 @@ router.post("/user-profile", (req, res) => {
   //TODO:  use a real database
   userProfiles[userName] = userProfile;
 
-  res.status(200).json({ message: "User profile updated successfully" });
+  res.status(200).send({ message: "User profile updated successfully" });
 });
 
 router.get("/user-profile/:userName/picture", (req, res) => {
@@ -104,7 +104,7 @@ router.get("/user-profile/:userName/picture", (req, res) => {
     // Send the user profile picture
     res.sendFile(userProfiles[userName].pictureUrl);
   } else {
-    res.status(404).json({ error: "Profile picture not found" });
+    res.status(404).send({ error: "Profile picture not found" });
   }
 });
 
