@@ -23,7 +23,7 @@ router.post("/register", (req, res) => {
   );
 
   if (existingUser) {
-    res.status(409).json({ error: "User already exists" });
+    res.status(409).send({ error: "User already exists" });
   } else {
     // Add the user to the mock database 
     // TODO:should use a real database later in the implementation
@@ -31,7 +31,7 @@ router.post("/register", (req, res) => {
 
     // Respond with a token 
     // TODO:should implement proper authentication
-    res.status(201).json({ token: "afj93sfjkljawef" });
+    res.status(201).send({ token: "afj93sfjkljawef" });
   }
 });
 
