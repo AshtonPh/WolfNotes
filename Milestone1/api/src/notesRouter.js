@@ -1,6 +1,10 @@
 const express = require("express");
+const app = express();
 const router = express.Router();
 const example = require("./example/notesRouter-example");
+
+//Middleware to parse JSON request bodies
+app.use(express.json());
 
 
 function authenticate(req) {
@@ -15,7 +19,7 @@ function authenticate(req) {
 }
 
 // Create a new note
-router.post('/', (req, res) => {
+app.post('/', (req, res) => {
 
     if (!authenticate(req))
         return;
@@ -47,7 +51,7 @@ router.post('/', (req, res) => {
   });
 
 // Get a note by its id
-router.get('/:noteID', (req, res) => {
+app.get('/notes/:noteID', (req, res) => {
 
     if (!authenticate(req))
         return;
@@ -66,7 +70,7 @@ router.get('/:noteID', (req, res) => {
   });
 
 // Update a note by its id
-router.put("/:noteID", (req, res) => {
+app.put("/notes/:noteID", (req, res) => {
 
     if (!authenticate(req))
         return;
@@ -97,7 +101,7 @@ router.put("/:noteID", (req, res) => {
   });
 
 // Delete a note by its id
-router.delete("/:noteID", (req, res) => {
+app.delete("/notes/:noteID", (req, res) => {
     if (!authenticate(req))
         return;
     const { noteID } = req.params;
@@ -121,7 +125,7 @@ router.delete("/:noteID", (req, res) => {
   });
 
 // Search notes by a phrase or keyword
-router.get("/search", (req, res) => {
+app.get("/notes/search", (req, res) => {
     if (!authenticate(req))
         return;
     const { q } = req.query;
@@ -139,7 +143,7 @@ router.get("/search", (req, res) => {
   });
 
 // Search notes by tags
-router.get("/searchByTag", (req, res) => {
+app.get("/notes/searchByTag", (req, res) => {
     if (!authenticate(req))
         return;
     const { tag } = req.query;
