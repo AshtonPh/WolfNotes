@@ -6,13 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wolfnotes</title>
     <script src="./tinymce/js/tinymce/tinymce.min.js"></script>
-    <link rel="stylesheet" href="style.css">
     <script src="script.js" type="module"></script>
+    <style>
+      #container{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        
+      }
+    </style>
 </head>
 <body>
     <div id="container">
-      <textarea id="default" placeholder="Write your notes here">  </textarea>
-      <md-filled-button onclick=>Upload lecture slide</md-filled-button>
+      <div id="editor">
+        <textarea id="default" placeholder="Write your notes here">  </textarea>
+      </div>
+      <div id="img-container"> 
+        <img src="../note/images/1697578214520-99125ed2-4143-4148-bf1b-2a8b6fb6487f_1.jpg" style="width:100%">
+      </div>
     </div>
     <script src="note.js"></script>
 </body>

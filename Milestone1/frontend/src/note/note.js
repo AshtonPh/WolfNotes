@@ -8,6 +8,7 @@ tinymce.init({
     a11y_advanced_options: true,
     promotion: false,
     branding: false,
-    width: '50%',
+    width: '100%',
+    height: '100vh',
     elementpath: false
 });
