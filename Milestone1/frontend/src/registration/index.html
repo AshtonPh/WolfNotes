@@ -5,13 +5,13 @@
     <meta charset = "UTF-8">
     <title>Registration</title>
   <link rel="stylesheet" href="style.css">
-
+  <script src="script.js"></script>
 </head>
 
 <body>
     <div class = "registartion">
         <h2>User Registration</h2>
-        <form action="your-server-endpoint.php" method="post">
+        <form action="/register" action = "/send" method = "post" enctype="multipart/form-data">
             <label for = "email">Email:</label>
             <input type = "text" id = "email" name = "email" required>
 
