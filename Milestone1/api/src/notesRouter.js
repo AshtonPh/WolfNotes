@@ -2,8 +2,6 @@ const express = require("express");
 const router = express.Router();
 const example = require("./example/notesRouter-example");
 
-//Middleware to parse JSON request bodies
-//router.use(express.json());
 
 
 function authenticate(req) {
@@ -17,7 +15,19 @@ function authenticate(req) {
     }
 }
 
+// Get all notes
+router.get("/allNotes", (req, res) => {
+  if (!authenticate(req))
+    return;
+
+  // Return all notes
+  res.status(200).json(example.notes);
+});
+
+
+
 // Search notes by tags
+// Checked
 router.get("/searchByTag", (req, res) => {
   if (!authenticate(req))
       return;
@@ -52,7 +62,7 @@ router.get("/search", (req, res) => {
       note.content.includes(q) ||
       note.tags.some(tag_include)
   );
-  
+
   if (filteredNotes.length == 0){
     res.status(404).json({ error: "Note not found" });
   } 
