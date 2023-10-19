@@ -8,6 +8,7 @@
     <script src="./tinymce/js/tinymce/tinymce.min.js"></script>
     <script src="script.js" type="module"></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Gabarito">
 </head>
 <body>
     <div id="container">
@@ -15,14 +16,15 @@
           <img id="img" src="" alt="Image">
       </div>
       <div id ="button-container">
-        <md-filled-button id="prev-btn">Previous</md-filled-button>
-        <md-filled-button id="next-btn">Next</md-filled-button>
+        <md-filled-button id="prev-btn" onclick="prevImage()">Previous</md-filled-button>
+        <md-filled-button id="next-btn" onclick="nextImage()">Next</md-filled-button>
       </div>
-      <div id="editor">
+      <form id="editor">
         <textarea id="default" placeholder="Write your notes here">  </textarea>
 
-      </div>
+      </form>
     </div>
     <script src="note.js"></script>
+    <script src="api.js"></script>
 </body>
 </html>

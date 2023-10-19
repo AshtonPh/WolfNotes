@@ -1,10 +1,10 @@
 tinymce.init({
     selector: 'textarea#default',
     menubar: 'file edit view insert format',
-    toolbar: 'undo redo | fontfamily fontsize| bold italic underline| alignleft aligncenter alignright alignjustify | ' +
+    toolbar: ' save undo redo | fontfamily fontsize| bold italic underline| alignleft aligncenter alignright alignjustify | ' +
     'bullist numlist outdent indent | link image | preview media fullscreen | ' +
     ' forecolor backcolor emoticons',
-    plugins: 'image',
+    plugins: 'save',
     a11y_advanced_options: true,
     promotion: false,
     branding: false,
