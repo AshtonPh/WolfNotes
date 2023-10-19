@@ -4,9 +4,10 @@
  * Handle click events for page buttons
  */
 
-import { deleteNote } from "./api";
+import { deleteNote, createNote } from "./api";
 
-let noteMenu, deleteDialog, confirmDeleteButton, cancelDeleteButton, notesListContent;
+let noteMenu, deleteDialog, confirmDeleteButton, cancelDeleteButton, 
+    notesListContent, createDialog, newNoteName, confirmCreateBtn, cancelCreateBtn;
 
 /**
  * Register onclick events for static (non-rendered) button items
@@ -18,6 +19,10 @@ export function registerButtons() {
     confirmDeleteButton = document.getElementById('confirm-delete-btn');
     cancelDeleteButton = document.getElementById('cancel-delete-btn');
     notesListContent = document.getElementById('note-list-content');
+    createDialog = document.getElementById('create-new-dialog');
+    confirmCreateBtn = document.getElementById('confirm-create-btn');
+    cancelCreateBtn = document.getElementById('cancel-create-btn');
+    newNoteName = document.getElementById('new-note-name');
 
     // Make the user picture open the user menu
     const userMenu = document.getElementById('user-menu');
@@ -33,6 +38,11 @@ export function registerButtons() {
     // Add actions to the delete dialog
     confirmDeleteButton.onclick = confirmDelete;
     cancelDeleteButton.onclick = () => deleteDialog.close();
+
+    // Add actions for creating a note
+    document.getElementById('create-note-btn').onclick = () => createDialog.show();
+    confirmCreateBtn.onclick = confirmCreate;
+    cancelCreateBtn.onclick = () => createDialog.close();
 }
 
 /**
@@ -87,6 +97,14 @@ async function confirmDelete() {
     confirmDeleteButton.disabled = false;
     cancelDeleteButton.disabled = false;
     deleteDialog.close();
+}
+
+async function confirmCreate() {
+    if (!newNoteName.reportValidity())
+        return;
+
+    let res = await createNote(newNoteName.value, []);
+    openNote(res.json().noteID);
 }
 
 let filters = []
