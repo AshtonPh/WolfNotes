@@ -14,7 +14,7 @@ form.addEventListener('submit', (event) => {
 
   // Create the request body
   const requestBody = {
-    noteID: '1',
+    noteID: '5',
     title: 'Lecture #1',
     content: htmlContent,
     tags: ['Course A', 'Professor A'],
@@ -24,7 +24,8 @@ form.addEventListener('submit', (event) => {
   fetch(apiUrl, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': 'token afj93sfjkljawef'
     },
     body: JSON.stringify(requestBody)
   })
