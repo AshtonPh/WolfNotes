@@ -313,7 +313,7 @@ function isWithinLastWeek(dateTimeString) {
     parsedDateTime.time.seconds
   );
 
-  if (parsedDateTimeObject >= lastWeekDateTime && parsedDateTimeObject <= currentDate) {
+  if (parsedDateTimeObject >= lastWeekDateTime) {
     isWithinLastWeek = true;
   }
 
