@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
           // Sign-in succeeded
           console.log('Sign-in successful:', data);
           // Redirect to the home page
-          window.location.href = '/home.html';
+          window.location.href = '/home/index.html';
         })
         .catch((error) => {
           // Sign-in failed, handle the error

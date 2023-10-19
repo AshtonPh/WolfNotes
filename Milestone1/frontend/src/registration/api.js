@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const email = document.getElementById('email').value;
 
       // Define the API endpoint URL
-       const apiUrl = 'http://localhost:3501/registration/';
+     const apiUrl = 'http://localhost:3501/registration/';
   
       // Create an object with the registration data
       const registrationData = {
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
           // Registration succeeded
           console.log('Registration successful:', data);
           // Redirect to the home page
-          window.location.href = '/home.html';
+          window.location.href = '/home';
         })
         .catch((error) => {
           // Registration failed, handle the error

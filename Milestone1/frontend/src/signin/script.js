@@ -29,5 +29,5 @@ document.getElementById('login-form').addEventListener('submit', function(event)
     document.cookie = `token=${token}; path=/`;
 
     // Redirect to the home page after successfully log in 
-    window.location.href = '../home/index.html';
+    window.location.href = '/home/index.html';
 });
