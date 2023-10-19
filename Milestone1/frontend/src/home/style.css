@@ -114,6 +114,10 @@ main {
     font-size: 14pt;
 }
 
+#note-list {
+    padding-bottom: 56pt;
+}
+
 #note-list-content {
     margin: 0pt;
     padding: 0pt;
@@ -179,4 +183,10 @@ main {
 #confirm-delete-btn {
     --md-filled-tonal-button-container-color: var(--md-sys-color-error-container);
     --md-filled-tonal-button-label-text-color: var(--md-sys-color-on-error-container);
+}
+
+#create-note-btn {
+    position: fixed;
+    bottom: calc(64px + 12pt);
+    right: 12pt;
 }

@@ -16,6 +16,7 @@ import '@material/web/ripple/ripple'
 import '@material/web/button/filled-tonal-button'
 import '@material/web/button/text-button'
 import '@material/web/dialog/dialog'
+import '@material/web/fab/fab'
 import { render } from './render'
 import { registerButtons } from './buttons'
 

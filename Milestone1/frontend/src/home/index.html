@@ -43,6 +43,9 @@
         <md-primary-tab active><md-icon slot="icon">home</md-icon>Home</md-primary-tab>
         <md-primary-tab><md-icon slot="icon">style</md-icon>Tags</md-primary-tab>
     </md-tabs>
+    <md-fab label="New" id="create-note-btn">
+        <md-icon slot="icon">add</md-icon>
+    </md-fab>
     <div id="hidden-items">
         <md-menu id="note-menu" data-for="" anchor="">
             <md-menu-item disabled>
@@ -57,12 +60,12 @@
             </md-menu-item>
         </md-menu>
         <md-menu id="user-menu" anchor="user-picture">
-            <md-menu-item>
+            <md-menu-item href="/settings">
                 <div slot="headline">User settings</div>
                 <div slot="supporting-text" id="user-menu-email">sdent@ncsu.edu</div>
                 <md-icon slot="start">settings</md-icon>
             </md-menu-item>
-            <md-menu-item>
+            <md-menu-item href="/signin">
                 <div slot="headline">Log out</div>
                 <md-icon slot="start">logout</md-icon>
             </md-menu-item>
@@ -74,6 +77,16 @@
             <div slot="actions">
                 <md-text-button id="cancel-delete-btn">Cancel</md-text-button>
                 <md-filled-tonal-button id="confirm-delete-btn">Delete</md-filled-tonal-button>
+            </div>
+        </md-dialog>
+        <md-dialog id="create-new-dialog">
+            <div slot="headline">Create Note</div>
+            <div slot="content">
+                <md-filled-text-field required id="new-note-name" name="name" label="Name"></md-filled-text-field>
+            </div>
+            <div slot="actions">
+                <md-text-button id="cancel-create-btn">Cancel</md-text-button>
+                <md-filled-tonal-button id="confirm-create-btn">Create</md-filled-tonal-button>
             </div>
         </md-dialog>
     </div>

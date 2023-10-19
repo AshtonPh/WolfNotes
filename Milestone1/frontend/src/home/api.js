@@ -109,3 +109,10 @@ export function deleteNote(noteID) {
         method: 'DELETE'
     });
 }
+
+export function createNote(title, tags) {
+    return requestApi(`/notes`, {
+        method: 'POST',
+        body: JSON.stringify({title, tags})
+    });
+}
