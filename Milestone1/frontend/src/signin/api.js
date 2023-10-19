@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
       };
   
       // Send a POST request to the sign-in endpoint
-      fetch('/auth/signin', {
+      fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
