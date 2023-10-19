@@ -9,22 +9,57 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Gabarito">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
     <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Rounded" rel="stylesheet">
+    <link rel="stylesheet" href="../common/theme/theme.css">
     <link rel="stylesheet" href="style.css">
-    <script src="script.js" type="module" defer></script>
-    <script src="api.js" defer></script>
-    <script src="buttons.js" defer></script>
+    <script src="script.js" type="module"></script>
 </head>
 
 <body>
     <header>
         <md-outlined-text-field id="searchbar" placeholder="Search your notes...">
             <md-icon slot="leading-icon">search</md-icon>
-            <div id="user-picture" slot="trailing-icon"></div>
+            <img id="user-picture" slot="trailing-icon"></div>
         </md-outlined-text-field>
+    </header>
+    <main>
+        <h2 class="section-header">Jump Back In</h2>
+        <div id="jump">
+        </div>
+        <h2 class="section-header">Your Notes</h2>
+        <div id="note-list">
+            <md-chip-set id="filters">
+                <md-assist-chip id="chip-sorting" label="Most recent first">
+                    <md-icon slot="icon">sort</md-icon>
+                </md-assist-chip>
+                <!-- <md-filter-chip id="chip-downloaded" label="Downloaded">
+                    <md-icon slot="icon">cloud_off</md-icon>
+                </md-filter-chip> -->
+            </md-chip-set>
+            <md-list id="note-list-content">
+            </md-list>
+        </div>
+    </main>
+    <md-tabs>
+        <md-primary-tab active><md-icon slot="icon">home</md-icon>Home</md-primary-tab>
+        <md-primary-tab><md-icon slot="icon">style</md-icon>Tags</md-primary-tab>
+    </md-tabs>
+    <div id="hidden-items">
+        <md-menu id="note-menu" data-for="" anchor="">
+            <md-menu-item disabled>
+                <div slot="headline">Rename</div>
+            </md-menu-item>
+            <md-menu-item disabled>
+                <div slot="headline">Edit tags</div>
+                <div slot="supporting-text">Coming when the tags page is complete</div>
+            </md-menu-item>
+            <md-menu-item id="nm-btn-delete">
+                <div slot="headline">Delete</div>
+            </md-menu-item>
+        </md-menu>
         <md-menu id="user-menu" anchor="user-picture">
             <md-menu-item>
                 <div slot="headline">User settings</div>
-                <div slot="supporting-text">sdent@ncsu.edu</div>
+                <div slot="supporting-text" id="user-menu-email">sdent@ncsu.edu</div>
                 <md-icon slot="start">settings</md-icon>
             </md-menu-item>
             <md-menu-item>
@@ -32,115 +67,16 @@
                 <md-icon slot="start">logout</md-icon>
             </md-menu-item>
         </md-menu>
-    </header>
-    <!-- <div id="main-container"> -->
-        <main>
-            <h2 class="section-header">Jump Back In</h2>
-            <div id="jump">
-                <div class="jump-target">
-                    <div class="jump-target-img"></div>
-                    <div class="jump-target-details">
-                        <div class="jump-target-details-text">
-                            <div class="jump-target-name">Lecture Name</div>
-                            <div class="jump-target-why">You opened this recently</div>
-                        </div>
-                        <md-icon-button>
-                            <md-icon>more_vert</md-icon>
-                        </md-icon-button>
-                    </div>
-                </div>
-                <div class="jump-target">
-                    <div class="jump-target-img"></div>
-                    <div class="jump-target-details">
-                        <div class="jump-target-details-text">
-                            <div class="jump-target-name">Lecture Name</div>
-                            <div class="jump-target-why">You opened this recently</div>
-                        </div>
-                        <md-icon-button>
-                            <md-icon>more_vert</md-icon>
-                        </md-icon-button>
-                    </div>
-                </div>
-                <div class="jump-target">
-                    <div class="jump-target-img"></div>
-                    <div class="jump-target-details">
-                        <div class="jump-target-details-text">
-                            <div class="jump-target-name">Lecture Name</div>
-                            <div class="jump-target-why">You opened this recently</div>
-                        </div>
-                        <md-icon-button>
-                            <md-icon>more_vert</md-icon>
-                        </md-icon-button>
-                    </div>
-                </div>
+        <md-dialog id="confirm-delete-dialog" data-for="">
+            <md-icon slot="icon">delete</md-icon>
+            <div slot="headline">Confirm Deletion</div>
+            <div slot="content">Are you sure you want to delete this note?</div>
+            <div slot="actions">
+                <md-text-button id="cancel-delete-btn">Cancel</md-text-button>
+                <md-filled-tonal-button id="confirm-delete-btn">Delete</md-filled-tonal-button>
             </div>
-            <h2 class="section-header">Your Lectures</h2>
-            <div id="lecture-list">
-                <md-chip-set id="filters">
-                    <md-assist-chip id="chip-sorting" label="Most recent first">
-                        <md-icon slot="icon">sort</md-icon>
-                    </md-assist-chip>
-                    <md-filter-chip id="chip-downloaded" label="Downloaded">
-                        <md-icon slot="icon">cloud_off</md-icon>
-                    </md-filter-chip>
-                    <md-filter-chip id="chip-downloaded" label="Tag 1">
-                        <md-icon slot="icon">sell</md-icon>
-                    </md-filter-chip>
-                </md-chip-set>
-                <md-list id="lecture-list-content">
-                    <md-list-item>
-                        <div class="lecture-list-name" slot="headline">Lecture 1</div>
-                        <div class="lecture-list-details" slot="supporting-text">
-                            <div class="lecture-list-details-item"><md-icon>sell</md-icon> Tag Name</div>
-                            <div class="lecture-list-details-item"><md-icon>history</md-icon> Last edit at 12:34 PM
-                            </div>
-                        </div>
-                        <div class="lecture-list-img" slot="start"></div>
-                    </md-list-item>
-                    <md-list-item>
-                        <div class="lecture-list-name" slot="headline">Lecture 1</div>
-                        <div class="lecture-list-details" slot="supporting-text">
-                            <div class="lecture-list-details-item"><md-icon>sell</md-icon> Tag Name</div>
-                            <div class="lecture-list-details-item"><md-icon>history</md-icon> Last edit at 12:34 PM
-                            </div>
-                        </div>
-                        <div class="lecture-list-img" slot="start"></div>
-                    </md-list-item>
-                    <md-list-item>
-                        <div class="lecture-list-name" slot="headline">Lecture 1</div>
-                        <div class="lecture-list-details" slot="supporting-text">
-                            <div class="lecture-list-details-item"><md-icon>sell</md-icon> Tag Name</div>
-                            <div class="lecture-list-details-item"><md-icon>history</md-icon> Last edit at 12:34 PM
-                            </div>
-                        </div>
-                        <div class="lecture-list-img" slot="start"></div>
-                    </md-list-item>
-                    <md-list-item>
-                        <div class="lecture-list-name" slot="headline">Lecture 1</div>
-                        <div class="lecture-list-details" slot="supporting-text">
-                            <div class="lecture-list-details-item"><md-icon>sell</md-icon> Tag Name</div>
-                            <div class="lecture-list-details-item"><md-icon>history</md-icon> Last edit at 12:34 PM
-                            </div>
-                        </div>
-                        <div class="lecture-list-img" slot="start"></div>
-                    </md-list-item>
-                    <md-list-item>
-                        <div class="lecture-list-name" slot="headline">Lecture 1</div>
-                        <div class="lecture-list-details" slot="supporting-text">
-                            <div class="lecture-list-details-item"><md-icon>sell</md-icon> Tag Name</div>
-                            <div class="lecture-list-details-item"><md-icon>history</md-icon> Last edit at 12:34 PM
-                            </div>
-                        </div>
-                        <div class="lecture-list-img" slot="start"></div>
-                    </md-list-item>
-                </md-list>
-            </div>
-        </main>
-    <!-- </div> -->
-    <md-tabs>
-        <md-primary-tab active><md-icon slot="icon">home</md-icon>Home</md-primary-tab>
-        <md-primary-tab><md-icon slot="icon">style</md-icon>Tags</md-primary-tab>
-    </md-tabs>
+        </md-dialog>
+    </div>
 </body>
 
 </html>

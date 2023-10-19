@@ -1,4 +1,4 @@
-@import url('../common/theme/theme.css');
+/* @import url('../common/theme/theme.css'); */
 
 html {
     margin: 0px;
@@ -48,11 +48,10 @@ header {
 }
 
 #user-picture {
-    background-color: blue;
+    background-color: var(--md-sys-color-primary);
     width: 24pt;
     height: 24pt;
     border-radius: 50%;
-    /* z-index: 1000; */
 }
 
 #main-container {
@@ -77,6 +76,7 @@ main {
 
 #jump {
     padding-left: 12pt;
+    padding-right: 12pt;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -90,6 +90,7 @@ main {
 }
 
 .jump-target {
+    position: relative;
     background-color: var(--md-sys-color-surface-variant);
     color: var(--md-sys-color-on-surface-variant);
     border-radius: 12pt;
@@ -102,23 +103,23 @@ main {
 }
 
 .jump-target-img {
-    background-color: blue;
+    object-fit: cover;
     width: 100%;
-    height: 72pt;
+    height: 84pt;
     border-radius: 6pt;
-    padding-bottom: 12pt;
+    /* padding-bottom: 12pt; */
 }
 
 .jump-target-name {
     font-size: 14pt;
 }
 
-#lecture-list-content {
+#note-list-content {
     margin: 0pt;
     padding: 0pt;
 }
 
-#lecture-list-content md-list-item {
+#note-list-content md-list-item {
     padding-left: 0pt
 }
 
@@ -131,6 +132,7 @@ main {
 
 #filters {
     padding-left: 12pt;
+    padding-right: 12pt;
     margin-bottom: 6pt;
     flex-wrap: nowrap;
     overflow-x: scroll;
@@ -142,33 +144,39 @@ main {
     display: none;
 }
 
-.lecture-list-img {
-    background-color: blue;
+.note-list-img {
+    /* background-color: blue; */
     width: 42pt;
     height: 28pt;
     border-radius: 4pt;
     margin-left: 2pt;
+    outline: 2px solid var(--md-sys-color-outline);
 }
 
-.lecture-list-name {
+.note-list-name {
     font-size: 14pt;
 }
 
-.lecture-list-details {
+.note-list-details {
     display: flex;
     gap: 6pt;
     flex-wrap: wrap;
 }
 
-.lecture-list-details-item {
+.note-list-details-item {
     min-width: fit-content;
     display: flex;
     align-items: center;
     gap: 2pt;
 }
 
-.lecture-list-details-item md-icon {
+.note-list-details-item md-icon {
     width: 12pt;
     height: 12pt;
     font-size: 12pt;
+}
+
+#confirm-delete-btn {
+    --md-filled-tonal-button-container-color: var(--md-sys-color-error-container);
+    --md-filled-tonal-button-label-text-color: var(--md-sys-color-on-error-container);
 }

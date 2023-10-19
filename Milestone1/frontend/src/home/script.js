@@ -12,6 +12,12 @@ import '@material/web/textfield/outlined-text-field'
 import '@material/web/textfield/filled-text-field'
 import '@material/web/menu/menu'
 import '@material/web/menu/menu-item'
+import '@material/web/ripple/ripple'
+import '@material/web/button/filled-tonal-button'
+import '@material/web/button/text-button'
+import '@material/web/dialog/dialog'
+import { render } from './render'
+import { registerButtons } from './buttons'
 
 const main = document.getElementsByTagName('main')[0];
 const body = document.getElementsByTagName('body')[0];
@@ -28,3 +34,10 @@ main.onscroll = (ev) => {
         }
     }, 20)
 }
+
+// OnLoad events
+window.onload = () => {
+    render();
+    registerButtons();
+};
+
