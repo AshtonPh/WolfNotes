@@ -6,6 +6,13 @@ const dataRouter = require('./dataRouter');
 const app = express();
 const PORT = process.env.PORT || 3501;
 
+// Used for dev/debug
+// Enable CORS on all requests when "CORS=True" is passed on the command line
+if (process.env.CORS && process.env.CORS == "True") {
+    const cors = require('cors');
+    app.use(cors());
+}
+
 app.use(express.json());
 app.use('/auth', authenticationRouter);
 app.use('/notes', notesRouter);
