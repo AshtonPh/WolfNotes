@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
+
 // Mock database for user registration and authentication
 const users = [
   { userName: "user1234", password: "password1234", email: "user@ncsu.edu" },
@@ -30,8 +31,12 @@ router.post("/register", (req, res) => {
     users.push({ userName, password, email });
 
     // Respond with a token 
-    // TODO:should implement proper authentication
-    res.status(201).send({ token: "afj93sfjkljawef" });
+    // TODO: should implement proper authentication
+    const token = "afj93sfjkljawef"; // Replace with actual token generation logic
+    res.cookie("token", token, { httpOnly: true }); // Set the 'httpOnly' option for security
+
+    // Redirect to the home page after successful registration
+    res.redirect("/home/index.html")
   }
 });
 
@@ -52,8 +57,8 @@ router.post("/signin", (req, res) => {
     // Set the token as a cookie
     res.cookie("token", token, { httpOnly: true }); // Set the 'httpOnly' option for security
 
-    // Respond with a success message
-    res.status(200).send({ message: "Sign-in successful" });
+    // Redirect to the home page after successful sign-in
+    res.redirect("/home/index.html");
   } else {
     res.status(401).send({ error: "Invalid username or password" });
   }
