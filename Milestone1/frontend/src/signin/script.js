@@ -28,7 +28,6 @@ document.getElementById('login-form').addEventListener('submit', function(event)
     // Store the token in a cookie.
     document.cookie = `token=${token}; path=/`;
 
-    // Redirect to a protected page or perform other actions.
-    // Replace 'dashboard.html' with the actual protected page URL.
-    window.location.href = 'dashboard.html';
+    // Redirect to the home page after successfully log in 
+    window.location.href = '../home/index.html';
 });
