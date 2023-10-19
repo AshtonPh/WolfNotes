@@ -31,6 +31,7 @@ router.get("/all", (req, res) => {
   res.status(200).json(example.notes);
 });
 
+// Get suggested notes
 router.get("/suggested", (req, res) => {
   if (!authenticate(req))
     return;
@@ -54,6 +55,7 @@ router.get("/suggested", (req, res) => {
   // Return the recently edited notes
   res.status(200).json(recentlyEditedNotes);
 });
+
 
 // Search notes by tags
 // Checked
