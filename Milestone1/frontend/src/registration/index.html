@@ -11,8 +11,8 @@
 <body>
     <div class = "registartion">
         <h2>User Registration</h2>
-        <form action="/register" action = "/send" method = "post" enctype="multipart/form-data">
-            <label for = "email">Email:</label>
+        <form id="registrationForm" method="post" action="http://localhost/registration_handler.php">
+            <label for="email">Email:</label>
             <input type = "text" id = "email" name = "email" required>
 
             <label for = "username">Username:</label>
@@ -24,8 +24,11 @@
 
             <label for="password">Confirm Password:</label>
             <input type = "password" id = "password-confirmation" name = "password-confirmation" required>
+
+            <span id="form-error" style="color: red;"></span><br>
+            <span id="password-error" style="color: red;"></span><br>
             
-            <input type = "submit" value = "Sign Up">
+            <input type = "submit" value = "Register">
         </form>
     </div>
 </body>

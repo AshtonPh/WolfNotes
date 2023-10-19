@@ -39,16 +39,21 @@ router.post("/register", (req, res) => {
 router.post("/signin", (req, res) => {
   const { userName, password } = req.body;
 
-  // Check if the user credentials are valid 
+  // Check if the user credentials are valid
   // TODO: should use a real database
   const user = users.find(
     (u) => u.userName === userName && u.password === password
   );
 
   if (user) {
-    // Respond with a token 
-    //TODO: implement proper authentication
-    res.status(200).send({ token: "afj93sfjkljawef" });
+    // Generate a token (you should use a proper token library)
+    const token = "afj93sfjkljawef"; // Replace with actual token generation logic
+
+    // Set the token as a cookie
+    res.cookie("token", token, { httpOnly: true }); // Set the 'httpOnly' option for security
+
+    // Respond with a success message
+    res.status(200).send({ message: "Sign-in successful" });
   } else {
     res.status(401).send({ error: "Invalid username or password" });
   }
