@@ -23,10 +23,10 @@ document.getElementById('login-form').addEventListener('submit', function(event)
     // Replace this with future actual authentication logic.
     // For this example, we assume authentication is successful.
 
-    const yourToken = 'yourToken123'; // Replace with the actual token.
+    const token = 'afj93sfjkljawef'; // Replace with the actual token.
 
     // Store the token in a cookie.
-    document.cookie = `token=${yourToken}; path=/`;
+    document.cookie = `token=${token}; path=/`;
 
     // Redirect to a protected page or perform other actions.
     // Replace 'dashboard.html' with the actual protected page URL.
