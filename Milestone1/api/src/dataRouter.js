@@ -10,7 +10,7 @@ const upload = multer({dest: `${__dirname}/example/upload`})
 
 // Placeholder authentication method
 // Returns true on successful auth, returns false and sends 403 otherwise
-function authenticate(req) {
+function authenticate(req, res) {
     if (req.headers.authorization == `token ${example.authToken}`) {
         return true;
     }
@@ -34,7 +34,7 @@ function genID() {
 
 // Save a "chunk" (slide) for a specific note
 router.post('/:noteID/chunk', (req, res) => {
-    if (!authenticate(req))
+    if (!authenticate(req, res))
         return;
 
     if (req.params.noteID != example.noteID) {
@@ -56,7 +56,7 @@ router.post('/:noteID/chunk', (req, res) => {
 
 // Retrieve all "chunks" (slides) for a specific note
 router.get('/:noteID/chunks', (req, res) => {
-    if (!authenticate(req))
+    if (!authenticate(req, res))
         return;
 
     if (req.params.noteID != example.noteID) {
@@ -70,7 +70,7 @@ router.get('/:noteID/chunks', (req, res) => {
 
 // Save a new definition
 router.post('/:noteID/definition', (req, res) => {
-    if (!authenticate(req))
+    if (!authenticate(req, res))
         return;
 
     if (req.params.noteID != example.noteID) {
@@ -102,7 +102,7 @@ router.post('/:noteID/definition', (req, res) => {
 
 // Retrieve all existing definitions for a specific note
 router.get('/:noteID/definitions', (req, res) => {
-    if (!authenticate(req))
+    if (!authenticate(req, res))
         return;
 
     if (req.params.noteID != example.noteID) {
@@ -116,7 +116,7 @@ router.get('/:noteID/definitions', (req, res) => {
 // Since this is being developed independently of the tagging system,
 //  the mockup version will return all definitions for any given tag name
 router.get('/:tagName/class_definitions', (req, res) => {
-    if (!authenticate(req))
+    if (!authenticate(req, res))
         return;
 
     res.send(example.definitions);
@@ -125,7 +125,7 @@ router.get('/:tagName/class_definitions', (req, res) => {
 // Post a new set of slides for a set of notes
 // For the mockup, this doesn't actually do anything except save the PDF to disk
 router.post('/:noteID/slides', upload.any(), (req, res) => {
-    if (!authenticate(req))
+    if (!authenticate(req, res))
         return;
 
     if (req.params.noteID != example.noteID) {
@@ -147,7 +147,7 @@ router.post('/:noteID/slides', upload.any(), (req, res) => {
 // Retrieve a slide for a set of notes
 // For the mockup, this just retrieves one of the example slides
 router.get('/:noteID/slide/:slideNumber', (req, res) => {
-    if (!authenticate(req))
+    if (!authenticate(req, res))
         return;
 
     if (req.params.noteID != example.noteID) {
