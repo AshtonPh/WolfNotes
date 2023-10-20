@@ -30,6 +30,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Attach the validateForm function to the form's onsubmit event
-    const registrationForm = document.getElementById("registrationForm");
+    const registrationForm = document.getElementById("registration-form");
     registrationForm.onsubmit = validateForm;
 });
