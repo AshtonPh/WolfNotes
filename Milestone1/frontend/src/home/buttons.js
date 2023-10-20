@@ -68,7 +68,7 @@ export function registerFilterChips() {
 }
 
 function openNote(noteID) {
-    window.location.href = `/note?noteid=${noteID}`;
+    window.location.href = `/notes?noteid=${noteID}`;
 }
 
 function openNoteMenu(ev, noteID, anchorID) {

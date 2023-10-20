@@ -4,7 +4,7 @@
  * Handles interacting with the wolfnotes api
  */
 
-const API_BASE = "http://localhost:3501"
+const API_BASE = "/api"
 
 function getAuthToken() {
     return 'afj93sfjkljawef';
@@ -32,56 +32,12 @@ function errorHandler(url, reason) {
 }
 
 export function getNotesList() {
-    // TODO - replace this with the proper design
-    // return fetch(API_BASE + "/notes/list")
-    return new Promise((resolve, reject) => {
-        resolve([
-            {
-                "noteID": "1",
-                "title": "Lecture #1",
-                "content": "Note created sucessfully  ",
-                "tags": ["Course A", "Professor A"]
-            },
-
-            {
-                "noteID": "1",
-                "title": "Lecture #10",
-                "content": "Note created sucessfully  ",
-                "tags": ["Course B", "Professor B"]
-            },
-
-            {
-                "noteID": "1",
-                "title": "Lecture #11",
-                "content": "Note created sucessfully  ",
-                "tags": ["Course B", "Professor A"]
-            }
-        ])
-    });
+    return requestApi("/notes/all").then(res => res.json());
 }
 
 export function getSuggestions() {
-    // TODO - replace this with the proper design
-    // return fetch(API_BASE + "/notes/list")
-    return new Promise((resolve, reject) => {
-        resolve([
-            {
-                "noteID": "1",
-                "title": "Lecture #1",
-                "content": "Note created sucessfully  ",
-                "tags": ["Course A", "Professor A"],
-                "reason": "Often opened around this time"
-            },
-
-            {
-                "noteID": "1",
-                "title": "Lecture #10",
-                "content": "Note created sucessfully  ",
-                "tags": ["Course B", "Professor B"],
-                "reason": "You modified this recently"
-            }
-        ])
-    });
+    return requestApi("/notes/suggested")
+        .then(res => res.json());
 }
 
 // Used this article to help:

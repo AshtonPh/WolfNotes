@@ -96,8 +96,10 @@ const filterTagTemplate = Handlebars.compile(
 const jump = document.getElementById("jump");
 function renderJumpTargets() {
     getSuggestions().then(async suggestions => {
-        for (let s of suggestions)
+        for (let s of suggestions) {
             s.slideImg = await getSlideImage(s.noteID, 1);
+            s.reason = "Edited recently"
+        }
         jump.innerHTML = jumpTargetTemplate(suggestions);
         registerNoteItems(jump.children);
     });

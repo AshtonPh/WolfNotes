@@ -8,14 +8,14 @@ examples.notes = [
     "content": "Note created sucessfully  ", 
     "tags":["Course A", "Professor A"],
     "recentlyEdited": true,
-    "timeEdited": "19/9/2023 12:16:35"},
+    "timeEdited": "19/10/2023 12:16:35"},
     
     {"noteID": "10", 
     "title": "Lecture #10", 
     "content": "Note created sucessfully  ", 
     "tags":["Course B", "Professor B"],
     "recentlyEdited": true,
-	"timeEdited": "19/9/2023 12:16:35"}
+	"timeEdited": "19/10/2023 12:16:35"}
 ];
 
 module.exports = examples
