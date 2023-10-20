@@ -16,5 +16,4 @@ services:
   frontend:
     build: ./frontend
     restart: unless-stopped
-    volumes:
-      - ./frontend:/var/app
+    

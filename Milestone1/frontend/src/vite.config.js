@@ -1,5 +1,6 @@
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
+import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 export default defineConfig({
     base: '',
@@ -13,5 +14,13 @@ export default defineConfig({
                 demo: resolve(__dirname, 'demo/index.html')
             }
         }
-    }
+    },
+    plugins: [
+        viteStaticCopy({
+            targets: [
+                {src: 'notes/images/*', dest: 'notes/images/'},
+                {src: 'notes/tinymce', dest: 'notes/'}
+            ]
+        })
+    ]
 })
