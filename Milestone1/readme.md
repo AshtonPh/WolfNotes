@@ -17,10 +17,12 @@
 Our web-application is called ‘Wolfnotes’.
 
 **3. Current progress**
+
+
 Done:
 
  - Mock API endpoints.
-  - Register and login pages.
+ - Register and login pages.
 
 Not done:
 - API endpoints and front-end integration.
