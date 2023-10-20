@@ -16,7 +16,17 @@
 
 Our web-application is called ‘Wolfnotes’.
 
-**3. Pages status**
+**3. Current progress**
+Done:
+
+ - Mock API endpoints.
+  - Register and login pages.
+
+Not done:
+- API endpoints and front-end integration.
+- Home, note editor, browse tags, user agreement, user settings.
+
+**4. Pages status**
 | Pages   | Status | Wireframe  |
 |---------|--------|------------|
 | Login   |  90%  |   |
@@ -27,7 +37,7 @@ Our web-application is called ‘Wolfnotes’.
 | User agreement|0%     |  |
 |User settings|0%|
 
-**4. API Endpoints**
+**5. API Endpoints**
 | Method | Route         | Description                                            |
 |--------|---------------|--------------------------------------------------------|
 | POST   | /api/auth/register        | Register a new user                         |
@@ -51,3 +61,10 @@ Our web-application is called ‘Wolfnotes’.
 |GET|/api/data/:tagName/tag_definitions|Retrieve a list of definitions for a specific tag- used for browsing definitions by class|
 |POST|/api/data/:noteID/slides|Assign a set of slides to a specific note|
 |GET|/api/data/:noteID/slide/:slideNumber|Get the image for a specific slide|
+
+**6. Contributions**
+| Team member | Team contributions                 |
+|----:|-------------------------|
+|  **Zelda Lu**  | -   Created all the signin and register API endpoints. <br />-   Created the register and login pages. |
+|  **Deci Horine**  | -   Created all the note data API endpoints.<br />-   Created the home page.<br />- Applied the Vite frontend tool to the project.<br />    |
+|  **Nam Pham** | -   Created all the note management API endpoints.<br />-   Created the note editor page.<br />
