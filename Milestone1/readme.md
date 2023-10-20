@@ -1,3 +1,22 @@
+**1. Project team information**
+
+- Zelda Lu (wlu27).
+
+  
+
+- Deci Horine (djhorine).
+
+  
+
+- Pham Thanh Nam (pthanhn).
+
+**2. Project Title**
+
+  
+
+Our web-application is called ‘Wolfnotes’.
+
+**3. Pages status**
 | Pages   | Status | Wireframe  |
 |---------|--------|------------|
 | Login   |  90%  |   |
@@ -8,7 +27,7 @@
 | User agreement|0%     |  |
 |User settings|0%|
 
-
+**4. API Endpoints**
 | Method | Route         | Description                                            |
 |--------|---------------|--------------------------------------------------------|
 | POST   | /api/auth/register        | Register a new user                         |
