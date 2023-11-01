@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wolfnotes</title>
+    <script src="./tinymce/js/tinymce/tinymce.min.js"></script>
+    <script src="script.js" type="module"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="theme.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Gabarito">
+</head>
+<body>
+    <div id="container">
+      <div id="img-container">
+          <img id="img" src="" alt="Image">
+      </div>
+      <div id ="button-container">
+        <md-filled-button id="prev-btn" onclick="prevImage()">Previous</md-filled-button>
+        <md-filled-button id="next-btn" onclick="nextImage()">Next</md-filled-button>
+      </div>
+      <form id="editor">
+        <textarea id="default" placeholder="Write your notes here">  </textarea>
+
+      </form>
+    </div>
+    <script src="note.js" type="module"></script>
+    <script src="api.js" type="module"></script>
+</body>
+</html>

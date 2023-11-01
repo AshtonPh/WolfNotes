@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sign In</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" type="module"></script>
+    <script src="api.js" type="module"></script>
+</head>
+
+<body>
+    <div class="signin"> 
+        <h2>User Sign In</h2>
+        <form action ="../home/index.html" method="post"></form>
+        <!-- <form action="/auth/signin" method="post" id="signin-form"> -->
+            <label for="email">User Name:</label>
+            <input type="text" id="email" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <span id="form-error" style="color: red;"></span><br>
+
+            <input type="submit" value="Sign In">
+        </form>
+    </div>
+</body>
+
+</html>

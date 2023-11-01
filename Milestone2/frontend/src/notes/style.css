@@ -1,0 +1,30 @@
+#img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+#img-container img {
+    width: 100%; 
+    height: 100%; 
+    object-fit: contain; 
+}
+  
+#editor{
+    overflow-y: auto;
+}
+  
+#button-container {
+    display: flex;
+    justify-content: center;
+}
+  
+#button-container md-filled-button {
+    font-family: 'Gabarito';
+    flex: 1;
+    margin: 0 10px;
+    color: "primary";
+    
+}
+
