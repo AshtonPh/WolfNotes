@@ -12,8 +12,26 @@ services:
     restart: unless-stopped
     volumes:
       - ./api:/var/app
+    environment:
+      - PORT=80
+    env_file: # this is new
+      - .env # this is new
 
   frontend:
     build: ./frontend
     restart: unless-stopped
+    
+  database:
+    image: mariadb:10.6
+    restart: unless-stopped
+    ports:
+      # Make the DB accessible from outside of the Docker network if needed
+      - 3307:3306
+    volumes:
+      # Mount a volume for mariadb's persistent files for lifecylce outside of stack
+      - "./database/data:/var/lib/mysql"
+      # Mount the db_schema directory into the container to be auto-read and created in the new db
+      - "./database/db_schema:/docker-entrypoint-initdb.d"
+    env_file:
+      - .env
     
