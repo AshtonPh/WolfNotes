@@ -11,15 +11,17 @@ services:
     build: ./api
     restart: unless-stopped
     volumes:
-      - ./api:/var/app
+      - ./api/src:/var/app/src
     environment:
       - PORT=80
-    env_file: # this is new
-      - .env # this is new
+    env_file:
+      - .env
 
   frontend:
     build: ./frontend
     restart: unless-stopped
+    volumes:
+      - ./frontend/src:/var/app/src
     
   database:
     image: mariadb:10.6
