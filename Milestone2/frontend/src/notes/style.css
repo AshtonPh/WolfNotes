@@ -18,6 +18,7 @@
 #button-container {
     display: flex;
     justify-content: center;
+    padding: 20px;
 }
   
 #button-container md-filled-button {
