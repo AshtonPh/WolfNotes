@@ -11,7 +11,7 @@
     object-fit: contain; 
 }
   
-#editor{
+#editor-container{
     overflow-y: auto;
 }
   
@@ -28,3 +28,28 @@
     
 }
 
+.format-section {
+	text-align: center;
+	padding-top: 20px;
+	height: 6vh;
+	background-color: #ffffff;
+	margin-bottom: 20px;
+}
+.format-section span {
+	font-size: 24px;
+	margin: 2px 4px 0px 4px;
+	cursor: pointer;
+	color: #252525;
+}
+.editor {
+	min-height: 70vh;
+	width: 80%;
+	background: #ffffff;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 40px;
+	margin-left: 8%;
+	margin-right: 5%;
+	outline: none;
+}
