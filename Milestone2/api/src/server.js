@@ -1,7 +1,7 @@
 const express = require('express');
-const authenticationRouter = require('./authenticationRouter');
-const notesRouter = require('./notesRouter');
-const dataRouter = require('./dataRouter');
+const authenticationRouter = require('./routes/authenticationRouter');
+const notesRouter = require('./routes/notesRouter');
+const dataRouter = require('./routes/dataRouter');
 
 const app = express();
 const PORT = process.env.PORT || 3501;
