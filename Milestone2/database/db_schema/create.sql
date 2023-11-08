@@ -21,7 +21,7 @@ USE `wolfnotes_db`;
 
 -- Dumping structure for table wolfnotes_db.Definition
 CREATE TABLE IF NOT EXISTS `Definition` (
-  `definitionID` int(11) NOT NULL,
+  `definitionID` int(11) NOT NULL AUTO_INCREMENT,
   `userID` int(11) NOT NULL,
   `noteID` int(11) NOT NULL,
   `term` text NOT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `Definition` (
 
 -- Dumping structure for table wolfnotes_db.Note
 CREATE TABLE IF NOT EXISTS `Note` (
-  `noteID` int(11) NOT NULL,
+  `noteID` int(11) NOT NULL AUTO_INCREMENT,
   `userID` int(11) NOT NULL,
   `dateEdited` datetime NOT NULL,
   `title` text NOT NULL,
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `Note` (
 
 -- Dumping structure for table wolfnotes_db.NoteData
 CREATE TABLE IF NOT EXISTS `NoteData` (
-  `chunkID` int(11) NOT NULL,
+  `chunkID` int(11) NOT NULL AUTO_INCREMENT,
   `noteID` int(11) NOT NULL,
   `slideNumber` int(11) NOT NULL,
   `contents` longtext NOT NULL,
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `NoteData` (
 
 -- Dumping structure for table wolfnotes_db.NoteTag
 CREATE TABLE IF NOT EXISTS `NoteTag` (
-  `ntID` int(11) NOT NULL,
+  `ntID` int(11) NOT NULL AUTO_INCREMENT,
   `noteID` int(11) NOT NULL,
   `tagID` int(11) NOT NULL,
   PRIMARY KEY (`ntID`),
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `NoteTag` (
 
 -- Dumping structure for table wolfnotes_db.Shorthand
 CREATE TABLE IF NOT EXISTS `Shorthand` (
-  `shorthandID` int(11) NOT NULL,
+  `shorthandID` int(11) NOT NULL AUTO_INCREMENT,
   `userID` int(11) DEFAULT NULL,
   `short` text NOT NULL,
   `expanded` text NOT NULL,
@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `Shorthand` (
 
 -- Dumping structure for table wolfnotes_db.Tag
 CREATE TABLE IF NOT EXISTS `Tag` (
-  `tagID` int(11) NOT NULL,
+  `tagID` int(11) NOT NULL AUTO_INCREMENT,
   `tagName` text NOT NULL,
   `userID` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`tagID`)
@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `Tag` (
 
 -- Dumping structure for table wolfnotes_db.User
 CREATE TABLE IF NOT EXISTS `User` (
-  `userID` int(11) NOT NULL,
+  `userID` int(11) NOT NULL AUTO_INCREMENT,
   `userName` text NOT NULL,
   `avatar` text NOT NULL,
   `passwordHash` text NOT NULL,
