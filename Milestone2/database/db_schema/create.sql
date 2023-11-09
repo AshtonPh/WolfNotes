@@ -14,11 +14,6 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-
--- Dumping database structure for wolfnotes_db
-CREATE DATABASE IF NOT EXISTS `wolfnotes_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
-USE `wolfnotes_db`;
-
 -- Dumping structure for table wolfnotes_db.Definition
 CREATE TABLE IF NOT EXISTS `Definition` (
   `definitionID` int(11) NOT NULL AUTO_INCREMENT,
@@ -29,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `Definition` (
   PRIMARY KEY (`definitionID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='A list of terms and definitions';
 
--- Data exporting was unselected.
+-- Dumping data for table wolfnotes_db.Definition: ~0 rows (approximately)
 
 -- Dumping structure for table wolfnotes_db.Note
 CREATE TABLE IF NOT EXISTS `Note` (
@@ -42,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `Note` (
   PRIMARY KEY (`noteID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='A list of notes (not including their content) stored in WolfNotes';
 
--- Data exporting was unselected.
+-- Dumping data for table wolfnotes_db.Note: ~0 rows (approximately)
 
 -- Dumping structure for table wolfnotes_db.NoteData
 CREATE TABLE IF NOT EXISTS `NoteData` (
@@ -54,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `NoteData` (
   UNIQUE KEY `noteID_slideNumber` (`noteID`,`slideNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='The actual contents of the notes split by "chunks" (1 chunk = 1 slide)';
 
--- Data exporting was unselected.
+-- Dumping data for table wolfnotes_db.NoteData: ~0 rows (approximately)
 
 -- Dumping structure for table wolfnotes_db.NoteTag
 CREATE TABLE IF NOT EXISTS `NoteTag` (
@@ -65,18 +60,30 @@ CREATE TABLE IF NOT EXISTS `NoteTag` (
   UNIQUE KEY `noteID_tagID` (`noteID`,`tagID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='A database to represent the many-to-many relationship between notes and tags';
 
--- Data exporting was unselected.
+-- Dumping data for table wolfnotes_db.NoteTag: ~0 rows (approximately)
 
 -- Dumping structure for table wolfnotes_db.Shorthand
 CREATE TABLE IF NOT EXISTS `Shorthand` (
   `shorthandID` int(11) NOT NULL AUTO_INCREMENT,
-  `userID` int(11) DEFAULT NULL,
+  `userID` int(11) NOT NULL,
   `short` text NOT NULL,
   `expanded` text NOT NULL,
   PRIMARY KEY (`shorthandID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='A list of shorthand expansions per-user';
 
--- Data exporting was unselected.
+-- Dumping data for table wolfnotes_db.Shorthand: ~0 rows (approximately)
+
+-- Dumping structure for table wolfnotes_db.slideImages
+CREATE TABLE IF NOT EXISTS `slideImages` (
+  `noteID` int(11) NOT NULL AUTO_INCREMENT,
+  `userID` int(11) NOT NULL,
+  `slideNumber` int(11) NOT NULL,
+  `slide` text NOT NULL,
+  `thumbnail` text NOT NULL,
+  PRIMARY KEY (`noteID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Dumping data for table wolfnotes_db.slideImages: ~0 rows (approximately)
 
 -- Dumping structure for table wolfnotes_db.Tag
 CREATE TABLE IF NOT EXISTS `Tag` (
@@ -86,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `Tag` (
   PRIMARY KEY (`tagID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='A list of tags to be applied to notes';
 
--- Data exporting was unselected.
+-- Dumping data for table wolfnotes_db.Tag: ~0 rows (approximately)
 
 -- Dumping structure for table wolfnotes_db.User
 CREATE TABLE IF NOT EXISTS `User` (
@@ -99,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `User` (
   UNIQUE KEY `userName` (`userName`) USING HASH
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='A list of WolfNotes users';
 
--- Data exporting was unselected.
+-- Dumping data for table wolfnotes_db.User: ~0 rows (approximately)
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
