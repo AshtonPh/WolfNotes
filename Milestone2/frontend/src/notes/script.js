@@ -1,6 +1,6 @@
 import '@material/web/button/filled-button';
 
-var currentIndex = 1;
+var currentIndex = 0;
 var imageContainer = document.getElementById("img-container");
 var imageElement = document.getElementById("img");
 var prevButton = document.getElementById("prev-btn");
