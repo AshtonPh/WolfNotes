@@ -34,7 +34,9 @@ CREATE TABLE IF NOT EXISTS `Note` (
   `title` text NOT NULL,
   `slideSetDirectory` tinytext DEFAULT NULL,
   `slideCount` int(11) DEFAULT NULL,
-  PRIMARY KEY (`noteID`)
+  PRIMARY KEY (`noteID`),
+  CONSTRAINT `FK_Note_NoteData` FOREIGN KEY (`noteID`) REFERENCES `NoteData` (`noteID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_Note_NoteTag` FOREIGN KEY (`noteID`) REFERENCES `NoteTag` (`noteID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='A list of notes (not including their content) stored in WolfNotes';
 
 -- Dumping data for table wolfnotes_db.Note: ~0 rows (approximately)
@@ -73,17 +75,17 @@ CREATE TABLE IF NOT EXISTS `Shorthand` (
 
 -- Dumping data for table wolfnotes_db.Shorthand: ~0 rows (approximately)
 
--- Dumping structure for table wolfnotes_db.slideImages
-CREATE TABLE IF NOT EXISTS `slideImages` (
-  `noteID` int(11) NOT NULL AUTO_INCREMENT,
-  `userID` int(11) NOT NULL,
+-- Dumping structure for table wolfnotes_db.SlideImage
+CREATE TABLE IF NOT EXISTS `SlideImage` (
   `slideNumber` int(11) NOT NULL,
+  `noteID` int(11) NOT NULL,
+  `userID` int(11) NOT NULL,
   `slide` text NOT NULL,
   `thumbnail` text NOT NULL,
-  PRIMARY KEY (`noteID`)
+  PRIMARY KEY (`slideNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table wolfnotes_db.slideImages: ~0 rows (approximately)
+-- Dumping data for table wolfnotes_db.SlideImage: ~0 rows (approximately)
 
 -- Dumping structure for table wolfnotes_db.Tag
 CREATE TABLE IF NOT EXISTS `Tag` (
