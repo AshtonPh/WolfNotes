@@ -1,0 +1,43 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+ }
+ 
+ h1 {
+    text-align: center;
+    padding: 20px 0;
+ }
+ 
+#dictionaryForm {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+ }
+ 
+#dictionaryForm input {
+    margin: 0 10px;
+    padding: 5px;
+ }
+
+#dictionaryForm div {
+   display: block;
+   margin-bottom: 10px;
+}
+
+ 
+ #dictionaryList {
+    list-style-type: none;
+    padding: 0;
+ }
+ 
+ #dictionaryList li {
+    background-color: #fff;
+    margin: 5px 0;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+   text-align: center;
+ }
+ 

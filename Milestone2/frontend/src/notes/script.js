@@ -44,6 +44,7 @@ function nextImage() {
     updateImage();
 }
 
+
 prevButton.addEventListener("click", prevImage);
 nextButton.addEventListener("click", nextImage);
 
