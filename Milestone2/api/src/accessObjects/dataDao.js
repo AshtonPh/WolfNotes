@@ -11,12 +11,37 @@ function getContentsByNoteID(noteId) {
 function getSlideAndContentsByNoteID(noteId) {
     return db.query('SELECT slideNumber, contents FROM NoteData WHERE noteID=?', [noteId])
     .then(({results}) => {
-     return results.map(row => row);
+     return results.map(row => new data(row));
     });
-   }
+}
+
+function updateChunk(noteId, slideNumber, contents) {
+  return db.query(
+    "INSERT INTO NoteData (noteID, slideNumber, contents) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE contents = ?",
+   [noteId, slideNumber, contents, contents]).then(({results}) => {
+     getSlideAndContentsByNoteID(results.insertId)
+  });
+}
+
+
+function getImageByNoteID(noteId, slideNumber, size) {
+  return db.query('SELECT ? FROM SlideImage WHERE noteID=? AND slideNumber=?', [size, noteId, slideNumber])
+  .then(({results}) => {
+    // Convert the Blob data to a Blob URL
+    let blob = new Blob([results[0].image], { type: 'image/jpeg' }); // adjust the MIME type as needed
+    let blobUrl = URL.createObjectURL(blob);
+    return blobUrl;
+  });
+ }
+ 
+
+ 
+
    
 module.exports = {
     //getContentsByNoteID: getContentsByNoteID,
-    getSlideAndContentsByNoteID: getSlideAndContentsByNoteID
+    getSlideAndContentsByNoteID: getSlideAndContentsByNoteID,
+    updateChunk: updateChunk,
+    getImageByNoteID:getImageByNoteID
   };
   
