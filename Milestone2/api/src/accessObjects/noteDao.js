@@ -1,4 +1,4 @@
-const Note = require('../models/note');
+const Note = require('./models/note');
 const Tag = require('./models/tag')
 const conPro = require('./connectionProvider')
 
