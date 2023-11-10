@@ -30,20 +30,10 @@ module.exports = class {
      * @param {*} data 
      */
     constructor(data) {
-        this.noteID = this.noteID;
-        this.userID = this.userID;
-        this.dateEdited = this.dateEdited;
-        this.title = this.title;
-        this.slideCount = this.slideCount;
-    }
-
-    toJSON() {
-        return {
-            noteID,
-            userID,
-            dateEdited,
-            title,
-            slideCount
-        }
+        this.noteID = data.noteID;
+        this.userID = data.userID;
+        this.dateEdited = data.dateEdited;
+        this.title = data.title;
+        this.slideCount = data.slideCount;
     }
 }
