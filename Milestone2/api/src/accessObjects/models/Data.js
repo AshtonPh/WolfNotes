@@ -11,4 +11,4 @@ module.exports = class {
       this.contents = data.contents;
     }
   
-  };
+  }
