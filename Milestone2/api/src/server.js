@@ -3,6 +3,7 @@ const cookieparser = require('cookie-parser');
 const authenticationRouter = require('./routes/authenticationRouter');
 const notesRouter = require('./routes/notesRouter');
 const dataRouter = require('./routes/dataRouter');
+const tagRouter = require('./routes/tagRouter');
 
 const app = express();
 const PORT = process.env.PORT || 3501;
@@ -19,6 +20,7 @@ app.use(cookieparser());
 app.use('/auth', authenticationRouter);
 app.use('/notes', notesRouter);
 app.use('/data', dataRouter);
+app.use('/tags', tagRouter);
 
 // As our server to listen for incoming connections
 app.listen(PORT, () => console.log(`Server listening on port: ${PORT}`));

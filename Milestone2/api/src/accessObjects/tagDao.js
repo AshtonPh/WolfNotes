@@ -5,11 +5,11 @@ const conPro = require('./connectionProvider')
  * Get a set of all tags for a specific user
  * 
  * @param {number} userID the ID of the user to find tags for
- * @returns {number[]} a list of numerical tag IDs
+ * @returns {Tag[]} a list of tag objects
  */
 function getTagsByUser(userID) {
-    return conPro.query('SELECT (tagID, tagName) FROM Tag WHERE userID = ?', [userID])
-        .then(i => new Tag(i));
+    return conPro.query('SELECT tagID, tagName FROM Tag WHERE userID = ?', [userID])
+        .then(r => r.results.map(t => new Tag(t)));
 }
 
 /**
