@@ -25,9 +25,9 @@ function updateChunk(noteId, slideNumber, contents) {
 
 
 function getImageByNoteID(noteId, slideNumber, size) {
-  return db.query('SELECT ? FROM SlideImage WHERE noteID=? AND slideNumber=?', [size, noteId, slideNumber])
+  return db.query('SELECT * FROM SlideImage WHERE noteID=? AND slideNumber=?', [noteId, slideNumber])
   .then(({results}) => {
-    return results[0].image;
+    return results[0].slide;
   });
  }
  
