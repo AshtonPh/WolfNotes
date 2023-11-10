@@ -25,11 +25,17 @@ function updateChunk(noteId, slideNumber, contents) {
 
 
 function getImageByNoteID(noteId, slideNumber, size) {
-  return db.query('SELECT * FROM SlideImage WHERE noteID=? AND slideNumber=?', [noteId, slideNumber])
-  .then(({results}) => {
-    return results[0].slide;
-  });
- }
+  if (size === 'slide')
+    return db.query('SELECT * FROM SlideImage WHERE noteID=? AND slideNumber=?', [noteId, slideNumber])
+    .then(({results}) => {
+      return results[0].slide;
+    })
+  else if (size === 'thumbnail')
+    return db.query('SELECT * FROM SlideImage WHERE noteID=? AND slideNumber=?', [noteId, slideNumber])
+    .then(({results}) => {
+      return results[0].thumbnail;
+ });
+}
  
 
  
