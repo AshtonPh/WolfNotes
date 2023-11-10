@@ -1,4 +1,5 @@
 const express = require('express');
+const cookieparser = require('cookie-parser');
 const authenticationRouter = require('./routes/authenticationRouter');
 const notesRouter = require('./routes/notesRouter');
 const dataRouter = require('./routes/dataRouter');
@@ -14,6 +15,7 @@ if (process.env.CORS && process.env.CORS == "True") {
 }
 
 app.use(express.json());
+app.use(cookieparser());
 app.use('/auth', authenticationRouter);
 app.use('/notes', notesRouter);
 app.use('/data', dataRouter);
