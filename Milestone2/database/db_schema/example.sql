@@ -119,17 +119,17 @@ CREATE TABLE IF NOT EXISTS `SlideImage` (
   `slideNumber` int(11) NOT NULL,
   `noteID` int(11) NOT NULL,
   `userID` int(11) NOT NULL,
-  `slide` text NOT NULL,
+  `slide` varchar(50) NOT NULL DEFAULT '',
   `thumbnail` text NOT NULL,
   PRIMARY KEY (`slideNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table wolfnotes_db.SlideImage: ~4 rows (approximately)
 INSERT INTO `SlideImage` (`slideNumber`, `noteID`, `userID`, `slide`, `thumbnail`) VALUES
-	(1, 1, 1, 'slide1', 'thumbnail1'),
-	(2, 1, 1, 'slide2', 'thumbnail2'),
-	(3, 2, 2, 'slide3', 'thumbnail2'),
-	(4, 2, 2, 'slide4', 'thumbnail3');
+	(1, 1, 1, '', 'thumbnail1'),
+	(2, 1, 1, '', 'thumbnail2'),
+	(3, 2, 2, '', 'thumbnail2'),
+	(4, 2, 2, '', 'thumbnail3');
 
 -- Dumping structure for table wolfnotes_db.Tag
 CREATE TABLE IF NOT EXISTS `Tag` (
