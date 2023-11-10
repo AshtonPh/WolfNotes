@@ -31,7 +31,7 @@ exports.TokenMiddleware = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, API_SECRET);
-    req.user = decoded.user;
+    req.userID = decoded.userID;
     next(); //Make sure we call the next middleware
   }
   catch(err) { //Token is invalid
