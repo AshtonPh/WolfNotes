@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const TOKEN_COOKIE_NAME = "GrocerEZToken";
+const TOKEN_COOKIE_NAME = "DoggieWriggle";
 // In a real application, you will never hard-code this secret and you will
 // definitely never commit it to version control, ever
 const API_SECRET = process.env.API_SECRET_KEY;
@@ -42,10 +42,9 @@ exports.TokenMiddleware = (req, res, next) => {
 
 }
 
-
-exports.generateToken = (req, res, user) => {
+exports.generateToken = (req, res, userID) => {
   let data = {
-    user: user,
+    userID: userID,
     // Use the exp registered claim to expire token in 1 hour
     exp: Math.floor(Date.now() / 1000) + (60 * 60)
   }
@@ -56,7 +55,7 @@ exports.generateToken = (req, res, user) => {
   res.cookie(TOKEN_COOKIE_NAME, token, {
     httpOnly: true,
     secure: true,
-    maxAge: 60 * 60 * 1000 //This session expires in 2 minutes.. but token expires in 1 hour!
+    maxAge: 2 * 60 * 1000 //This session expires in 2 minutes.. but token expires in 1 hour!
   });
 };
 
