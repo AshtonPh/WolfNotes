@@ -38,8 +38,6 @@ exports.TokenMiddleware = (req, res, next) => {
     res.status(401).json({error: 'Not authenticated or token expired'});
     return;
   }
-
-
 }
 
 exports.generateToken = (req, res, userID) => {
