@@ -49,7 +49,7 @@ router.get('/:noteId/:slideNumber/:size', (req, res) => {
       res.setHeader('Content-Type', 'image/jpg'); 
   
       // Send the image data as a response
-      res.send(buffer);
+      res.send(imageData);
     })
     .catch(err => {
       res.status(500).json({error: err});

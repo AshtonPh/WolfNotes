@@ -27,10 +27,7 @@ function updateChunk(noteId, slideNumber, contents) {
 function getImageByNoteID(noteId, slideNumber, size) {
   return db.query('SELECT ? FROM SlideImage WHERE noteID=? AND slideNumber=?', [size, noteId, slideNumber])
   .then(({results}) => {
-    // Convert the Blob data to a Blob URL
-    let blob = new Blob([results[0].image], { type: 'image/jpeg' }); // adjust the MIME type as needed
-    let blobUrl = URL.createObjectURL(blob);
-    return blobUrl;
+    return results[0].image;
   });
  }
  
