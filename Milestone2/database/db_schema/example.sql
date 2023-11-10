@@ -160,7 +160,7 @@ CREATE TABLE IF NOT EXISTS `User` (
 
 -- Dumping data for table wolfnotes_db.User: ~3 rows (approximately)
 INSERT INTO `User` (`userID`, `userName`, `avatar`, `passwordHash`, `salt`) VALUES
-	(1, 'john_doe', 'image', 'hashed_password_1\'', 'salt'),
+	(1, 'john_doe', 'image', 'hashed_password_1', 'salt'),
 	(2, 'jane_smith', 'image', 'hashed_password_2', 'salt'),
 	(3, 'bob_johnson', 'image', 'hashed_password_3', 'salt');
 
