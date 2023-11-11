@@ -14,6 +14,11 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+
+-- Dumping database structure for wolfnotes_db
+CREATE DATABASE IF NOT EXISTS `wolfnotes_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+USE `wolfnotes_db`;
+
 -- Dumping structure for table wolfnotes_db.Definition
 CREATE TABLE IF NOT EXISTS `Definition` (
   `definitionID` int(11) NOT NULL AUTO_INCREMENT,
@@ -35,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `Note` (
   `slideSetDirectory` tinytext DEFAULT NULL,
   `slideCount` int(11) DEFAULT NULL,
   PRIMARY KEY (`noteID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='A list of notes (not including their content) stored in WolfNotes';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='A list of notes (not including their content) stored in WolfNotes';
 
 -- Data exporting was unselected.
 
@@ -58,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `NoteTag` (
   `tagID` int(11) NOT NULL,
   PRIMARY KEY (`ntID`),
   UNIQUE KEY `noteID_tagID` (`noteID`,`tagID`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='A database to represent the many-to-many relationship between notes and tags';
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='A database to represent the many-to-many relationship between notes and tags';
 
 -- Data exporting was unselected.
 
@@ -79,8 +84,7 @@ CREATE TABLE IF NOT EXISTS `SlideImage` (
   `noteID` int(11) NOT NULL,
   `userID` int(11) NOT NULL,
   `slide` longblob NOT NULL,
-  `thumbnail` longblob NOT NULL,
-  PRIMARY KEY (`slideNumber`)
+  `thumbnail` longblob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Data exporting was unselected.
