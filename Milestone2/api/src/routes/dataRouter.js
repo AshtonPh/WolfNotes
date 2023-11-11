@@ -1,6 +1,10 @@
 const express = require("express");
 const cookieParser = require('cookie-parser');
-
+const tk = require('../middleware/TokenMiddleware');
+const { promises: fs } = require("fs");
+const { pdf } = require("pdf-to-img");
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
 
 const router = express.Router();
 router.use(cookieParser());
@@ -41,10 +45,7 @@ router.get('/:noteId/:slideNumber/:size', (req, res) => {
   const size = req.params.size;
   
   dataDao.getImageByNoteID(noteId, slideNumber, size)
-    .then(imageData => {
-      // Convert the image data to a Buffer
-      let buffer = Buffer.from(imageData, 'binary');
-  
+    .then(imageData => {  
       // Set the Content-Type header to the type of the image
       res.setHeader('Content-Type', 'image/jpg'); 
   
@@ -56,6 +57,28 @@ router.get('/:noteId/:slideNumber/:size', (req, res) => {
     });
  });
  
+
+
+router.post('/:noteId/', upload.single('pdf'), tk.TokenMiddleware, async (req, res) => {
+  const noteId = req.params.noteId;
+  const pdfBuffer = await fs.readFile(req.file.path);
+
+  try {
+    // Convert the PDF into images
+    const document = await pdf(pdfBuffer, { scale: 3 });
+    let counter = 0;
+    for await (const image of document) {
+      
+      // Upload the image
+      const imageData = await dataDao.uploadImage(noteId, counter, image, req.userID);
+      counter++;
+    }
+    res.status(200).json({message: 'success'});
+  } catch (err) {
+    res.status(500).json({error: err});
+  }
+ });
  
+
 
 module.exports = router;

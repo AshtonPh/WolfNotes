@@ -80,8 +80,8 @@ CREATE TABLE IF NOT EXISTS `SlideImage` (
   `slideNumber` int(11) NOT NULL,
   `noteID` int(11) NOT NULL,
   `userID` int(11) NOT NULL,
-  `slide` text NOT NULL,
-  `thumbnail` text NOT NULL,
+  `slide` longblob NOT NULL,
+  `thumbnail` longblob NOT NULL,
   PRIMARY KEY (`slideNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

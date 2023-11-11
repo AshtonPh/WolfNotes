@@ -8,7 +8,7 @@ module.exports = class {
   #salt = null;;
 
   constructor(data) {
-    this.id = data.userID;
+    this.userID = data.userID;
     this.userName = data.userName;
     this.avatar = data.avatar;
     this.#salt = data.salt;

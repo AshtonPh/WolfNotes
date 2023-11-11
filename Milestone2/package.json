@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "pdf-to-img": "^2.1.2"
+  }
+}

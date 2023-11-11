@@ -1,28 +1,22 @@
 const jwt = require('jsonwebtoken');
 
 const TOKEN_COOKIE_NAME = "DoggieWriggle";
-// In a real application, you will never hard-code this secret and you will
-// definitely never commit it to version control, ever
+
 const API_SECRET = process.env.API_SECRET_KEY;
 
 exports.TokenMiddleware = (req, res, next) => {
-  // We will look for the token in two places:
-  // 1. A cookie in case of a browser
-  // 2. The Authorization header in case of a different client
   let token = null;
   if(!req.cookies[TOKEN_COOKIE_NAME]) {
-    //No cookie, so let's check Authorization header
     const authHeader = req.get('Authorization');
     if(authHeader && authHeader.startsWith("Bearer ")) {
-      //Format should be "Bearer token" but we only need the token
       token = authHeader.split(" ")[1];
     }
   }
-  else { //We do have a cookie with a token
-    token = req.cookies[TOKEN_COOKIE_NAME]; //Get session Id from cookie
+  else { 
+    token = req.cookies[TOKEN_COOKIE_NAME]; 
   }
 
-  if(!token) { // If we don't have a token
+  if(!token) { 
     res.status(401).json({error: 'Not authenticated'});
     return;
   }
