@@ -36,6 +36,14 @@ function getImageByNoteID(noteId, slideNumber, size) {
       return results[0].thumbnail;
  });
 }
+
+function uploadImage(noteId, slideNumber, image, userID) {
+  return db.query(
+    "INSERT INTO SlideImage (noteID, slideNumber, userID, slide, thumbnail) VALUES (?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE slide = ?, thumbnail = ?",
+   [noteId, slideNumber, userID, image, image , image, image]).then(({results}) => {
+     getSlideAndContentsByNoteID(results.insertId)
+  });
+}
  
 
  
@@ -45,6 +53,7 @@ module.exports = {
     //getContentsByNoteID: getContentsByNoteID,
     getSlideAndContentsByNoteID: getSlideAndContentsByNoteID,
     updateChunk: updateChunk,
-    getImageByNoteID:getImageByNoteID
+    getImageByNoteID:getImageByNoteID,
+    uploadImage:uploadImage
   };
   
