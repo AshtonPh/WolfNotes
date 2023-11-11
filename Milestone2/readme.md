@@ -91,7 +91,7 @@ Not done:
 
 **6. ER Diagram**
 
-<br />
+
 ![ER diagram of relationship schema](https://github.ncsu.edu/engr-csc342/csc342-2023Fall-GroupV/blob/main/Milestone2/Diagram.png) 
 
 
