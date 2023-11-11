@@ -1,7 +1,10 @@
 const express = require("express");
 const cookieParser = require('cookie-parser');
 const tk = require('../middleware/TokenMiddleware');
-
+const { promises: fs } = require("fs");
+const { pdf } = require("pdf-to-img");
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
 
 const router = express.Router();
 router.use(cookieParser());
@@ -55,10 +58,6 @@ router.get('/:noteId/:slideNumber/:size', (req, res) => {
  });
  
 
-const { promises: fs } = require("fs");
-const { pdf } = require("pdf-to-img");
-const multer  = require('multer')
-const upload = multer({ dest: 'uploads/' })
 
 router.post('/:noteId/', upload.single('pdf'), async (req, res) => {
   const noteId = req.params.noteId;
@@ -67,10 +66,8 @@ router.post('/:noteId/', upload.single('pdf'), async (req, res) => {
   try {
     // Convert the PDF into images
     const document = await pdf(pdfBuffer, { scale: 3 });
-    let counter = 1;
+    let counter = 0;
     for await (const image of document) {
-      //const imagePath = `${counter}.png`;
-      //await fs.writeFile(imagePath, image);
       
       // Upload the image
       const imageData = await dataDao.uploadImage(noteId, counter, image, '1');
