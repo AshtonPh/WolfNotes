@@ -19,9 +19,9 @@ router.post('/register', (req, res) => {
 });
 
 //users login in 
-router.post('/:userID/login', (req, res) => {
+router.post('/signin', (req, res) => {
     let userName = req.body.userName.trim();
-    let passwordHash = req.body.passwordHash.trim();
+    let passwordHash = req.body.password.trim();
     if(userName == "" || passwordHash == "") { // user cannot be empty
         res.status(400).json({error: "fields cannot be empty!"});
     }
@@ -37,12 +37,12 @@ router.post('/:userID/login', (req, res) => {
 });
 
 //users log out
-router.post('/:userID/logout', (req, res) => {
+router.post('/signout', (req, res) => {
     removeToken(req, res);
     res.json({message: "Logged out"});
 });
 
-router.get('/:userID/current', TokenMiddleware, (req, res) => {
+router.get('/user', TokenMiddleware, (req, res) => {
     res.json({message: 'success', user: req.user});
 })
 

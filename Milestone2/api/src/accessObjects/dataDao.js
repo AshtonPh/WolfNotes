@@ -45,9 +45,6 @@ function uploadImage(noteId, slideNumber, image, userID) {
   });
 }
  
-
- 
-
    
 module.exports = {
     //getContentsByNoteID: getContentsByNoteID,

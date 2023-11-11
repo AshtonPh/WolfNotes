@@ -5,6 +5,7 @@
  */
 
 import * as ns from '../common/js/noteState'
+import * as api from '../common/js/api'
 import { render, renderNotesList, sortTypes } from './render';
 
 let noteMenu, deleteDialog, confirmDeleteButton, cancelDeleteButton, 
@@ -38,6 +39,9 @@ export function registerButtons() {
     userPicture.onclick = (ev) => {
         userMenu.open = !userMenu.open;
         ev.stopPropagation();
+    }
+    document.getElementById('um-logout').onclick = () => {
+        api.req('/auth/signout', {method: 'POST'}).then(() => document.location.href = "/signin")
     }
 
     // Add actions to the note menu
@@ -151,8 +155,29 @@ async function confirmCreate() {
     if (!newNoteName.reportValidity())
         return;
 
-    let res = await createNote(newNoteName.value, []);
-    openNote(res.json().noteID);
+    let newName = newNoteName.value;
+    let tags = [];
+    for (let tElem of document.getElementById('newnote-tags').children) {
+        if (!tElem.selected)
+            continue;
+
+        tags.push(Number.parseInt(tElem.attributes.getNamedItem('data-tag-id').textContent));
+    }
+    ns.createNote(newName, tags).then(nID => {
+        if (document.getElementById('new-note-slides').files && 
+            document.getElementById('new-note-slides').files[0]) {
+                let data = new FormData();
+                data.append('pdf', document.getElementById('new-note-slides').files[0]);
+                api.req(`/data/${nID}`, {
+                    method: 'POST',
+                    body: data
+                })
+                .then(() => openNote(nID));
+            }
+            else {
+                openNote(nID);
+            }
+    });
 }
 
 function confirmPropertySave() {
@@ -166,7 +191,7 @@ function confirmPropertySave() {
         if (!tElem.selected)
             continue;
 
-        tags += tElem.attributes.getNamedItem('data-tag-id').textContent;
+        tags.push(Number.parseInt(tElem.attributes.getNamedItem('data-tag-id').textContent));
     }
 
     confirmSavePropertiesButton.disabled = true;
