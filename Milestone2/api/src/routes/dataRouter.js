@@ -59,7 +59,7 @@ router.get('/:noteId/:slideNumber/:size', (req, res) => {
  
 
 
-router.post('/:noteId/', upload.single('pdf'), async (req, res) => {
+router.post('/:noteId/', upload.single('pdf'), tk.TokenMiddleware, async (req, res) => {
   const noteId = req.params.noteId;
   const pdfBuffer = await fs.readFile(req.file.path);
 
@@ -70,7 +70,7 @@ router.post('/:noteId/', upload.single('pdf'), async (req, res) => {
     for await (const image of document) {
       
       // Upload the image
-      const imageData = await dataDao.uploadImage(noteId, counter, image, '1');
+      const imageData = await dataDao.uploadImage(noteId, counter, image, req.userID);
       counter++;
     }
     res.status(200).json({message: 'success'});
