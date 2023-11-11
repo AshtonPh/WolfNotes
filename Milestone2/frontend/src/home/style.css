@@ -16,7 +16,7 @@ body {
     background-color: var(--md-sys-color-background);
     transition: background-color .2s, color .2s;
     display: grid;
-    grid-template-rows: 76pt 1fr 64px;
+    grid-template-rows: 76pt 1fr;
 }
 
 body.scrolled {

@@ -36,7 +36,7 @@ Handlebars.registerHelper("randomID", () => {
 Handlebars.registerHelper("niceTime", dO => util.niceTime(dO));
 
 Handlebars.registerHelper("previewURL", note => {
-    return `/api/data/${note.noteID}/0/thumbnail`;
+    return `/api/data/${note.noteID}/1/thumbnail`;
 })
 
 /**
@@ -76,7 +76,7 @@ const noteListItemTemplate = Handlebars.compile(
             <div class="note-list-details-item"><md-icon>sell</md-icon> {{this.tagName}}</div>
             {{/tags}}
         </div>
-        <img class="note-list-img" slot="start" src="{{slideImg}}"></img>
+        <img class="note-list-img" slot="start" src="{{previewURL this}}"></img>
         <md-icon-button id="{{randomID}}" slot="end" class="note-menu-button">
             <md-icon>more_vert</md-icon>
         </md-icon-button>
