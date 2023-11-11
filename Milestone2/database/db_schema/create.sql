@@ -34,9 +34,7 @@ CREATE TABLE IF NOT EXISTS `Note` (
   `title` text NOT NULL,
   `slideSetDirectory` tinytext DEFAULT NULL,
   `slideCount` int(11) DEFAULT NULL,
-  PRIMARY KEY (`noteID`),
-  CONSTRAINT `FK_Note_NoteData` FOREIGN KEY (`noteID`) REFERENCES `NoteData` (`noteID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_Note_NoteTag` FOREIGN KEY (`noteID`) REFERENCES `NoteTag` (`noteID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  PRIMARY KEY (`noteID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='A list of notes (not including their content) stored in WolfNotes';
 
 -- Data exporting was unselected.
@@ -49,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `NoteData` (
   `contents` longtext NOT NULL,
   PRIMARY KEY (`chunkID`),
   UNIQUE KEY `noteID_slideNumber` (`noteID`,`slideNumber`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='The actual contents of the notes split by "chunks" (1 chunk = 1 slide)';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='The actual contents of the notes split by "chunks" (1 chunk = 1 slide)';
 
 -- Data exporting was unselected.
 
@@ -60,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `NoteTag` (
   `tagID` int(11) NOT NULL,
   PRIMARY KEY (`ntID`),
   UNIQUE KEY `noteID_tagID` (`noteID`,`tagID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='A database to represent the many-to-many relationship between notes and tags';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='A database to represent the many-to-many relationship between notes and tags';
 
 -- Data exporting was unselected.
 
@@ -93,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `Tag` (
   `tagName` text NOT NULL,
   `userID` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`tagID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='A list of tags to be applied to notes';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='A list of tags to be applied to notes';
 
 -- Data exporting was unselected.
 
