@@ -1,3 +1,41 @@
+const registerButton = document.querySelector('#registerButton');
+const username = document.querySelector('#username');
+const password = document.querySelector('#password');
+const email = document.querySelector('#email');
+const errorBox = document.querySelector('#form-error');
+
+registerButton.addEventListener('click', e =>{
+    e.preventDefault();
+    errorBox.classList.add("hidden");
+    api.register(username.value, password.value, email.value)
+    .then(userData => {
+      window.location.href = "./login/index.html";
+    })
+    .catch(err => {
+      errorBox.classList.remove("hidden");
+      errorBox.textContent = "Error during registration: " + (err.message || "Please try again.");
+    });
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // document.addEventListener('DOMContentLoaded', function () {
 //     const registrationForm = document.getElementById('registration-form');
 //     registrationForm.addEventListener('submit', function (event) {

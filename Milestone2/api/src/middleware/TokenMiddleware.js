@@ -16,7 +16,7 @@ exports.TokenMiddleware = (req, res, next) => {
     token = req.cookies[TOKEN_COOKIE_NAME]; 
   }
 
-  if(!token) { 
+  if(!token) {  
     res.status(401).json({error: 'Not authenticated'});
     return;
   }
