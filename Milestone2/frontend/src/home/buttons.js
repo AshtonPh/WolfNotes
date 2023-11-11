@@ -4,10 +4,13 @@
  * Handle click events for page buttons
  */
 
-import { deleteNote, createNote } from "./api";
+import * as ns from '../common/js/noteState'
+import { render, renderNotesList, sortTypes } from './render';
 
 let noteMenu, deleteDialog, confirmDeleteButton, cancelDeleteButton, 
-    notesListContent, createDialog, newNoteName, confirmCreateBtn, cancelCreateBtn;
+    notesListContent, createDialog, newNoteName, confirmCreateBtn, cancelCreateBtn,
+    sortMenu, propertiesDialog, notePropertyName, confirmSavePropertiesButton,
+    cancelSavePropertiesButton;
 
 /**
  * Register onclick events for static (non-rendered) button items
@@ -23,6 +26,11 @@ export function registerButtons() {
     confirmCreateBtn = document.getElementById('confirm-create-btn');
     cancelCreateBtn = document.getElementById('cancel-create-btn');
     newNoteName = document.getElementById('new-note-name');
+    sortMenu = document.getElementById('sort-menu');
+    propertiesDialog = document.getElementById('properties-dialog');
+    notePropertyName = document.getElementById('properties-note-name');
+    confirmSavePropertiesButton = document.getElementById('confirm-propsave-btn');
+    cancelSavePropertiesButton = document.getElementById('cancel-propsave-btn');
 
     // Make the user picture open the user menu
     const userMenu = document.getElementById('user-menu');
@@ -34,10 +42,19 @@ export function registerButtons() {
 
     // Add actions to the note menu
     document.getElementById("nm-btn-delete").onclick = openDeleteDialog;
+    document.getElementById("nm-btn-properties").onclick = openPropertiesDialog;
+
+    // Add actions to sort menu
+    for (let e of document.getElementById('sort-menu').children)
+        e.onclick = () => setSort(e);
 
     // Add actions to the delete dialog
     confirmDeleteButton.onclick = confirmDelete;
     cancelDeleteButton.onclick = () => deleteDialog.close();
+
+    // Add actions to the properties dialog
+    confirmSavePropertiesButton.onclick = confirmPropertySave;
+    cancelSavePropertiesButton.onclick = () => propertiesDialog.close();
 
     // Add actions for creating a note
     document.getElementById('create-note-btn').onclick = () => createDialog.show();
@@ -60,10 +77,15 @@ export function registerNoteItems(elements) {
 /**
  * Register onclick events for filter chips
  */
-export function registerFilterChips() {
+export function registerTagChips() {
+    document.getElementById('chip-sorting').onclick = openSortMenu;
+    sortMenu.anchorID = 'chip-sorting';
     let chips = document.querySelectorAll("#filters md-filter-chip");
     for (let chip of chips) {
-        chip.onclick = () => updateFilter(chip.label, chip.selected);
+        // This setTimeout is a workaround for the filter chips
+        //  sometimes updating their state slightly slower than
+        //  they fire the onclick event
+        chip.onclick = () => setTimeout(renderNotesList, 100);
     }
 }
 
@@ -82,11 +104,37 @@ function openNoteMenu(ev, noteID, anchorID) {
     ev.stopPropagation();
 }
 
+function openSortMenu() {
+    sortMenu.open = !sortMenu.open;
+}
+
+function setSort(elem) {
+    let sortType = elem.attributes.getNamedItem("data-sorttype").textContent;
+    document.getElementById('chip-sorting').attributes.getNamedItem('data-currentsort').textContent = sortType;
+    document.getElementById('chip-sorting').attributes.getNamedItem('label').textContent =
+        sortTypes.find(t => t.id == sortType).niceName;
+    renderNotesList();
+}
+
 function openDeleteDialog() {
     let nmForAttr = noteMenu.attributes.getNamedItem("data-for");
     let diagForAttr = deleteDialog.attributes.getNamedItem("data-for");
     diagForAttr.textContent = nmForAttr.textContent;
     deleteDialog.show();
+}
+
+function openPropertiesDialog() {
+    let nmForAttr = noteMenu.attributes.getNamedItem("data-for");
+    let diagForAttr = propertiesDialog.attributes.getNamedItem("data-for");
+    diagForAttr.textContent = nmForAttr.textContent;
+    ns.getNote(Number.parseInt(nmForAttr.textContent)).then(note => {
+        document.getElementById('properties-note-name').value = note.title;
+        for (let tElem of document.getElementById('properties-tags').children) {
+            let tagID = tElem.attributes.getNamedItem('data-tag-id').textContent;
+            tElem.selected = note.tags.some(t => t.tagID == tagID);
+        }
+        propertiesDialog.show();
+    });
 }
 
 async function confirmDelete() {
@@ -107,25 +155,27 @@ async function confirmCreate() {
     openNote(res.json().noteID);
 }
 
-let filters = []
-function updateFilter(tag, on) {
-    // This onclick triggers before the selected property is updated,
-    //  so use the opposite of the on value
-    if (!on && !filters.includes(tag))
-        filters.push(tag);
-    else if (on && filters.includes(tag))
-        filters.pop(tag);
+function confirmPropertySave() {
+    if (!notePropertyName.reportValidity())
+        return;
 
-    if (filters.length == 0) {
-        for (let n of notesListContent.children)
-            n.style.display = "flex";
+    let diagForAttr = propertiesDialog.attributes.getNamedItem("data-for");
+    let newName = notePropertyName.value;
+    let tags = [];
+    for (let tElem of document.getElementById('properties-tags').children) {
+        if (!tElem.selected)
+            continue;
+
+        tags += tElem.attributes.getNamedItem('data-tag-id').textContent;
     }
-    else for (let n of notesListContent.children) {
-        let tagsAttr = n.attributes.getNamedItem("data-tags");
-        let tags = tagsAttr.textContent.split(';');
-        if (filters.find(f => !tags.includes(f)) !== undefined)
-            n.style.display = "none";
-        else
-            n.style.display = "flex";
-    }
+
+    confirmSavePropertiesButton.disabled = true;
+    ns.getNote(diagForAttr.textContent)
+        .then(note => ns.setNoteInformation(note, newName, tags))
+        .then(() => {
+            confirmSavePropertiesButton.disabled = false;
+            propertiesDialog.close();
+            render();
+        });
+
 }

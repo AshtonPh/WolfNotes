@@ -4,8 +4,9 @@
  * Handles grabbing data from the API and keeping track of local state
  */
 
-import * as api from'./api';
-import {Note, Tag} from './models';
+import * as api from './api';
+import { Note, Tag } from './models';
+import * as ts from './tagState';
 
 /**
  * The current set of Note objects
@@ -13,77 +14,78 @@ import {Note, Tag} from './models';
  */
 let noteSet;
 
-/** True if the note set contains all notes */
-let noteSetComplete = false;
+let noteSetInitializedPromise;
+
+function initializeNoteSet() {
+    if (!noteSetInitializedPromise) {
+        noteSetInitializedPromise = new Promise((resolve, reject) => {
+            api.req('/notes/all')
+                .then(res => Promise.all([res.json(), ts.getTags()]))
+                .then(rt => {
+                    let [res, tags] = rt;
+                    noteSet = res
+                        .map(note => {
+                            let newNote = Note.fromApi(note);
+                            newNote.tags = tags.filter(t => note.tags.includes(t.tagID));
+                            return newNote;
+                        });
+                    resolve();
+                }).catch(reason => reject(reason));
+        });
+    }
+    return noteSetInitializedPromise;
+}
 
 /**
  * @returns {Promise<Note[]>}
  */
 export function getNotes() {
-    return new Promise((resolve, reject) => {
-        if (noteSetComplete && noteSet) {
-            resolve(noteSet);
-        }
-        else {
-            api.req('/notes/all').then(res => {
-                noteSet = res.json().map(note => Note.fromApi(note));
-                noteSetComplete = true;
-                resolve(noteSet);
-            }).catch(reason => reject(reason));
-        }
-    });
+    return initializeNoteSet().then(() => noteSet);
 }
 
 /**
  * @returns {Promise<Note[]>}
  */
 export function getSuggested() {
-    return new Promise((resolve, reject) => {
-        if (noteSetComplete && noteSet) {
-            resolve(noteSet);
-        }
-        else {
-            api.req('/notes/suggested').then(res => {
-                let nIDs = res.map(noteData => noteData.noteID);
-                getNotes().then(notes => notes.filter(n => nIDs.includes(n.noteID)));
-            }).catch(reason => reject(reason));
-        }
-    });
+    return initializeNoteSet()
+        .then(() => api.req('/notes/suggested'))
+        .then(res => res.json())
+        .then(res => noteSet.filter(n => res.includes(n.noteID)));
 }
 
 /** @returns {Promise<Note>} */
 export function getNote(noteID) {
-    return new Promise((resolve, reject) => {
-        let note = noteSet.find(n => n.noteID == noteID);
-        if (note) {
-            resolve(note);
-        }
-        else {
-            api.req(`/notes/${noteID}`).then(noteData => {
-                note = Note.fromApi(noteData);
-                noteSet.push(note);
-                resolve(note);
-            }).catch(reason => reject(reason));
-        }
-    });
+    // If the client has already requested all notes, just get it from the note set
+    if (noteSetInitializedPromise) {
+        return initializeNoteSet()
+            .then(() => noteSet.find(n => n.noteID == noteID))
+    }
+    // If this happens before the client requests all notes, then get the single note's data from the API
+    else {
+        return api.req(`/notes/${noteID}`)
+            .then(res => res.json())
+            .then(res => Note.fromApi(res));
+    }
 }
 
 /**
- * 
- * @param {Note} note 
- * @param {string} title 
- * @param {number[]} tags 
+ *
+ * @param {Note} note
+ * @param {string} title
+ * @param {number[]} tags
  * @returns {Promise}
  */
 export function setNoteInformation(note, title, tags) {
     return api.req(`/notes/${note.noteID}`, {
-        body: JSON.stringify({title, tags}),
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'}
-    }).then(res => {
-        note.title = title;
-        note.tags = tags;
-    });
+        body: JSON.stringify({ title, tags }),
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' }
+    })
+        .then(() => ts.getTags())
+        .then(allTags => {
+            note.title = title;
+            note.tags = allTags.filter(t => tags.includes(t.tagID));
+        });
 }
 
 /**
@@ -92,15 +94,23 @@ export function setNoteInformation(note, title, tags) {
  * @returns {Promise}
  */
 export function deleteNote(note) {
-    return api.req(`/notes/${note.noteID}`), {
-        method: 'DELETE',
-    }.then(() => {
-        noteSet.filter(n => n != note);
-    });
+    initializeNoteSet().then(() =>
+        api.req(`/notes/${note.noteID}`, {
+            method: 'DELETE',
+        })
+    )
+    .then(() => noteSet = noteSet.filter(n => n != note));
 }
 
 export function processTagDeletion(tagID) {
-    noteSet.forEach(note => {
-        note.tags.filter(t => t != tagID);
-    });
+    if (noteSet) {
+        noteSet.forEach(note => {
+            note.tags.filter(t => t != tagID);
+        });
+    }
+}
+
+export function invalidateState() {
+    noteSet = undefined;
+    noteSetInitializedPromise = undefined;
 }

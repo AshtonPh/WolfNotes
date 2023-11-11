@@ -13,7 +13,7 @@ const API_BASE = "/api"
  * @param {RequestInit} options request options
  * @returns {Promise<Response>} a request promise
  */
-function req(url, options) {
+export function req(url, options) {
     return fetch(API_BASE + url, options)
         .then(res => {
             if (res.status == 401)

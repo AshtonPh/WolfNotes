@@ -42,9 +42,8 @@ function assignTags(tags, noteID) {
  */
 function getNotesByUser(userID) {
     return conPro.query('SELECT * FROM Note WHERE userID = ?', [userID])
-        .then(q => 
-            q.results.map(r => new Note(r))
-            );
+        .then(q => q.results.map(r => new Note(r)))
+        .then(notes => fillNoteTagIDs(notes));
 }
 
 /**
@@ -55,8 +54,8 @@ function getNotesByUser(userID) {
  */
 function getSuggestedNotes(userID) {
     let oneWeekAgo = new Date().setDate(new Date().getDate() - 5);
-    return conPro.query('SELECT * FROM Note WHERE userID = ? AND dateEdited > ?', [userID, oneWeekAgo])
-        .then(q => q.results.map(r => new Note(r)));
+    return conPro.query('SELECT noteID FROM Note WHERE userID = ? AND dateEdited > ?', [userID, oneWeekAgo])
+        .then(q => q.results.map(r => r.noteID));
 }
 
 /**
@@ -67,9 +66,25 @@ function getSuggestedNotes(userID) {
  */
 function getNoteByID(noteID) {
     return conPro.query('SELECT * FROM Note WHERE noteID = ?', [noteID])
-        .then(q => 
-            q.results.length > 0 ? new Note(q.results[0]) : undefined
-            );
+        .then(q => q.results.length > 0 ? new Note(q.results[0]) : undefined)
+        .then(n => n ? fillNoteTagIDs([n]) : n);
+}
+
+/**
+ * Internal function to add tag IDs to notes
+ * 
+ * @param {Note[]} notes
+ */
+function fillNoteTagIDs(notes) {
+    return conPro.query('SELECT noteID, tagID FROM NoteTag WHERE noteID in (?)', notes.map(n => n.noteID))
+        .then(q => {
+            notes.forEach(n => {
+                n.tags = q.results
+                    .filter(r => r.noteID == n.noteID)
+                    .map(r => r.tagID);
+            });
+            return notes;
+        });
 }
 
 /**

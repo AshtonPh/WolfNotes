@@ -16,10 +16,12 @@
 
 <body>
     <header>
-        <md-outlined-text-field id="searchbar" placeholder="Search your notes...">
-            <md-icon slot="leading-icon">search</md-icon>
-            <img id="user-picture" slot="trailing-icon"></div>
-        </md-outlined-text-field>
+        <h1>WolfNotes</h1>
+        <div id="header-buttons">
+            <md-icon-button id="user-picture">
+                <md-icon>settings</md-icon>
+            </md-icon-button>
+        </div>
     </header>
     <main>
         <h2 class="section-header">Jump Back In</h2>
@@ -28,46 +30,44 @@
         <h2 class="section-header">Your Notes</h2>
         <div id="note-list">
             <md-chip-set id="filters">
-                <md-assist-chip id="chip-sorting" label="Most recent first">
-                    <md-icon slot="icon">sort</md-icon>
-                </md-assist-chip>
-                <!-- <md-filter-chip id="chip-downloaded" label="Downloaded">
-                    <md-icon slot="icon">cloud_off</md-icon>
-                </md-filter-chip> -->
             </md-chip-set>
             <md-list id="note-list-content">
             </md-list>
         </div>
     </main>
-    <md-tabs>
-        <md-primary-tab active><md-icon slot="icon">home</md-icon>Home</md-primary-tab>
-        <md-primary-tab><md-icon slot="icon">style</md-icon>Tags</md-primary-tab>
-    </md-tabs>
     <md-fab label="New" id="create-note-btn">
         <md-icon slot="icon">add</md-icon>
     </md-fab>
     <div id="hidden-items">
-        <md-menu id="note-menu" data-for="" anchor="">
-            <md-menu-item disabled>
-                <div slot="headline">Rename</div>
-            </md-menu-item>
-            <md-menu-item disabled>
-                <div slot="headline">Edit tags</div>
-                <div slot="supporting-text">Coming when the tags page is complete</div>
+        <md-menu id="note-menu" positioning="fixed" data-for="" anchor="">
+            <md-menu-item id="nm-btn-properties">
+                <md-icon slot="start">info</md-icon>
+                <div slot="headline">Properties</div>
+                <div slot="supporting-text">Edit this note's name and tags</div>
             </md-menu-item>
             <md-menu-item id="nm-btn-delete">
+                <md-icon slot="start">delete</md-icon>
                 <div slot="headline">Delete</div>
             </md-menu-item>
         </md-menu>
         <md-menu id="user-menu" anchor="user-picture">
-            <md-menu-item href="/settings">
-                <div slot="headline">User settings</div>
-                <div slot="supporting-text" id="user-menu-email">sdent@ncsu.edu</div>
-                <md-icon slot="start">settings</md-icon>
+            <md-menu-item>
+                <div slot="headline">Manage tags</div>
+                <md-icon slot="start">style</md-icon>
             </md-menu-item>
-            <md-menu-item href="/signin">
+            <md-menu-item>
                 <div slot="headline">Log out</div>
                 <md-icon slot="start">logout</md-icon>
+            </md-menu-item>
+        </md-menu>
+        <md-menu positioning="fixed" id="sort-menu" anchor="chip-sorting">
+            <md-menu-item id="sm-mostrecent" data-sorttype="mostrecent">
+                <md-icon slot="start">history</md-icon>
+                <div slot="headline">Most recent</div>
+            </md-menu-item>
+            <md-menu-item id="sm-az" data-sorttype="az">
+                <md-icon slot="start">sort_by_alpha</md-icon>
+                <div slot="headline">A to Z</div>
             </md-menu-item>
         </md-menu>
         <md-dialog id="confirm-delete-dialog" data-for="">
@@ -79,14 +79,28 @@
                 <md-filled-tonal-button id="confirm-delete-btn">Delete</md-filled-tonal-button>
             </div>
         </md-dialog>
-        <md-dialog id="create-new-dialog">
+        <md-dialog id="create-new-dialog" class="note-properties">
             <div slot="headline">Create Note</div>
             <div slot="content">
                 <md-filled-text-field required id="new-note-name" name="name" label="Name"></md-filled-text-field>
             </div>
+            <md-chip-set id="newnote-tags">
+            </md-chip-set>
             <div slot="actions">
                 <md-text-button id="cancel-create-btn">Cancel</md-text-button>
                 <md-filled-tonal-button id="confirm-create-btn">Create</md-filled-tonal-button>
+            </div>
+        </md-dialog>
+        <md-dialog id="properties-dialog" data-for="" class="note-properties">
+            <div slot="headline">Properties</div>
+            <div slot="content">
+                <md-filled-text-field required id="properties-note-name" name="name" label="Name"></md-filled-text-field>
+                <md-chip-set id="properties-tags">
+                </md-chip-set>
+            </div>
+            <div slot="actions">
+                <md-text-button id="cancel-propsave-btn">Cancel</md-text-button>
+                <md-filled-tonal-button id="confirm-propsave-btn">Save</md-filled-tonal-button>
             </div>
         </md-dialog>
     </div>

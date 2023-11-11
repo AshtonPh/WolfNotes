@@ -24,13 +24,8 @@ body.scrolled {
     color: var(--md-sys-color-on-surface-variant);
 }
 
-md-tabs {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-
 header {
+    font-family: Gabarito, Arial, Helvetica, sans-serif;
     position: fixed;
     left: 0pt;
     top: 24pt;
@@ -39,19 +34,9 @@ header {
     width: 100vw;
     box-sizing: border-box;
     background-color: transparent;
-}
-
-#searchbar {
-    height: 36pt;
-    width: 100%;
-    --md-outlined-text-field-container-shape: 24pt;
-}
-
-#user-picture {
-    background-color: var(--md-sys-color-primary);
-    width: 24pt;
-    height: 24pt;
-    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 #main-container {
@@ -187,6 +172,19 @@ main {
 
 #create-note-btn {
     position: fixed;
-    bottom: calc(64px + 12pt);
+    bottom: 12pt;
     right: 12pt;
+}
+
+.note-properties {
+    width: 90vw;
+    max-width: 300pt;
+}
+
+.note-properties md-filled-text-field {
+    width: 100%;
+}
+
+.note-properties md-chip-set {
+    margin-top: 12pt;
 }

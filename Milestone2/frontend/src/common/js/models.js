@@ -3,17 +3,20 @@ export class Note {
     noteID;
     /** @type {Date} the last edit date/time of this note */
     dateEdited;
-    /** @type {number[]} a list of tag IDs associated with this note */
+    /** @type {Tag[]} a list of tags associated with this note */
     tags;
     /** @type {string} the title of this note */
     title;
+    /** @type {number} number of slides */
+    slideCount;
 
     static fromApi(data) {
         let note = new Note;
         note.noteID = data.noteID;
         note.title = data.title;
-        note.tags = data.tags;
         note.dateEdited = new Date(data.dateEdited);
+        note.slideCount = data.slideCount;
+        return note;
     }
 }
 
@@ -27,5 +30,6 @@ export class Tag {
         let tag = new Tag;
         tag.tagID = data.tagID;
         tag.tagName = data.tagName;
+        return tag;
     }
 }

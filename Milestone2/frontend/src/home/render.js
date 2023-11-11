@@ -5,24 +5,22 @@
  */
 
 import Handlebars from 'handlebars'
-import {getSuggestions, getNotesList, getSlideImage, getUserPicture, getUserEmail} from './api'
-import { registerNoteItems, registerFilterChips } from './buttons';
+import * as ns from '../common/js/noteState'
+import * as ts from '../common/js/tagState'
+import { Note, Tag } from '../common/js/models'
+import { registerNoteItems, registerTagChips } from './buttons';
+import * as util from '../common/js/util';
+
+export const sortTypes = [
+    {id: 'mostrecent', niceName: 'Most Recent', sorter: (n1, n2) => n2.dateEdited - n1.dateEdited},
+    {id: 'az', niceName: 'A to Z', sorter: (n1, n2) => n1.title - n2.title},
+]
 
 export function render() {
     renderJumpTargets();
     renderNotesList();
+    renderTagChips();
     renderUserInfo();
-}
-
-/**
- * Change how the notes are sorted
- * 
- * @param filter one of [lastEdit, firstEdit, az, za]
- */
-export function updateNotesSort(filter) {
-    // allNotes.sort((a, b) => a.lastEdit - b.lastEdit)\
-    noteListContent.innerHTML = noteListItemTemplate(allNotes);
-    registerNoteItems(noteListContent.children);
 }
 
 Handlebars.registerHelper("randomID", () => {
@@ -35,6 +33,15 @@ Handlebars.registerHelper("randomID", () => {
     return id;
 });
 
+Handlebars.registerHelper("niceTime", dO => util.niceTime(dO));
+
+Handlebars.registerHelper("previewURL", note => {
+    if (note.slideCount > 0)
+        return `/api/data/${note.noteID}/1/thumbnail`;
+    else
+        return ``; // TODO: Placeholder image
+})
+
 /**
  * Template for rendering "Jump Back In" targets
  */
@@ -42,11 +49,11 @@ const jumpTargetTemplate = Handlebars.compile(
     `
     {{#this}}
     <div class="jump-target" data-noteid="{{noteID}}">
-        <img src="{{slideImg}}" class="jump-target-img"></img>
+        <img src="{{previewURL this}}" class="jump-target-img"></img>
         <div class="jump-target-details">
             <div class="jump-target-details-text">
                 <div class="jump-target-name">{{title}}</div>
-                <div class="jump-target-why">{{reason}}</div>
+                <div class="jump-target-why">Edited {{niceTime dateEdited}}</div>
             </div>
             <md-icon-button id="{{randomID}}" class="note-menu-button">
                 <md-icon>more_vert</md-icon>
@@ -67,8 +74,9 @@ const noteListItemTemplate = Handlebars.compile(
     <md-list-item type="button" data-noteid="{{noteID}}" data-tags="{{#tags}}{{this}};{{/tags}}">
         <div class="note-list-name" slot="headline">{{title}}</div>
         <div class="note-list-details" slot="supporting-text">
+            <div class="note-list-details-item"><md-icon>history</md-icon> Edited {{niceTime dateEdited}}</div>
             {{#tags}}
-            <div class="note-list-details-item"><md-icon>sell</md-icon> {{this}}</div>
+            <div class="note-list-details-item"><md-icon>sell</md-icon> {{this.tagName}}</div>
             {{/tags}}
         </div>
         <img class="note-list-img" slot="start" src="{{slideImg}}"></img>
@@ -85,8 +93,21 @@ const noteListItemTemplate = Handlebars.compile(
  */
 const filterTagTemplate = Handlebars.compile(
     `
+    <md-assist-chip id="chip-sorting" label="Most recent" data-currentsort="mostrecent">
+        <md-icon slot="icon">sort</md-icon>
+    </md-assist-chip>
     {{#this}}
-    <md-filter-chip id="chip-downloaded" label="{{this}}">
+    <md-filter-chip data-filter-id="{{tagID}}" label="{{tagName}}">
+        <md-icon slot="icon">sell</md-icon>
+    </md-filter-chip>
+    {{/this}}
+    `
+)
+
+const propertiesTagTemplate = Handlebars.compile(
+    `
+    {{#this}}
+    <md-filter-chip label="{{tagName}}" data-tag-id="{{tagID}}">
         <md-icon slot="icon">sell</md-icon>
     </md-filter-chip>
     {{/this}}
@@ -94,12 +115,8 @@ const filterTagTemplate = Handlebars.compile(
 )
 
 const jump = document.getElementById("jump");
-function renderJumpTargets() {
-    getSuggestions().then(async suggestions => {
-        for (let s of suggestions) {
-            s.slideImg = await getSlideImage(s.noteID, 1);
-            s.reason = "Edited recently"
-        }
+export function renderJumpTargets() {
+    ns.getSuggested().then(suggestions => {
         jump.innerHTML = jumpTargetTemplate(suggestions);
         registerNoteItems(jump.children);
     });
@@ -107,28 +124,40 @@ function renderJumpTargets() {
 
 const noteListContent = document.getElementById("note-list-content");
 const filters = document.getElementById("filters");
-let allNotes;
-async function renderNotesList() {
-    // Get the notes and preview images
-    allNotes = await getNotesList();
-    for (let note of allNotes){
-        note.slideImg = await getSlideImage(note.noteID, 1);
-    }
-    
-    // Create the tag filters from the notes list
-    let seen = []
-    let allTags = allNotes.map(n => n.tags).flat().filter(t => {
-        if (seen.includes(t))
-            return false;
+export function renderNotesList() {
+    let filterChips = filters.querySelectorAll('md-filter-chip');
+    let activeFilters = Array.from(filterChips)
+        .filter(n => n.selected)
+        .map(n => Number.parseInt(n.attributes.getNamedItem('data-filter-id').value));
 
-        seen.push(t);
-        return true;
+    ns.getNotes().then(notes => {
+        let toRender = notes
+            .filter(n => activeFilters.every(tID => n.tags.some(t => t.tagID == tID)));
+
+        let sortChip = document.getElementById('chip-sorting');
+        let sorter;
+        if (sortChip) {
+            sorter = sortTypes
+                .find(s => s.id == sortChip.attributes.getNamedItem('data-currentsort').textContent)
+        }
+        if (sorter === undefined) 
+            sorter = sortTypes[0];
+
+        noteListContent.innerHTML = noteListItemTemplate(toRender);
+        registerNoteItems(noteListContent.children);
     });
-    filters.innerHTML += filterTagTemplate(allTags);
-    registerFilterChips();
-
-    updateNotesSort("recent");
 }
+
+export function renderTagChips() {
+    ts.getTags().then(tags => {
+        filters.innerHTML += filterTagTemplate(tags)
+        registerTagChips();
+        document.getElementById('properties-tags').innerHTML = 
+        document.getElementById('newnote-tags').innerHTML =
+            propertiesTagTemplate(tags);
+    });
+}
+    
 
 const userPicture = document.getElementById("user-picture")
 const userMenuEmail = document.getElementById("user-menu-email")
