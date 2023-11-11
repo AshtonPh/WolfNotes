@@ -92,18 +92,18 @@ Not done:
 **6. ER Diagram**
 
 <br />
-![ER diagram of relationship schema](https://github.ncsu.edu/engr-csc342/csc342-2023Fall-GroupV/blob/main/Milestone2/Diagram.png)  
+![ER diagram of relationship schema](https://github.ncsu.edu/engr-csc342/csc342-2023Fall-GroupV/blob/main/Milestone2/Diagram.png) 
+
+
+
 **7. Authorization and authentication**
 The "TokenMiddleware" is applied as middleware to routes that require authentication, such as the "/" and "/:userID/current" routes. The generateToken function is used to create a JWT when a user is registered or logs in. The generated token is sent to the client for future requests. The userDao.addUser funtion is called to the user to the system. So if successful, a JWT is generated using "generateToken" and the response includes the user data and generated token. Data is being stored and managed by the userDao module and it is interacts with our database to store and retrieve user information. The TokenMiddleware is used to ensure that routes require authentication are only accessible with a valid token and that is allowing users to access what they are allowed to access.
 
 **8. Contributions**
 
 | Team member | Team contributions |
-
-|----:|-------------------------|
-
+|-------------|--------------------|
 | **Zelda Lu** | - Created authentication router and userDAO <br />- Updated the register and login pages. <br />- Created the token middleware<br /> - Created and populated the database<br />|
-
 | **Deci Horine** | - Created all of the updated tag endpoints<br />- Developed the home page.<br />- Implemented the connection provider, noteDAO, note router, tagDAO, and tag router<br /> - Created the common javascripts.<br />|
+| **Nam Pham** | - Created the dataDAO and data router.<br />- Updated the note editor. <br /> - Created the dictionary page. <br />|
 
-| **Nam Pham** | - Created the dataDAO and data router.<br />- Updated the note editor. <br /> - Created the dictionary page. <br>
