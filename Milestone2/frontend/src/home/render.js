@@ -13,7 +13,7 @@ import * as util from '../common/js/util';
 
 export const sortTypes = [
     {id: 'mostrecent', niceName: 'Most Recent', sorter: (n1, n2) => n2.dateEdited - n1.dateEdited},
-    {id: 'az', niceName: 'A to Z', sorter: (n1, n2) => n1.title - n2.title},
+    {id: 'az', niceName: 'A to Z', sorter: (n1, n2) => n1.title.localeCompare(n2.title)},
 ]
 
 export function render() {
@@ -36,10 +36,7 @@ Handlebars.registerHelper("randomID", () => {
 Handlebars.registerHelper("niceTime", dO => util.niceTime(dO));
 
 Handlebars.registerHelper("previewURL", note => {
-    if (note.slideCount > 0)
-        return `/api/data/${note.noteID}/1/thumbnail`;
-    else
-        return ``; // TODO: Placeholder image
+    return `/api/data/${note.noteID}/0/thumbnail`;
 })
 
 /**
@@ -143,6 +140,7 @@ export function renderNotesList() {
         if (sorter === undefined) 
             sorter = sortTypes[0];
 
+        toRender.sort(sorter.sorter);
         noteListContent.innerHTML = noteListItemTemplate(toRender);
         registerNoteItems(noteListContent.children);
     });
@@ -150,7 +148,7 @@ export function renderNotesList() {
 
 export function renderTagChips() {
     ts.getTags().then(tags => {
-        filters.innerHTML += filterTagTemplate(tags)
+        filters.innerHTML = filterTagTemplate(tags)
         registerTagChips();
         document.getElementById('properties-tags').innerHTML = 
         document.getElementById('newnote-tags').innerHTML =

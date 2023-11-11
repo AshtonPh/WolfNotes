@@ -55,7 +55,7 @@
                 <div slot="headline">Manage tags</div>
                 <md-icon slot="start">style</md-icon>
             </md-menu-item>
-            <md-menu-item>
+            <md-menu-item id="um-logout">
                 <div slot="headline">Log out</div>
                 <md-icon slot="start">logout</md-icon>
             </md-menu-item>
@@ -83,9 +83,11 @@
             <div slot="headline">Create Note</div>
             <div slot="content">
                 <md-filled-text-field required id="new-note-name" name="name" label="Name"></md-filled-text-field>
+                <label for="new-note-slides">Slide set</label>
+                <input id="new-note-slides" type="file" accept=".pdf">
+                <md-chip-set id="newnote-tags">
+                </md-chip-set>
             </div>
-            <md-chip-set id="newnote-tags">
-            </md-chip-set>
             <div slot="actions">
                 <md-text-button id="cancel-create-btn">Cancel</md-text-button>
                 <md-filled-tonal-button id="confirm-create-btn">Create</md-filled-tonal-button>

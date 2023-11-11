@@ -188,3 +188,7 @@ main {
 .note-properties md-chip-set {
     margin-top: 12pt;
 }
+
+#create-new-dialog input[type="file"] {
+    padding-top: 12pt;
+}

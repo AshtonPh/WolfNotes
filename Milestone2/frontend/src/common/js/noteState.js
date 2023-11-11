@@ -102,6 +102,16 @@ export function deleteNote(note) {
     .then(() => noteSet = noteSet.filter(n => n != note));
 }
 
+export function createNote(title, tags) {
+    return api.req(`/notes`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, tags }),
+    })
+        .then(res => res.json())
+        .then(res => res.noteID);
+}
+
 export function processTagDeletion(tagID) {
     if (noteSet) {
         noteSet.forEach(note => {

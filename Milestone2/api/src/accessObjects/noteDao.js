@@ -76,7 +76,7 @@ function getNoteByID(noteID) {
  * @param {Note[]} notes
  */
 function fillNoteTagIDs(notes) {
-    return conPro.query('SELECT noteID, tagID FROM NoteTag WHERE noteID in (?)', notes.map(n => n.noteID))
+    return conPro.query('SELECT noteID, tagID FROM NoteTag WHERE noteID in (?)', [notes.map(n => n.noteID)])
         .then(q => {
             notes.forEach(n => {
                 n.tags = q.results
