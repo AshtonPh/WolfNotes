@@ -54,68 +54,40 @@ Not done:
 **4. Pages status**
 
 | Pages | Status | Wireframe |
-
-|---------|--------|------------|
-
+|-------|--------|-----------|
 | Login | 95% | |
-
 | Register | 90% | |
-
-| Home | 80% |[Wireframe](https://github.ncsu.edu/engr-csc342/csc342-2023Fall-GroupV/blob/main/Proposal/Wireframes/home.png?raw=true)|
-
+| Home | 80% | [Wireframe](https://github.ncsu.edu/engr-csc342/csc342-2023Fall-GroupV/blob/main/Proposal/Wireframes/home.png?raw=true) |
 | Note editor | 70% | [Wireframe](https://github.ncsu.edu/engr-csc342/csc342-2023Fall-GroupV/blob/main/Proposal/Wireframes/notes.png) |
-
 | Browse tags | 0% | |
-
-| Dictionary| 25% | |
-
-|User settings & Shorthands |0%|
+| Dictionary | 25% | |
+| User settings & Shorthands | 0% | |
 
   
 
 **5. API Endpoints**
 
 | Method | Route | Description |
-
-|--------|---------------|--------------------------------------------------------|
-
+|--------|-------|-------------|
 | POST | /api/auth/register | Register a new user |
-
 | POST | /api/auth/signin | User sign-in |
+| POST | /api/auth/signout | User sign-out |
+| GET | /api/auth/user/ | Get user information for the current user |
+| POST | /api/auth/avatar | A user profile setting |
+| GET | /api/auth/avatar | Getting the profile picture from the user |
+| POST | /api/notes/ | Create a new note |
+| GET | /api/notes/all | Get a list of all notes |
+| GET | /api/notes/suggested | Get a list of suggested notes |
+| GET | /api/notes/:noteID | Get a specific note by its ID |
+| PUT | /api/notes/:noteID | Update an existing note |
+| DELETE | /api/notes/:noteID | Delete a specific note by its ID |
+| GET | /api/tags | Get all tags for the logged-in user |
+| POST | /api/tags | Create a new tag for the logged-in user |
+| DELETE | /api/tags/:tagID | Delete a tag that belongs to the logged-in user |
+| POST | /api/data/:noteID/chunk | Send a chunk (1 slide) of note data - main endpoint for saving notes |
+| GET | /api/data/:noteID/:slideNumber/chunks | Retrieve the entire set of chunks for a specific note - used for viewing a note or downloading a note |
+| GET | /api/data/:noteID/ | Get the image for a specific slide by a specific size (one of thumbnail, full) |
 
-|POST /api/auth/signout| User sign-out |
-
-|GET|/api/auth/user/|Get user information for the current user |
-
-|POST/api/auth/avatar|A user profile setting |
-
-|GET/api/auth/avatar|Getting the profile picture from the user |
-
-
-|POST|/api/notes/|Create a new note|
-
-|GET|/api/notes/all|Get a list of all notes|
-
-|GET|/api/notes/suggested|Get a list of suggested notes
-
-|GET|/api/notes/:noteID|Get a specific note by its ID|
-
-|PUT|/api/notes/:noteID|Update an existing note|
-
-|DELETE|/api/notes/:noteID|Delete a specific note by its ID|
-
-
-|GET /api/tags|Get all tags for the logged-in user|
-
-|POST /api/tags|Create a new tag for the logged-in user|
-
-|DELETE /api/tags/:tagID|Delete a tag that belongs to the logged-in user|
-
-|POST /api/data/:noteID/chunk|Send a chunk (1 slide) of note data - main endpoint for saving notes|
-
-|GET /api/data/:noteID/:slideNumber/chunks|Retrieve the entire set of chunks for a specific note - used for viewing a note or downloading a note|
-
-|GET /api/data/:noteID/|Get the image for a specific slide by a specific size (one of thumbnail, full)|
 
 **6. ER Diagram**
 ![ER diagram of relationship schema](https://github.ncsu.edu/engr-csc342/csc342-2023Fall-GroupV/blob/main/Milestone2/Diagram.png)  
