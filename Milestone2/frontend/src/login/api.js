@@ -1,9 +1,9 @@
 import api from './APIClient.js';
 
-const loginButton = document.querySelector('submit');
-const username = document.querySelector('username');
-const password = document.querySelector('password');
-const errorBox = document.querySelector('form-error');
+const loginButton = document.querySelector('#submit');
+const username = document.querySelector('#username');
+const password = document.querySelector('#password');
+const errorBox = document.querySelector('#form-error');
 
 //Redirect if the user already logged in
 api.getCurrentUser().then(user => {

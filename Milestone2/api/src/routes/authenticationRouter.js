@@ -19,14 +19,15 @@ router.post('/register', (req, res) => {
 });
 
 //users login in 
-router.post('/signin', (req, res) => {
-    let userName = req.body.userName.trim();
+router.post('/login', (req, res) => {
+    // console.log(req);
+    let username = req.body.username.trim();
     let passwordHash = req.body.password.trim();
-    if(userName == "" || passwordHash == "") { // user cannot be empty
+    if(username == "" || passwordHash == "") { // user cannot be empty
         res.status(400).json({error: "fields cannot be empty!"});
     }
     else {
-        userDao.getUserByCredentials(userName, passwordHash).then(user => { // find user to see if they exist 
+        userDao.getUserByCredentials(username, passwordHash).then(user => { // find user to see if they exist 
             generateToken(req, res, user);
             res.json({result: 'Logged in'});
         }).catch(error => {
