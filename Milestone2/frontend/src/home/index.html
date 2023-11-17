@@ -61,14 +61,6 @@
             </md-menu-item>
         </md-menu>
         <md-menu positioning="fixed" id="sort-menu" anchor="chip-sorting">
-            <md-menu-item id="sm-mostrecent" data-sorttype="mostrecent">
-                <md-icon slot="start">history</md-icon>
-                <div slot="headline">Most recent</div>
-            </md-menu-item>
-            <md-menu-item id="sm-az" data-sorttype="az">
-                <md-icon slot="start">sort_by_alpha</md-icon>
-                <div slot="headline">A to Z</div>
-            </md-menu-item>
         </md-menu>
         <md-dialog id="confirm-delete-dialog" data-for="">
             <md-icon slot="icon">delete</md-icon>
@@ -85,7 +77,7 @@
                 <md-filled-text-field required id="new-note-name" name="name" label="Name"></md-filled-text-field>
                 <label for="new-note-slides">Slide set</label>
                 <input id="new-note-slides" type="file" accept=".pdf">
-                <md-chip-set id="newnote-tags">
+                <md-chip-set id="new-note-tags">
                 </md-chip-set>
             </div>
             <div slot="actions">
@@ -101,8 +93,8 @@
                 </md-chip-set>
             </div>
             <div slot="actions">
-                <md-text-button id="cancel-propsave-btn">Cancel</md-text-button>
-                <md-filled-tonal-button id="confirm-propsave-btn">Save</md-filled-tonal-button>
+                <md-text-button id="cancel-properties-btn">Cancel</md-text-button>
+                <md-filled-tonal-button id="confirm-properties-btn">Save</md-filled-tonal-button>
             </div>
         </md-dialog>
     </div>

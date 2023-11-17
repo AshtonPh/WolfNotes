@@ -1,3 +1,4 @@
+// Material design components
 import '@material/web/tabs/primary-tab'
 import '@material/web/tabs/tabs'
 import '@material/web/iconbutton/icon-button'
@@ -18,8 +19,14 @@ import '@material/web/button/text-button'
 import '@material/web/dialog/dialog'
 import '@material/web/fab/fab'
 import '@material/web/checkbox/checkbox'
-import { render } from './render'
-import { registerButtons } from './buttons'
+
+// My own scripts
+import './deleteDialog';
+import './newPropertiesDialog';
+import './noteItems';
+import './noteMenu';
+import './sortAndFilter';
+import './userMenu';
 
 const main = document.getElementsByTagName('main')[0];
 const body = document.getElementsByTagName('body')[0];
@@ -36,10 +43,3 @@ main.onscroll = (ev) => {
         }
     }, 20)
 }
-
-// OnLoad events
-window.onload = () => {
-    render();
-    registerButtons();
-};
-

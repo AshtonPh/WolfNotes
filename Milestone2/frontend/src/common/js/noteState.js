@@ -99,7 +99,7 @@ export function deleteNote(note) {
             method: 'DELETE',
         })
     )
-    .then(() => noteSet = noteSet.filter(n => n != note));
+    .then(() => noteSet = noteSet.filter(n => n.noteID != note.noteID));
 }
 
 export function createNote(title, tags) {
@@ -110,6 +110,15 @@ export function createNote(title, tags) {
     })
         .then(res => res.json())
         .then(res => res.noteID);
+}
+
+export function addSlideSet(noteID, buffer) {
+    let data = new FormData();
+    data.append('pdf', buffer);
+    return api.req(`/data/${noteID}`, {
+        method: 'POST',
+        body: data
+    })
 }
 
 export function processTagDeletion(tagID) {
