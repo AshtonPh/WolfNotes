@@ -1,0 +1,1 @@
+The files in this folder were generated using the [Material 3 Theme Builder](https://m3.material.io/theme-builder#/custom).

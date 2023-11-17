@@ -4,6 +4,9 @@ let prevBtn = document.querySelector('#prev-btn');
 let editors = document.querySelectorAll('.editor');
 let activeNote = editors.length - 1;
 
+
+let boldBtn = document.querySelector('#bold');
+
 const slide_length = 14;
 
 // editor section
@@ -76,3 +79,5 @@ prevBtn.addEventListener('click', () => {
 	}
 	updateActiveNote();
 });
+
+boldBtn.addEventListener('click', format('bold'));

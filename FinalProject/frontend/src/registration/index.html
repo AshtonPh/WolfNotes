@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset = "UTF-8">
+    <title>Registration</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" type="module"></script>
+  <script src="api.js" type="module"></script>
+</head>
+
+<body>
+    <div class = "registartion">
+        <h2>User Registration</h2>
+        <form action ="../home/index.html" method="post">
+        <!-- <form action="/auth/register" method="post" id="registration-form"> -->
+            <label for="email">Email:</label>
+            <input type = "text" id = "email" name = "email" required>
+
+            <label for = "username">Username:</label>
+            <input type = "text" id = "username" name = "username" required>
+            
+            <!-- Using password type to hide the values of the password from the users -->
+            <label for="password">Password:</label>
+            <input type = "password" id = "password" name = "password" required>
+
+            <!-- password confirmation attribute -->
+            <!-- <label for="password">Confirm Password:</label>
+            <input type = "password" id = "password-confirmation" name = "password-confirmation" required> -->
+
+            <span id="form-error" style="color: red;"></span><br>
+            <span id="password-error" style="color: red;"></span><br>
+            
+            <input type = "submit" input id = "submit" value = "Register">
+        </form>
+    </div>
+</body>
+</html>

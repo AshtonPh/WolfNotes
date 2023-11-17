@@ -10,7 +10,7 @@
 	  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="theme.css">
-
+    <script src="note.js" type="module"></script>
 </head>
 <body>
     <div id="container">
@@ -18,18 +18,18 @@
           <img id="img" src="" alt="Image">
       </div>
       <div id ="button-container">
-        <md-filled-button id="prev-btn" onclick="prevImage()">Previous</md-filled-button>
+        <md-filled-button id="prev-btn">Previous</md-filled-button>
 
         <router-link to="/dictionary/index.html">
           <md-filled-button id="dictionary">Dictionary</md-filled-button>
         </router-link>
         
-        <md-filled-button id="next-btn" onclick="nextImage()">Next</md-filled-button>
+        <md-filled-button id="next-btn">Next</md-filled-button>
       </div>
       <form id="editor-container">
         <div class="edit-icons">
           <div class="format-section">
-            <a href="javascript:void(0)" onclick="format('bold')"><span class="fa fa-bold fa-fw"></span></a>
+            <a href="javascript:void(0)"><span class="fa fa-bold fa-fw" id="bold"></span></a>
     
             <a href="javascript:void(0)" onclick="format('italic')"><span class="fa fa-italic fa-fw"></span></a>
 
@@ -86,8 +86,7 @@
 
       </form>
     </div>
-    <script src="note.js"></script>
+    
     <script src="script.js" type="module"></script>
-    <script src="api.js" type="module"></script>
 </body>
 </html>
