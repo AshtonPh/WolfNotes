@@ -8,7 +8,10 @@ services:
       - "80:80"
 
   api:
-    build: ./api
+    build:
+      context: ./api
+      ## Change this to Dockerfile.prod to use the production server
+      dockerfile: ./Dockerfile.dev
     restart: unless-stopped
     volumes:
       - ./api/src:/var/app/src
@@ -18,8 +21,15 @@ services:
       - .env
 
   frontend:
-    build: ./frontend
+    build: 
+      context: ./frontend
+      ## Change this to Dockerfile.prod to use the production server
+      dockerfile: ./Dockerfile.prod
     restart: unless-stopped
+    environment:
+      - PORT=80
+    volumes:
+      - "./frontend/src:/var/app/src"
     
     
   database:

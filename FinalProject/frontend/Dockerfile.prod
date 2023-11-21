@@ -1,0 +1,12 @@
+FROM node:lts
+WORKDIR /var/app
+
+COPY package*.json ./
+RUN npm install
+COPY ./src ./src
+COPY ./prod ./prod
+RUN npm run build
+
+ENV PORT 80
+
+ENTRYPOINT [ "npm", "start"]
