@@ -24,7 +24,7 @@ services:
     build: 
       context: ./frontend
       ## Change this to Dockerfile.prod to use the production server
-      dockerfile: ./Dockerfile.prod
+      dockerfile: ./Dockerfile.dev
     restart: unless-stopped
     environment:
       - PORT=80
