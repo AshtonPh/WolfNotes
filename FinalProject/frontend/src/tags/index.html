@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wolfnotes</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Gabarito">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Rounded" rel="stylesheet">
+    <link rel="stylesheet" href="../common/theme/theme.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" type="module"></script>
+</head>
+<body>
+    <header>
+            <md-icon-button href="../home">
+                <md-icon>arrow_back</md-icon>
+            </md-icon-button>
+            <h1>Tags</h1>
+    </header>
+    <main>
+        <div>
+            <md-list id="tag-list">
+                <md-list-item>
+                    <md-circular-progress indeterminate></md-circular-progress>
+                </md-list-item>
+            </md-list>
+        </div>
+        <md-fab label="New tag" id="new-tag-btn">
+            <md-icon slot="icon">add</md-icon>
+        </md-fab>
+    </main>
+    <div id="invisible-items">
+        <md-dialog id="new-tag-dialog">
+            <div slot="headline">
+                Create Tag
+            </div>
+            <div slot="content">
+                <md-filled-text-field required id="new-tag-name" name="name" label="Name"></md-filled-text-field>
+            </div>
+            <div slot="actions">
+                <md-text-button id="cancel-new-btn">Cancel</md-text-button>
+                <md-filled-button id="confirm-new-btn">Create</md-filled-button>
+            </div>
+        </md-dialog>
+        <md-dialog id="delete-tag-dialog">
+            <md-icon slot="icon">delete</md-icon>
+            <div slot="headline">Confirm Deletion</div>
+            <div slot="content" id="delete-content">Are you sure you want to delete this tag?</div>
+            <div slot="actions">
+                <md-text-button id="cancel-delete-btn">Cancel</md-text-button>
+                <md-filled-tonal-button id="confirm-delete-btn">Delete</md-filled-tonal-button>
+            </div>
+        </md-dialog>
+    </div>
+</body>
+</html>

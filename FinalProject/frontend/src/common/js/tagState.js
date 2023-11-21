@@ -53,10 +53,12 @@ export function createTag(name) {
             body: JSON.stringify({ tagName: name }),
             method: 'POST',
             headers: { 'Content-Type': 'application/json' }
-        }).then(res => {
+        })
+        .then(res => res.json())
+        .then(res => {
             let newTag = new Tag;
             newTag.tagName = name;
-            newTag.tagID = res.json().tagID;
+            newTag.tagID = res.tagID;
             tagSet.push(newTag);
             return newTag;
         })
@@ -68,9 +70,9 @@ export function createTag(name) {
  * @returns {Promise}
  */
 export function deleteTag(tag) {
-    initializeTagSet().then(() =>
+    return initializeTagSet().then(() =>
         api.req(`/tags/${tag.tagID}`, { method: 'DELETE' }).then(res => {
-            tagSet.filter(t => t != tag);
+            tagSet = tagSet.filter(t => t.tagID != tag.tagID);
             processTagDeletion(tag.tagID);
         }));
 }

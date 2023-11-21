@@ -11,7 +11,8 @@ export default defineConfig({
                 note: resolve(__dirname, 'notes/index.html'),
                 dictionary: resolve(__dirname, 'dictionary/index.html'),
                 registration: resolve(__dirname, 'registration/index.html'),
-                login: resolve(__dirname, 'login/index.html')
+                login: resolve(__dirname, 'login/index.html'),
+                tags: resolve(__dirname, 'tags/index.html')
             }
         }
     },
