@@ -189,6 +189,23 @@ main {
     margin-top: 12pt;
 }
 
+#slides-upload-box {
+    box-sizing: border-box;
+    width: calc(100% + 6pt);
+    position: relative;
+    left: -3pt;
+    background-color: var(--md-sys-color-secondary-container);
+    color: var(--md-sys-color-on-secondary-container);
+    padding: 12pt;
+    margin-top: 12pt;
+    border-radius: 12pt;
+}
+
 #create-new-dialog input[type="file"] {
-    padding-top: 12pt;
+    margin-top: 6pt;
+    font-size: .9rem;
+}
+
+#new-note-slides-label {
+    font-size: 1.2rem;
 }

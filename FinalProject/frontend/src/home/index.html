@@ -75,14 +75,19 @@
             <div slot="headline">Create Note</div>
             <div slot="content">
                 <md-filled-text-field required id="new-note-name" name="name" label="Name"></md-filled-text-field>
-                <label for="new-note-slides">Slide set</label>
-                <input id="new-note-slides" type="file" accept=".pdf">
                 <md-chip-set id="new-note-tags">
                 </md-chip-set>
+                <div id="slides-upload-box">
+                    <label id="new-note-slides-label" for="new-note-slides">
+                        Slide set
+                    </label>
+                    <br>
+                    <input id="new-note-slides" type="file" accept=".pdf">
+                </div>
             </div>
             <div slot="actions">
                 <md-text-button id="cancel-create-btn">Cancel</md-text-button>
-                <md-filled-tonal-button id="confirm-create-btn">Create</md-filled-tonal-button>
+                <md-filled-button id="confirm-create-btn">Create</md-tonal-button>
             </div>
         </md-dialog>
         <md-dialog id="properties-dialog" data-for="" class="note-properties">
@@ -94,7 +99,7 @@
             </div>
             <div slot="actions">
                 <md-text-button id="cancel-properties-btn">Cancel</md-text-button>
-                <md-filled-tonal-button id="confirm-properties-btn">Save</md-filled-tonal-button>
+                <md-filled-button id="confirm-properties-btn">Save</md-filled-button>
             </div>
         </md-dialog>
     </div>
