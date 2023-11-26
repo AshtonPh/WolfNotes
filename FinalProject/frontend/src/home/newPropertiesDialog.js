@@ -10,6 +10,7 @@ import { MdChipSet } from '@material/web/chips/chip-set';
 import * as NoteItems from './noteItems';
 import * as ns from '../common/js/noteState';
 import * as ts from '../common/js/tagState';
+import * as lb from './loadingBlock';
 
 import Handlebars from 'handlebars'
 
@@ -71,10 +72,12 @@ function confirmPropertySave() {
     let tags = getTagsFromChips(propertiesTags);
 
     confirmPropertyBtn.disabled = true;
+    lb.show();
     ns.getNote(activeNoteID)
         .then(note => ns.setNoteInformation(note, newName, tags))
         .then(() => {
             confirmPropertyBtn.disabled = false;
+            lb.hide();
             propertiesDialog.close();
             NoteItems.renderJumpTargets();
             NoteItems.renderNotesList();
@@ -92,6 +95,7 @@ function confirmCreate() {
     let newName = newNoteNameField.value;
     let tags = getTagsFromChips(newNoteTags);
 
+    lb.show();
     ns.createNote(newName, tags)
         .then(nID => {
             if (newNoteSlides.files && newNoteSlides.files[0]) {

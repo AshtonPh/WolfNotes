@@ -16,13 +16,44 @@
 
 <body>
     <header>
+        <md-icon-button id="navigation-menu-button">
+            <md-icon>menu</md-icon>
+        </md-icon-button>
         <h1>WolfNotes</h1>
         <div id="header-buttons">
-            <md-icon-button id="user-picture">
-                <md-icon>settings</md-icon>
+            <md-icon-button id="search-button">
+                <md-icon>search</md-icon>
             </md-icon-button>
         </div>
     </header>
+    <div id="navigation-menu-background"></div>
+    <div id="navigation-menu">
+        <md-list>
+            <md-list-item id="nav-home" class="nav-active" type="button">
+                <md-icon slot="start">home</md-icon>
+                <div slot="headline">Home</div>
+            </md-list-item>
+            <md-list-item id="nav-dictionary" href="../dictionary" type="link">
+                <md-icon slot="start">book_3</md-icon>
+                <div slot="headline">Dictionary</div>
+            </md-list-item>
+            <md-list-item id="nav-tags" href="../tags" type="link">
+                <md-icon slot="start">style</md-icon>
+                <div slot="headline">Manage Tags</div>
+            </md-list-item>
+            <md-list-item id="nav-settings" href="../settings" type="link">
+                <md-icon slot="start">settings_account_box</md-icon>
+                <div slot="headline">User Settings</div>
+            </md-list-item>
+            <md-list-item id="nav-logout" type="button">
+                <md-icon slot="start">logout</md-icon>
+                <div slot="headline">Log Out</div>
+            </md-list-item>
+        </md-list>
+    </div>
+    <div id="loading-block">
+        <md-circular-progress indeterminate></md-circular-progress>
+    </div>
     <main>
         <h2 class="section-header">Jump Back In</h2>
         <div id="jump">
@@ -55,6 +86,10 @@
                 <div slot="headline">Manage tags</div>
                 <md-icon slot="start">style</md-icon>
             </md-menu-item>
+            <md-menu-item href="../settings">
+                <div slot="headline">User settings</div>
+                <md-icon slot="start">settings_account_box</md-icon>
+            </md-menu-item>
             <md-menu-item id="um-logout">
                 <div slot="headline">Log out</div>
                 <md-icon slot="start">logout</md-icon>
@@ -69,6 +104,18 @@
             <div slot="actions">
                 <md-text-button id="cancel-delete-btn">Cancel</md-text-button>
                 <md-filled-tonal-button id="confirm-delete-btn">Delete</md-filled-tonal-button>
+            </div>
+        </md-dialog>
+        <md-dialog id="search-dialog">
+            <div slot="headline" id="search-dialog-header">
+                <md-outlined-text-field id="search-bar" placeholder="Find a note...">
+                    <md-icon slot="leading-icon">search</md-icon>
+                    <md-icon-button slot="trailing-icon" id="search-close-button"><md-icon>close</md-icon></md-icon-button>
+                </md-outlined-text-field>
+            </div>
+            <div slot="content">
+                <md-list id="search-results">
+                </md-list>
             </div>
         </md-dialog>
         <md-dialog id="create-new-dialog" class="note-properties">

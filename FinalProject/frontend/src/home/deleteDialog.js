@@ -5,6 +5,7 @@
  */
 
 import {MdDialog} from '@material/web/dialog/dialog';
+import * as lb from './loadingBlock';
 import * as ns from '../common/js/noteState'
 import * as NoteItems from './noteItems';
 
@@ -26,11 +27,13 @@ export function open(noteID) {
 }
 
 function confirmDelete() {
+    lb.show();
     confirmDeleteButton.disabled = true;
     cancelDeleteButton.disabled = true;
     ns.getNote(activeNoteID)
         .then(note => ns.deleteNote(note))
         .then(() => {
+            lb.hide();
             confirmDeleteButton.disabled = false;
             cancelDeleteButton.disabled = false;
             deleteDialog.close();
