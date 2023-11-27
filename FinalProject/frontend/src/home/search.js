@@ -61,7 +61,7 @@ function includesNoCase(input, match) {
 function strongifyAllInArray(terms, stringToSearch) {
     let escaped = Handlebars.escapeExpression(stringToSearch);
     let lower = escaped.toLowerCase();
-    
+
     let toInsert = terms
         .map(t => Handlebars.escapeExpression(t))
         .map(t => ({start: lower.indexOf(t), end: t.length + lower.indexOf(t)}))
@@ -72,9 +72,9 @@ function strongifyAllInArray(terms, stringToSearch) {
 
     let finalStr = '';
     for (let i = 0; i < escaped.length; i++) {
-        finalStr += starts.filter(s => s == i).map(() => '<strong>').join();
+        finalStr += starts.filter(s => s == i).map(() => '<strong>').join('');
         finalStr += escaped[i];
-        finalStr += ends.filter(s => s == i + 1).map(() => '</strong>').join();
+        finalStr += ends.filter(s => s == i + 1).map(() => '</strong>').join('');
     }
 
     return new Handlebars.SafeString(finalStr);
@@ -116,9 +116,10 @@ async function getMatches(term) {
             // Rank is calculated as
             //  2 * (# of matched characters in the title) +
             //  (# of matched characters in the tags)
+            let lowerTitle = nT.n.title.toLowerCase();
             sr.rank = 
-                2 * sections.filter(s => nT.n.title.includes(s)).map(s => s.length) +
-                sections.filter(s => nT.t.some(t => includesNoCase(t.tagName, s))).map(s => s.length);
+                2 * sections.filter(s => lowerTitle.includes(s)).reduce((a, s) => a + s.length, 0) +
+                sections.filter(s => nT.t.some(t => includesNoCase(t.tagName, s))).reduce((a, s) => a + s.length, 0);
             return sr;
         })
         .sort((sr1, sr2) => sr2.rank - sr1.rank);
