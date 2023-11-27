@@ -19,6 +19,7 @@ router.post('/register', (req, res) => {
 });
 
 //users login in 
+//mistake to keep in mind. The router is called "login" not "signin"
 router.post('/login', (req, res) => {
     // console.log(req);
     let username = req.body.username.trim();
