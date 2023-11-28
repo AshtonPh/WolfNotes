@@ -4,10 +4,25 @@ let prevBtn = document.querySelector('#prev-btn');
 let editors = document.querySelectorAll('.editor');
 let activeNote = editors.length - 1;
 
+
+let boldBtn = document.querySelector('#bold');
+
 const slide_length = 14;
 
+// editor section
+function format(command, value) {
+	document.execCommand(command, false, value);
+}
 
+function changeFont() {
+	const Font = document.getElementById('input-font').value;
+	document.execCommand('fontName', false, Font);
+}
 
+function changeSize() {
+	const size = document.getElementById('fontSize').value;
+	document.execCommand('fontSize', false, size);
+}
 
 function addNote()
 {
@@ -40,8 +55,8 @@ function updateActiveNote() {
 	});
 	document.querySelector('#editor' + activeNote).contentEditable = true;
 }
-
-
+   
+   
 nextBtn.addEventListener('click', () => {
 	activeNote++;
 
@@ -53,7 +68,7 @@ nextBtn.addEventListener('click', () => {
 	}
 	updateActiveNote();
 });
-
+   
 prevBtn.addEventListener('click', () => {
 	activeNote--;
 	if (activeNote < 0) {
@@ -65,11 +80,4 @@ prevBtn.addEventListener('click', () => {
 	updateActiveNote();
 });
 
-
-tinymce.init({
-	selector: '.edit-content',
-	//inline: true,
-	plugins: 'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
-	toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-	branding: false
-});
+boldBtn.addEventListener('click', format('bold'));

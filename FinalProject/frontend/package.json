@@ -17,6 +17,7 @@
     "express": "^4.18.2",
     "handlebars": "^4.7.8",
     "rollup-plugin-copy": "^3.5.0",
+    "tinymce": "^6.7.3",
     "vite-plugin-static-copy": "^0.17.0"
   }
 }
