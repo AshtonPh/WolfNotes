@@ -4,23 +4,31 @@ const tk = require('../middleware/TokenMiddleware');
 const noteDao = require('../accessObjects/noteDao');
 const tagDao = require('../accessObjects/tagDao');
 
-router.post('/', tk.TokenMiddleware, (req, res) => {
-    noteDao.createNote(req.body.title, req.userID).then(noteID => {
-        // Handle tag assignments
-        // If there's string inside the note array, assume that tags need to be created
-        let newTags = req.body.tags.filter(t => typeof t === typeof "");
-        if (newTags.length > 0) {
-            Promise.all(newTags.map(nT => tagDao.createTag(req.userID, nT))).then(tagIds => {
-                allTags = tagIds.concat(req.body.tags.filter(t => typeof t === typeof 0));
-                noteDao.assignTags(allTags, noteID);
-            });
-        }
-        else if (req.body.tags.length > 0) {
-            noteDao.assignTags(req.body.tags, noteID);
-        }
+router.post('/', tk.TokenMiddleware, async (req, res) => {
+    // Data validation
+    let valid = req.body.title &&
+        req.body.title.trim().length != 0 &&
+        req.body.title.length <= 16 &&
+        req.body.tags &&
+        req.body.tags.every(v => typeof v == typeof 0);
 
-        res.send({"noteID" : noteID});
-    });
+    if (!valid) {
+        res.status(400);
+        res.send({ 'error': 'invalid request' });
+        return;
+    }
+
+    let noteID = await noteDao.createNote(req.body.title, req.userID);
+    // Handle tag assignments
+    if (req.body.tags.length > 0) {
+        let tAssignSuccess = await noteDao.assignTags(req.body.tags, noteID);
+        if (!tAssignSuccess) {
+            res.status(400);
+            res.send({ 'error': 'note created, but failed to assign tags (likely a nonexistant tag provided)' });
+            return;
+        }
+    }
+    res.send({ "noteID": noteID });
 });
 
 router.get('/all', tk.TokenMiddleware, (req, res) => {
@@ -35,27 +43,39 @@ router.get('/suggested', tk.TokenMiddleware, (req, res) => {
     })
 });
 
-router.get('/:noteID', tk.TokenMiddleware, (req, res) => {
-    noteDao.getNoteByID(Number.parseInt(req.params.noteID))
-        .then(note => res.send(note));
+router.get('/:noteID', tk.TokenMiddleware, async (req, res) => {
+    let note = await noteDao.getNoteByID(Number.parseInt(req.params.noteID))
+    if (note == undefined) {
+        res.status(404);
+        res.send({ 'error': 'no note found' });
+        return;
+    }
+    
+    res.send(note);
 });
 
-router.put('/:noteID', tk.TokenMiddleware, (req, res) => {
+router.put('/:noteID', tk.TokenMiddleware, async (req, res) => {
     if (req.body.title) {
-        noteDao.setNoteTitle(req.params.noteID, req.body.title);
+        if (req.body.title.length > 16 || req.body.title.trim().length == 0) {
+            res.status(400);
+            res.send({ 'error': 'invalid request' });
+            return;
+        }
+
+        await noteDao.setNoteTitle(req.params.noteID, req.body.title);
     }
     if (req.body.tags) {
-        // Handle tag assignments
-        // If there's string inside the note array, assume that tags need to be created
-        let newTags = req.body.tags.filter(t => typeof t === typeof "");
-        if (newTags.length > 0) {
-            Promise.all(newTags.map(nT => tagDao.createTag(req.userID, nT))).then(tagIds => {
-                allTags = tagIds.concat(req.body.tags.filter(t => typeof t === typeof 0));
-                noteDao.assignTags(allTags, req.params.noteID);
-            });
+        if (!req.body.tags.every(v => typeof v == typeof 0)) {
+            res.status(400);
+            res.send({ 'error': 'invalid request' });
+            return;
         }
-        else if (req.body.tags.length > 0) {
-            noteDao.assignTags(req.body.tags, req.params.noteID);
+
+        let tAssignSuccess = await noteDao.assignTags(req.body.tags, req.params.noteID);
+        if (!tAssignSuccess) {
+            res.status(400);
+            res.send({ 'error': 'failed to assign tags (likely a nonexistant tag provided)' });
+            return;
         }
     }
     res.send({});
