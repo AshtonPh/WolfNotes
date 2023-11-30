@@ -11,6 +11,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Rounded" rel="stylesheet">
     <link rel="stylesheet" href="../common/theme/theme.css">
     <link rel="stylesheet" href="style.css">
+    <script src="../common/js/requireOnline.js" type="module"></script>
+    <script src="../common/js/swManager.js" type="module"></script>
     <script src="script.js" type="module"></script>
 </head>
 
@@ -121,7 +123,7 @@
         <md-dialog id="create-new-dialog" class="note-properties">
             <div slot="headline">Create Note</div>
             <div slot="content">
-                <md-filled-text-field required id="new-note-name" name="name" label="Name"></md-filled-text-field>
+                <md-filled-text-field required maxlength="16" id="new-note-name" name="name" label="Name"></md-filled-text-field>
                 <md-chip-set id="new-note-tags">
                 </md-chip-set>
                 <div id="slides-upload-box">
@@ -140,7 +142,7 @@
         <md-dialog id="properties-dialog" data-for="" class="note-properties">
             <div slot="headline">Properties</div>
             <div slot="content">
-                <md-filled-text-field required id="properties-note-name" name="name" label="Name"></md-filled-text-field>
+                <md-filled-text-field required maxlength="16" id="properties-note-name" name="name" label="Name"></md-filled-text-field>
                 <md-chip-set id="properties-tags">
                 </md-chip-set>
             </div>

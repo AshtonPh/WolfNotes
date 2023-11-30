@@ -12,7 +12,8 @@ export default defineConfig({
                 dictionary: resolve(__dirname, 'dictionary/index.html'),
                 registration: resolve(__dirname, 'registration/index.html'),
                 login: resolve(__dirname, 'login/index.html'),
-                tags: resolve(__dirname, 'tags/index.html')
+                tags: resolve(__dirname, 'tags/index.html'),
+                offline: resolve(__dirname, 'offline/index.html')
             }
         }
     },
@@ -24,7 +25,7 @@ export default defineConfig({
         viteStaticCopy({
             targets: [
                 {src: 'notes/images/*', dest: 'notes/images/'},
-                {src: 'notes/tinymce', dest: 'notes/'}
+                {src: 'notes/tinymce', dest: 'notes/'},
             ]
         })
     ]

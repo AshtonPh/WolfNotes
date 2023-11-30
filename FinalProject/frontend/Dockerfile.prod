@@ -6,6 +6,7 @@ RUN npm install
 COPY ./src ./src
 COPY ./prod ./prod
 RUN npm run build
+COPY ./src/prodServiceWorker.js ./prod/dist/serviceWorker.js
 
 ENV PORT 80
 

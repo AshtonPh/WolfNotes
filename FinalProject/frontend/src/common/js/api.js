@@ -26,9 +26,10 @@ export function req(url, options) {
         })
         .catch(reason => {
             errorHandler(url, reason);
+            throw(reason);
         });
 }
 
 function errorHandler(url, reason) {
-    alert(`Something went wrong when trying to fetch ${url} (${reason})`);
+    console.log(`Something went wrong when trying to fetch ${url} (${reason})`);
 }

@@ -1,0 +1,40 @@
+html {
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    --md-icon-font: 'Material Symbols Rounded';
+}
+
+body {
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+    color: var(--md-sys-color-on-background);
+    background-color: var(--md-sys-color-background);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main {
+    margin: 12pt;
+}
+
+#offline-hint {
+    color: var(--md-sys-color-outline);
+}
+
+#offline-hint-menu {
+    background-color: var(--md-sys-color-surface);
+    color: var(--md-sys-color-on-surface);
+    border-radius: 6pt;
+    padding: 6pt;
+    margin-left: 6pt;
+    margin-right: 6pt;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+    vertical-align: middle;
+}
