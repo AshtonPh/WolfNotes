@@ -292,3 +292,15 @@ main {
     display: block;
     opacity: 100%;
 }
+
+#wolfnotes-logo {
+    display: flex;
+    align-items: center;
+    gap: 6pt;
+    position: relative;
+    /* left: calc(-6pt); */
+}
+
+#wolfnotes-logo-img {
+    height: 1.5em;
+}

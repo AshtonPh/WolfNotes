@@ -1,0 +1,14 @@
+{
+    "name": "WolfNotes",
+    "description": "Take notes alongside your lecture",
+    "start_url": "/",
+    "lang": "en-US",
+    "theme_color": "#006b59",
+    "display": "standalone",
+    "icons": [
+      {
+        "src": "/public/icon-home.png",
+        "sizes": "256x256"
+      }
+    ]
+  }
