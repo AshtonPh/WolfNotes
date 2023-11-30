@@ -25,7 +25,7 @@ function addUser(userData){ // add a user
   let key = crypto.pbkdf2Sync(userData.password, salt, ITERATIONS, KEYLEN, DIGEST).toString('hex');
   console.log(key);
   console.log(userData);
-  return db.query('INSERT INTO users (userID, userName, avatar, salt, passwordHash) VALUES (NULL, ?, ?, ?, ?)',
+  return db.query('INSERT INTO users (userID, userName, avatar, passwordHash, salt) VALUES (NULL, ?, ?, ?, ?)',
   [userData.username, userData.email, salt, key, userData.displayname, `https://robohash.org/${userData.username}.png?size=64x64&set=set1`]).then(({results}) => {
       return getUserById(results.insertId);
   })
