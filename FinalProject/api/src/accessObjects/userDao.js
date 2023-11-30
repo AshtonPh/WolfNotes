@@ -25,6 +25,8 @@ function addUser(userData){ // add a user
   let key = crypto.pbkdf2Sync(userData.password, salt, ITERATIONS, KEYLEN, DIGEST).toString('hex');
   console.log(key);
   console.log(userData);
+  console.log("Salt:", salt);
+  console.log("Hashed Password:", key);
   return db.query('INSERT INTO users (userID, userName, avatar, salt, passwordHash) VALUES (NULL, ?, ?, ?, ?)',
   [userData.username, userData.email, salt, key, userData.displayname, `https://robohash.org/${userData.username}.png?size=64x64&set=set1`]).then(({results}) => {
       return getUserById(results.insertId);
@@ -33,11 +35,13 @@ function addUser(userData){ // add a user
 }
 
 function getUserByCredentials(username, password) {
-    return db.query('SELECT * FROM user WHERE usr_username=?', [username]).then(({results}) => {
+    return db.query('SELECT * FROM user WHERE userName=?', [username]).then(({results}) => {
       const user = new User(results[0]);
       if (user) { // we found our user
         console.log(user);
+        console.log(user.validatePassword(password));
         return user.validatePassword(password);
+        
       }
       else { // if no user with provided username
         throw new Error("No such user");

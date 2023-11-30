@@ -22,12 +22,14 @@ router.post('/register', (req, res) => {
 router.post('/login', (req, res) => {
     // console.log(req);
     let username = req.body.username.trim();
-    let passwordHash = req.body.password.trim();
-    if(username == "" || passwordHash == "") { // user cannot be empty
+    let password = req.body.password.trim();
+    console.log(username);
+    console.log(password);
+    if(username == "" || password == "") { // user cannot be empty
         res.status(400).json({error: "fields cannot be empty!"});
     }
     else {
-        userDao.getUserByCredentials(username, passwordHash).then(user => { // find user to see if they exist 
+        userDao.getUserByCredentials(username, password).then(user => { // find user to see if they exist 
             generateToken(req, res, user);
             res.json({result: 'Logged in'});
         }).catch(error => {

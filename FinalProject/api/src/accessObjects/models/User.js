@@ -19,11 +19,16 @@ module.exports = class {
     return new Promise((resolve, reject) => {
       crypto.pbkdf2(password, this.#salt, 100000, 64, 'sha512', (err, derivedKey) => {
         if (err) { //problem computing digest, like hash function not available
-         reject("Error: " +err);
+         console.log(err);
+         reject("Error: " +  err);
         }
 
         const digest = derivedKey.toString('hex');
+        console.log(password);
+        console.log(this.#passwordHash);
+        console.log(digest);
         if (this.#passwordHash == digest) {
+          
           resolve(this);
         }
         else {

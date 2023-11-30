@@ -21,7 +21,7 @@ loginButton.addEventListener('click', e => {
   api.logIn(username.value, password.value).then(userData => {
     document.location = "/home/index.html";
   }).catch((err) => {
-
+    console.log(err);
     errorBox.classList.remove("hidden");
     if(err.status === 401) {
       errorBox.innerHTML = "Invalid username or password";
