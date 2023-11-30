@@ -15,6 +15,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./api/src:/var/app/src
+      - ./api/dockerDebugLaunch.json:/var/app/.vscode/launch.json
     environment:
       - PORT=80
     env_file:
