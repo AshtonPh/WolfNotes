@@ -3,10 +3,6 @@ const router = express.Router();
 const {TokenMiddleware, generateToken, removeToken} = require('../middleware/TokenMiddleware');
 const userDao = require('../accessObjects/userDao');
 
-router.get('/', TokenMiddleware, (req, res) => { // base API path, testing
-    res.json({your_api: 'it works'});
-});
-
 //register, add a user
 router.post('/register', (req, res) => {
     userDao.addUser(req.body).then(result => { // try adding  a user

@@ -37,8 +37,8 @@ exports.TokenMiddleware = (req, res, next) => {
 exports.generateToken = (req, res, userID) => {
   let data = {
     userID: userID,
-    // Use the exp registered claim to expire token in 1 hour
-    exp: Math.floor(Date.now() / 1000) + (60 * 60)
+    // Use the exp registered claim to expire token in 24 hours
+    exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24)
   }
 
   const token = jwt.sign(data, API_SECRET);
@@ -47,7 +47,8 @@ exports.generateToken = (req, res, userID) => {
   res.cookie(TOKEN_COOKIE_NAME, token, {
     httpOnly: true,
     secure: true,
-    maxAge: 2 * 60 * 1000 //This session expires in 2 minutes.. but token expires in 1 hour!
+    //set the token expiration time to 24 hours
+    maxAge: 24 * 60 * 60 * 1000 // This session expires in 24 hours
   });
 };
 
