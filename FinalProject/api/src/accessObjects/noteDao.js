@@ -97,10 +97,22 @@ async function fillNoteTagIDs(notes) {
  * 
  * @param {number} noteID the ID of the note to set the title for
  * @param {string} title the new title to set
- * @returns a promise for the query
+ * @returns true if a note with the given ID could be found
  */
 async function setNoteTitle(noteID, title) {
     const res = await conPro.query('UPDATE Note SET title = ? WHERE noteID = ?', [title, noteID]);
+    return res.affectedRows > 0;
+}
+
+/**
+ * Set the slide count of an existing note
+ * 
+ * @param {number} noteID the ID of the note to set the title for
+ * @param {number} slideCount the slide count to set
+ * @returns true if a note with the given ID could be found
+ */
+async function setNoteSlideCount(noteID, slideCount) {
+    const res = await conPro.query('UPDATE Note SET slideCount = ? WHERE noteID = ?', [slideCount, noteID]);
     return res.affectedRows > 0;
 }
 
@@ -118,4 +130,4 @@ async function deleteNote(noteID) {
     return q.results.affectedRows > 0;
 }
 
-module.exports = {createNote, assignTags, getNotesByUser, getSuggestedNotes, getNoteByID, setNoteTitle, deleteNote};
+module.exports = {createNote, assignTags, getNotesByUser, getSuggestedNotes, getNoteByID, setNoteTitle, setNoteSlideCount, deleteNote};

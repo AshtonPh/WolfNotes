@@ -11,6 +11,7 @@ router.use(cookieParser());
 router.use(express.json());
 
 const dataDao = require('../accessObjects/dataDao');
+const noteDao = require('../accessObjects/noteDao');
 
 // Get all chunks of a note
 router.get('/:noteId/chunks', (req, res) => {
@@ -66,6 +67,7 @@ router.post('/:noteId/', upload.single('pdf'), tk.TokenMiddleware, async (req, r
   try {
     // Convert the PDF into images
     const document = await pdf(pdfBuffer, { scale: 3 });
+    noteDao.setNoteSlideCount(Number.parseInt(noteId), document.length);
     let counter = 0;
     for await (const image of document) {
       
