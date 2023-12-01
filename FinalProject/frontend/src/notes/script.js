@@ -1,6 +1,7 @@
 import '@material/web/button/filled-button';
 
 import * as ns from '../common/js/noteState';
+import * as api from '../common/js/api';
 
 var currentIndex = 0;
 var imageContainer = document.getElementById("img-container");
@@ -33,6 +34,9 @@ ns.getNote(noteId).then(note => {
     }
 
     updateImage();
+
+    setContentBySlideNumber(noteId);
+
  })
  .catch(error => {
    // Handle any errors that occurred during the Promise
@@ -92,16 +96,42 @@ function getContent(elementId) {
     return element.innerHTML;
 }
 
-function setContent(noteId) {
-    fetch(`api/data/${noteId}/chunks`)
-    .then(response => response.json())
-    .then(data => {
-        document.getElementById("editor" + currentIndex).innerHTML = data.contents;
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-    });
+function setContentBySlideNumber(noteId) {
+    api.req(`/data/${noteId}/chunks`, {
+        method: 'GET'
+     })
+  .then(response => response.json())
+  .then(data => {
+      // Loop through each chunk
+      data.forEach(chunk => {
+          // Get the slide number and contents from the chunk
+          const slideNumber = chunk.slideNumber;
+          const contents = chunk.contents;
+
+          // Check if the element with id "editor" + slideNumber exists
+          let editor = document.getElementById("editor" + slideNumber);
+          // If it doesn't exist, create it
+          if (!editor) {
+              let outerDiv = document.querySelector('.edit-content');
+              let newDiv = document.createElement('div');
+              newDiv.className = 'slide-note fade';
+              editor = document.createElement('div');
+              editor.className = 'editor';
+              editor.contentEditable = true;
+              editor.id = 'editor' + slideNumber;
+              newDiv.appendChild(editor);
+              outerDiv.appendChild(newDiv);
+          }
+
+          // Set the innerHTML of the editor to the contents
+          editor.innerHTML = contents;
+      });
+  })
+  .catch((error) => {
+      console.error('Error:', error);
+  });
 }
+
 
 setInterval(() => {
     contents = getContent("editor" + activeNote);
