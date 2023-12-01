@@ -7,17 +7,32 @@ html {
 }
 
 body {
-    margin: 0px;
     width: 100%;
     height: 100%;
+    margin: 0px;
     color: var(--md-sys-color-on-background);
     background-color: var(--md-sys-color-background);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+}
+
+h1 {
+    font-family: Gabarito, Arial, Helvetica, sans-serif;
 }
 
 main {
+    width: 100%;
+    height: 100%;
+}
+
+#offline-message-noteless-wrapper {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+
+#offline-message-noteless {
     margin: 12pt;
 }
 
@@ -37,4 +52,44 @@ main {
     justify-content: center;
     width: max-content;
     vertical-align: middle;
+}
+
+#offline-notes {
+    padding: 12pt;
+    height: 100%;
+    box-sizing: border-box;
+    max-width: 600pt;
+    margin: auto;
+    display: none;
+}
+
+#note-list {
+    box-sizing: border-box;
+    border-radius: 12pt;
+    height: 80%;
+    overflow: scroll;
+}
+
+.note-list-name {
+    font-size: 14pt;
+    margin-bottom: 6pt;
+}
+
+.note-list-details {
+    display: flex;
+    gap: 6pt;
+    flex-wrap: wrap;
+}
+
+.note-list-details-item {
+    min-width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 2pt;
+}
+
+.note-list-details-item md-icon {
+    width: 12pt;
+    height: 12pt;
+    font-size: 12pt;
 }

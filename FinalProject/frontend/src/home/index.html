@@ -87,6 +87,9 @@
     <div id="loading-block">
         <md-circular-progress indeterminate></md-circular-progress>
     </div>
+    <div id="download-status-bar">
+        Hello, world!
+    </div>
     <main>
         <h2 class="section-header">Jump Back In</h2>
         <div id="jump">
@@ -112,6 +115,16 @@
             <md-menu-item id="nm-btn-delete">
                 <md-icon slot="start">delete</md-icon>
                 <div slot="headline">Delete</div>
+            </md-menu-item>
+            <md-menu-item id="nm-btn-download">
+                <md-icon slot="start">cloud_off</md-icon>
+                <div slot="headline">Save Offline</div>
+                <div slot="supporting-text">Make this note viewable without internet</div>
+            </md-menu-item>
+            <md-menu-item id="nm-btn-purge">
+                <md-icon slot="start">cloud</md-icon>
+                <div slot="headline">Remove From Offline</div>
+                <div slot="supporting-text">This note will no longer be viewable without internet</div>
             </md-menu-item>
         </md-menu>
         <md-menu id="user-menu" anchor="user-picture">

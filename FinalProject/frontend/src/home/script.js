@@ -31,6 +31,7 @@ import './noteMenu';
 import './sortAndFilter';
 import './navigationMenu';
 import './search';
+import './downloadManager';
 
 const main = document.getElementsByTagName('main')[0];
 const body = document.getElementsByTagName('body')[0];

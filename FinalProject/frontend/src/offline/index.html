@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,10 +13,23 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js" type="module"></script>
 </head>
+
 <body>
     <main>
-        <h1>You're offline</h1>
-        <div id="offline-hint">When you're online, use the <span id="offline-hint-menu"><md-icon>more_vert</md-icon>menu button</span> to download notes for offline viewing</div>
+        <div id="offline-message-noteless-wrapper">
+            <div id="offline-message-noteless">
+                <h1>You're offline</h1>
+                <div id="offline-hint">When you're online, use the <span
+                        id="offline-hint-menu"><md-icon>more_vert</md-icon>menu button</span> to save notes for offline
+                    viewing</div>
+            </div>
+        </div>
+        <div id="offline-notes">
+            <h1>Offline notes</h1>
+            <md-list id="note-list">
+            </md-list>
+        </div>
     </main>
 </body>
+
 </html>

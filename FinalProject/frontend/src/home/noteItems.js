@@ -29,7 +29,10 @@ Handlebars.registerHelper("niceTime", dO => util.niceTime(dO));
 
 // Get the preview URL for a given note
 Handlebars.registerHelper("previewURL", note => {
-    return `/api/data/${note.noteID}/1/thumbnail`;
+    if (note.slideCount && note.slideCount > 0)
+        return `/api/data/${note.noteID}/0/thumbnail`;
+    else
+        return '/home/placeholder.png';
 })
 
 /**
@@ -104,7 +107,7 @@ export function renderJumpTargets() {
  */
 export function registerNoteItems(elements) {
     for (let elem of elements) {
-        let noteID = elem.attributes.getNamedItem("data-noteid").textContent;
+        let noteID = Number.parseInt(elem.attributes.getNamedItem("data-noteid").textContent);
         elem.onclick = () => openNote(noteID);
         let dotsMenu = elem.querySelector(".note-menu-button");
         dotsMenu.onclick = ev =>  {

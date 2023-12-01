@@ -18,6 +18,16 @@ export class Note {
         note.slideCount = data.slideCount;
         return note;
     }
+
+    static fromJson(data) {
+        let note = new Note;
+        note.noteID = data.noteID;
+        note.title = data.title;
+        note.dateEdited = new Date(data.dateEdited);
+        note.slideCount = data.slideCount;
+        note.tags = data.tags.map(t => Tag.fromApi(t));
+        return note;
+    }
 }
 
 export class Tag {
