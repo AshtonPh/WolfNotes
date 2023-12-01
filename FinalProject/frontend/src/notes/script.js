@@ -15,27 +15,34 @@ var noteId = params.get("noteid");
 var size = "slide";
 
 let slide_length
+let note_title
 
 var images = [];
 
 ns.getNote(noteId).then(note => {
-   slide_length = note.slideCount -1;
-   console.log(slide_length);
+    slide_length = note.slideCount -1;
+    note_title = note.title;
+    document.getElementById("title").innerHTML = note_title;
 
    
-   for (let i = 0; i <= slide_length; i++) {
-    var img = document.createElement('img');
-    img.id = "img";
-    img.style = "width: 100%";
-    img.alt = i.toString();
-    let imgURL = `/api/data/${noteId}/${i}/${size}`;
-    img.src = imgURL;
-    images.push(img);
+    for (let i = 0; i <= slide_length; i++) {
+        var img = document.createElement('img');
+        img.id = "img";
+        img.style = "width: 100%";
+        img.alt = i.toString();
+        let imgURL = `/api/data/${noteId}/${i}/${size}`;
+        img.src = imgURL;
+        images.push(img);
     }
 
     updateImage();
 
     setContentBySlideNumber(noteId);
+
+    setInterval(() => {
+        let contents = getContent("editor" + currentIndex);
+        saveNote(noteId, currentIndex, contents);
+    }, 500);
 
  })
  .catch(error => {
@@ -136,10 +143,7 @@ function setContentBySlideNumber(noteId) {
 }
 
 
-setInterval(() => {
-    let contents = getContent("editor" + currentIndex);
-	saveNote(noteId, currentIndex, contents);
-}, 250);
+
 
 prevButton.addEventListener("click", prevImage);
 
@@ -155,4 +159,8 @@ nextButton.addEventListener("click", () => {
     saveNote(noteId, currentIndex, contents);
 });
 
-
+document.getElementById('idContentEditable').addEventListener('keypress', (evt) => {
+    if (evt.which === 13) {
+        evt.preventDefault();
+    }
+});

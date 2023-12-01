@@ -87,8 +87,19 @@ function updateActiveNote() {
 	}
 	});
 	document.querySelector('#editor' + activeNote).contentEditable = true;
+	document.querySelector('#editor' + activeNote).addEventListener('keydown', function(e) {
+		if (e.key === 'Enter') {
+			e.preventDefault();
+		}
+	 });
 }
 
+
+document.querySelector('#editor' + activeNote).addEventListener('keydown', function(e) {
+	if (e.key === 'Enter') {
+		e.preventDefault();
+	}
+ });
 
 
 
