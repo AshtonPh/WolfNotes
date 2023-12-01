@@ -10,7 +10,7 @@ router.get('/', TokenMiddleware, (req, res) => { // base API path, testing
 //register, add a user
 router.post('/register', (req, res) => {
     userDao.addUser(req.body).then(result => { // try adding  a user
-        generateToken(req, res, result);
+        generateToken(req, res, result.userID);
         res.json(result);
     }).catch(error => {
         res.status(400).json({error: error}); //catch and send error
@@ -29,7 +29,7 @@ router.post('/login', (req, res) => {
     }
     else {
         userDao.getUserByCredentials(username, password).then(user => { // find user to see if they exist 
-            generateToken(req, res, user);
+            generateToken(req, res, user.userID);
             res.json({result: 'Logged in'});
         }).catch(error => {
             //user does not exist or the user password and username does not match
