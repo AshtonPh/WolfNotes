@@ -18,7 +18,8 @@ for (let i = 0; i <= slide_length; i++) {
     img.alt = i.toString();
  
     // Use the fetch API to get the image data from the server
-    fetch(`http://localhost/api/${noteId}/${i}/${size}`)
+    /*
+    fetch(`http://localhost/api/data/${noteId}/${i}/${size}`)
         //.then(response => response.blob())
         .then(blob => {
             // Create a Blob URL for the image
@@ -27,7 +28,9 @@ for (let i = 0; i <= slide_length; i++) {
             img.src = blob;
         })
         .catch(err => console.error(err));
- 
+    */
+    let imgURL = `/api/data/${noteId}/${i}/${size}`;
+    img.src = imgURL;
     images.push(img);
  }
  
@@ -98,5 +101,14 @@ nextButton.addEventListener("click", () => {
     contents = getContent("editor" + activeNote);
     saveNote(noteId, activeNote, contents);
 });
+
+let editor = document.querySelector('.edit-content');
+
+editor.addEventListener('input', function() {
+   let contents = getContent("editor" + activeNote);
+
+   saveNote(noteId, currentIndex, contents);
+});
+
 
 updateImage();
