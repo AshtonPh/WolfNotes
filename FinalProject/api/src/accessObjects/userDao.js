@@ -68,7 +68,7 @@ function addUser(userData) {
 }
 
 function getUserByCredentials(username, password) {
-    return db.query('SELECT * FROM user WHERE userName=?', [username]).then(({results}) => {
+    return db.query('SELECT * FROM User WHERE userName=?', [username]).then(({results}) => {
       const user = new User(results[0]);
       if (user) { // we found our user
         console.log(user);
