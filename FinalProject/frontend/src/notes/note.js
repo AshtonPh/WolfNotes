@@ -9,6 +9,7 @@ let activeNote = editors.length - 1;
 let slide_length
 
 let params = new URLSearchParams(document.location.search);
+
 var noteId = params.get("noteid"); 
 
 ns.getNote(noteId).then(note => {

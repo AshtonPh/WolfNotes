@@ -77,7 +77,7 @@ function nextImage() {
 
 
 function saveNote(noteId, slideNumber, contents) {
-	fetch(`/api/data/${noteId}/chunks`, {
+	api.req(`/data/${noteId}/chunks`, {
 	 method: 'POST',
 	 headers: {
 	   'Content-Type': 'application/json',
@@ -92,7 +92,7 @@ function saveNote(noteId, slideNumber, contents) {
 }
 
 function getContent(elementId) {
-    var element = document.getElementById(elementId);
+    let element = document.getElementById(elementId);
     return element.innerHTML;
 }
 
@@ -137,31 +137,22 @@ function setContentBySlideNumber(noteId) {
 
 
 setInterval(() => {
-    contents = getContent("editor" + activeNote);
-	saveNote(noteId, activeNote, contents);
-}, 600000);
+    let contents = getContent("editor" + currentIndex);
+	saveNote(noteId, currentIndex, contents);
+}, 250);
 
 prevButton.addEventListener("click", prevImage);
 
 nextButton.addEventListener("click", nextImage);
 
 prevButton.addEventListener("click", () => {
-    contents = getContent("editor" + activeNote);
-	saveNote(noteId, activeNote, contents);
+    let contents = getContent("editor" + currentIndex);
+	saveNote(noteId, currentIndex, contents);
 });
 
 nextButton.addEventListener("click", () => {
-    contents = getContent("editor" + activeNote);
-    saveNote(noteId, activeNote, contents);
+    let contents = getContent("editor" + currentIndex);
+    saveNote(noteId, currentIndex, contents);
 });
-
-let editor = document.querySelector('.edit-content');
-
-editor.addEventListener('input', function() {
-   let contents = getContent("editor" + activeNote);
-
-   saveNote(noteId, currentIndex, contents);
-});
-
 
 
