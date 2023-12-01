@@ -1,35 +1,38 @@
-import '@material/web/button/filled-button'
-// Get the reference to the img-container element'
-document.addEventListener("DOMContentLoaded", function() {
-    // Function to validate the registration form
-    function validateForm() {
-        const email = document.getElementById("email").value;
-        const username = document.getElementById("username").value;
-        const password = document.getElementById("password").value;
-        const passwordConfirmation = document.getElementById("password-confirmation").value;
-        const passwordError = document.getElementById("password-error");
-        const formError = document.getElementById("form-error");
+function registerUser() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
 
-        // Reset any previous error messages
-        passwordError.textContent = "";
-        formError.textContent = "";
-
-        // Check for empty fields
-        if (!email || !username || !password || !passwordConfirmation) {
-            formError.textContent = "Please fill in all the fields.";
-            return false;
-        }
-
-        // Check if passwords match
-        if (password !== passwordConfirmation) {
-            passwordError.textContent = "Passwords do not match!";
-            return false;
-        }
-
-        return true; // Form is valid, allow submission
+    // Basic frontend validation
+    if (!username || !password || !confirmPassword) {
+        alert('All fields are required');
+        return;
     }
 
-    // Attach the validateForm function to the form's onsubmit event
-    const registrationForm = document.getElementById("registration-form");
-    registrationForm.onsubmit = validateForm;
-});
+    // Check if passwords match
+    if (password !== confirmPassword) {
+        alert('Passwords do not match');
+        return;
+    }
+
+    const userData = {
+        username: username,
+        password: password
+    };
+
+    // Send the user data to the backend for registration
+    fetch('/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        // Optionally, redirect to a different page upon successful registration
+        // window.location.href = '/login';
+    })
+    .catch(error => console.error('Error:', error));
+}
