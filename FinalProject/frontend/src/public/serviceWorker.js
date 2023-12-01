@@ -48,6 +48,12 @@ async function fetchHandler(event) {
   if (requestURL.origin != location.origin)
     return;
 
+  // Manually handle a redirect from / to /home/
+  // Doing it here solves some vite caching issues
+  if (requestURL.pathname == '/') {
+    event.respondWith(Response.redirect('/home/'));
+  }
+
   // Handle online checks
   if (requestURL.pathname.startsWith('/api/online')) {
     event.respondWith(onlineCheck());
@@ -61,11 +67,13 @@ async function fetchHandler(event) {
 }
 
 async function onlineCheck() {
+  let offlineResponse = new Response('{"check": false}');
   if (SIMULATE_OFFLINE) {
-    return new Response('{"check": false}');
+    return offlineResponse;
   }
   else {
-    return await fetch('/api/online');
+    return await fetch('/api/online')
+      .catch(() => offlineResponse);
   }
 }
 

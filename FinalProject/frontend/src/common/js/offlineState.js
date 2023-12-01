@@ -4,7 +4,8 @@
  * Handles downloading notes to the indexed db for offline viewing
  */
 
-import { Note } from './models'
+import { Note } from './models';
+import * as api from './api';
 
 const IDB_VERSION = 1;
 
@@ -54,7 +55,7 @@ export async function anyOfflineNotes() {
     let db = await getDB();
     let ta = db.transaction('notes', 'readonly');
     let os = ta.objectStore('notes');
-    return await new Promise((res, rej) => {
+    return await new Promise((res, _rej) => {
         os.count().onsuccess = ev => res(ev.target.result > 0);
     });
 }
@@ -95,11 +96,47 @@ export async function getNotes() {
 }
 
 /**
+ * Get a note object and a list of chunks from the offline database
+ * 
+ * @param {number} noteID the ID to find
+ * @returns {Promise<{note: Note, chunks: {slideNumber: number, contents: string}[]}>}
+ */
+export async function getNoteAndChunks(noteID) {
+    let db = await getDB();
+    let ta = db.transaction('notes', 'readonly');
+    let os = ta.objectStore('notes');
+    return await new Promise((res, rej) => {
+        os.get(noteID).onsuccess = ev => {
+            let noteItem = ev.target.result;
+            if (noteItem == undefined)
+                res(undefined);
+
+            res({
+                note: Note.fromJson(noteItem.meta),
+                chunks: noteItem.chunks
+            });
+        };
+    });
+}
+
+/**
  * Download a note to the offline database
  * 
  * @param {Note} note the note to add to the offline database
  */
 export async function download(note) {
+    // Download the note chunks from the API
+    let request = await api.req(`/data/${note.noteID}/chunks`);
+    let chunks;
+    if (request.ok)
+        chunks = await request.json();
+    else if (request.status == 404)
+        // 404 indicates a note with no chunks saved yet
+        chunks = [];
+    else
+        // Fail
+        console.log(`Failed to download ${note.title} for offline viewing: ${request.status}`);
+
     let db = await getDB();
     let ta = db.transaction('notes', 'readwrite');
     await new Promise((res, rej) => {
@@ -109,7 +146,7 @@ export async function download(note) {
         os.add({
             'id': note.noteID,
             'meta': note,
-            'chunks': ''
+            'chunks': chunks
         });
     })
 }

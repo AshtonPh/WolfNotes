@@ -1,0 +1,86 @@
+html {
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    --md-icon-font: 'Material Symbols Rounded';
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    color: var(--md-sys-color-on-background);
+    background-color: var(--md-sys-color-background);
+    box-sizing: border-box;
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+header {
+    /* background-color: red; */
+    display: flex;
+    align-items: center;
+    gap: 12pt;
+    padding: 12pt;
+}
+
+h2 {
+    font-family: Gabarito, Arial, Helvetica, sans-serif;
+    margin: 0pt;
+    margin-bottom: 3pt;
+}
+
+#viewing-offline-subtitle {
+    display: flex;
+    align-items: center;
+    gap: 6pt;
+    font-size: .8rem;
+    color: var(--md-sys-color-outline);
+}
+#viewing-offline-subtitle md-icon {
+    font-size: .8rem;
+    height: .8rem;
+    width: .8rem;
+}
+
+main {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.slide-break {
+    box-sizing: border-box;
+    
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12pt;
+    color: var(--md-sys-color-outline);
+}
+
+.slide-break span {
+    margin-left: 12pt;
+}
+
+.slide-break div {
+    background-color: var(--md-sys-color-outline);
+    height: 1pt;
+    width: 100%;
+    border-radius: 100px;
+}
+
+main p {
+    padding: 18pt;
+    padding-top: 6pt;
+}
+
+#empty-message {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding: 12pt;
+    display: none;
+}

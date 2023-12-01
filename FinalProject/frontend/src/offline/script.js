@@ -30,7 +30,7 @@ const template = Handlebars.compile(
 function registerClickEvents() {
     for (let i of noteList.children) {
         let nID = i.attributes.getNamedItem('data-noteid').textContent;
-        i.onclick = () => document.location.href = `/offline-view/?noteID=${nID}`;
+        i.onclick = () => document.location.href = `/offline-viewer/?noteID=${nID}`;
     }
 }
 

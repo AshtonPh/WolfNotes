@@ -44,6 +44,12 @@ async function fetchHandler(event) {
   if (requestURL.origin != location.origin)
     return;
 
+  // Manually handle a redirect from / to /home/
+  // Doing it here solves some vite caching issues
+  if (requestURL.pathname == '/') {
+    return Response.redirect('/home/');
+  }
+
   // Handle online checks
   if (requestURL.pathname.startsWith('/api/online')) {
     event.respondWith(onlineCheck());
@@ -82,6 +88,12 @@ async function cacheFirst(request) {
     if (!response && !request.url.endsWith('/')) {
       request.url += '/';
       response = await cache.match(request);
+    }
+    // Query params are used to pass state between pages of our app,
+    //  so ignore them for caching purposes
+    if (!response && request.method == 'GET' && (new URL(request.url)).searchParams.size > 0) {
+      let noQuery = request.url.substring(0, request.url.lastIndexOf('?'));
+      response = await cache.match(noQuery);
     }
     return response || fetchAndCache(request);
   } catch (error) {

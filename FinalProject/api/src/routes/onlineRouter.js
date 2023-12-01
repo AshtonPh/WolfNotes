@@ -6,7 +6,8 @@ router.use(express.json());
 const OFFLINE_AVAILABLE_PAGES = [
     '/home/',
     '/notes/',
-    '/offline/'
+    '/offline/',
+    '/offline-viewer/'
 ];
 
 const STATIC_RESOURCES = [

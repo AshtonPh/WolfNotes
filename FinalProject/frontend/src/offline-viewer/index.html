@@ -17,19 +17,17 @@
 </head>
 
 <body>
-    <main>
-        <div id="offline-message-noteless-wrapper">
-            <div id="offline-message-noteless">
-                <h1>You're offline</h1>
-                <div id="offline-hint">When you're online, use the <span
-                        id="offline-hint-menu"><md-icon>more_vert</md-icon>menu button</span> to save notes for offline
-                    viewing</div>
-            </div>
+    <header>
+        <md-icon-button href="/offline/"><md-icon>arrow_back</md-icon></md-icon-button>
+        <div>
+            <h2 id="note-title">Loading...</h2>
+            <div id="viewing-offline-subtitle"><md-icon>cloud_off</md-icon>Viewing offline</div>
         </div>
-        <div id="offline-notes">
-            <h1>Offline notes</h1>
-            <md-list id="note-list">
-            </md-list>
+    </header>
+    <main>
+        <div id="empty-message">
+            <h2>This note is empty</h2>
+            <div>Try taking some notes while online</div>
         </div>
     </main>
     <div id="connection-banner">
