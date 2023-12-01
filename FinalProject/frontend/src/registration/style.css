@@ -54,3 +54,19 @@ body {
 .registartion input[type="submit"]:hover {
     background-color: #b1d7b3;
 }
+
+
+/* Additional style for the signin link */
+.registartion p {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.registartion a {
+    color: #007BFF; 
+    text-decoration: none;
+}
+
+.registartion a:hover {
+    text-decoration: underline;
+}
