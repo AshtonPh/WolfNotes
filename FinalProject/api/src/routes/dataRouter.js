@@ -4,7 +4,12 @@ const tk = require('../middleware/TokenMiddleware');
 const { promises: fs } = require("fs");
 const { pdf } = require("pdf-to-img");
 const multer  = require('multer')
-const upload = multer({ dest: 'uploads/' })
+const upload = multer({
+  dest: '/tmp/uploads',
+  limits: {
+    fieldSize: 1000 * 1024 * 1024,
+  },
+});
 
 const router = express.Router();
 router.use(cookieParser());

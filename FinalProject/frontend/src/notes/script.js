@@ -1,38 +1,47 @@
 import '@material/web/button/filled-button';
 
+import * as ns from '../common/js/noteState';
+
 var currentIndex = 0;
 var imageContainer = document.getElementById("img-container");
 var imageElement = document.getElementById("img");
 var prevButton = document.getElementById("prev-btn");
 var nextButton = document.getElementById("next-btn");
-var noteId = "6";
+
+let params = new URLSearchParams(document.location.search);
+
+var noteId = params.get("noteid"); 
 var size = "slide";
 
-const slide_length = 21;
+let slide_length
+
 var images = [];
 
-for (let i = 0; i <= slide_length; i++) {
+ns.getNote(noteId).then(note => {
+   slide_length = note.slideCount -1;
+   console.log(slide_length);
+
+   
+   for (let i = 0; i <= slide_length; i++) {
     var img = document.createElement('img');
     img.id = "img";
     img.style = "width: 100%";
     img.alt = i.toString();
- 
-    // Use the fetch API to get the image data from the server
-    /*
-    fetch(`http://localhost/api/data/${noteId}/${i}/${size}`)
-        //.then(response => response.blob())
-        .then(blob => {
-            // Create a Blob URL for the image
-            var url = URL.createObjectURL(blob);
-            //img.src = url;
-            img.src = blob;
-        })
-        .catch(err => console.error(err));
-    */
     let imgURL = `/api/data/${noteId}/${i}/${size}`;
     img.src = imgURL;
     images.push(img);
- }
+    }
+
+    updateImage();
+ })
+ .catch(error => {
+   // Handle any errors that occurred during the Promise
+   console.error(error);
+ });
+
+
+
+
  
 
 // Function to update the image source
@@ -64,7 +73,7 @@ function nextImage() {
 
 
 function saveNote(noteId, slideNumber, contents) {
-	fetch(`http://localhost/api/data/${noteId}/chunks`, {
+	fetch(`/api/data/${noteId}/chunks`, {
 	 method: 'POST',
 	 headers: {
 	   'Content-Type': 'application/json',
@@ -81,6 +90,17 @@ function saveNote(noteId, slideNumber, contents) {
 function getContent(elementId) {
     var element = document.getElementById(elementId);
     return element.innerHTML;
+}
+
+function setContent(noteId) {
+    fetch(`api/data/${noteId}/chunks`)
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById("editor" + currentIndex).innerHTML = data.contents;
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
 }
 
 setInterval(() => {
@@ -111,4 +131,4 @@ editor.addEventListener('input', function() {
 });
 
 
-updateImage();
+
