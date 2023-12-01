@@ -1,18 +1,16 @@
 const handleError = (res) => {
-    if(!res.ok) {
-      let error = new Error(res.statusText);
-      error.status = res.status;
-      throw error;
-    }
-    return res;
-  };
+  if (!res.ok) {
+    let error = new Error(res.statusText);
+    error.status = res.status;
+    console.error(`HTTP Error: ${error.status} - ${error.message}`);
+    throw error;
+  }
+  return res;
+};
   
   export default {
     get: (url) => {
-      return fetch(url, {
-        headers: {
-        }
-      }).then(handleError).then(res => {
+      return fetch(url).then(handleError).then(res => {
         return res.json();
       });
     },

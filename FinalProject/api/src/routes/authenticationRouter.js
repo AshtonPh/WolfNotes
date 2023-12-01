@@ -5,6 +5,7 @@ const userDao = require('../accessObjects/userDao');
 
 //register, add a user
 router.post('/registration', (req, res) => {
+    console.log(req.body);
     userDao.addUser(req.body).then(result => { // try adding  a user
         generateToken(req, res, result.userID);
         res.json(result);
