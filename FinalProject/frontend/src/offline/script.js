@@ -7,7 +7,7 @@ import * as util from '../common/js/util';
 
 const noteList = document.getElementById('note-list');
 const offlineNotes = document.getElementById('offline-notes');
-const offlineMessageNoteless = document.getElementById('offline-message-noteless');
+const offlineMessageNoteless = document.getElementById('offline-message-noteless-wrapper');
 
 Handlebars.registerHelper("niceTime", dO => util.niceTime(dO));
 

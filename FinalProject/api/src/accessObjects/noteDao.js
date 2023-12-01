@@ -86,6 +86,9 @@ async function getNoteByID(noteID) {
  * @param {Note[]} notes
  */
 async function fillNoteTagIDs(notes) {
+    if (notes.length == 0)
+        return notes;
+
     const q = await conPro.query('SELECT noteID, tagID FROM NoteTag WHERE noteID in (?)', [notes.map(n => n.noteID)]);
     notes.forEach(n_1 => {
         n_1.tags = q.results
