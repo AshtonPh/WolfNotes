@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Gabarito">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="theme.css">
+    <link rel="stylesheet" href="../common/theme/theme.css">
+    
     <script src="https://cdn.tiny.cloud/1/8nmu2kykqik0lqi6f6owz1lx1mh757582oezqy6s27kdqyg9/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     
 </head>
@@ -20,22 +21,20 @@
       <div id="img-container">
           <img id="img" src="" alt="Image">
       </div>
-      <div id ="button-container">
-        <md-filled-button id="prev-btn">Previous</md-filled-button>
-
-        <router-link to="/dictionary/index.html">
-          <md-filled-button id="dictionary">Dictionary</md-filled-button>
-        </router-link>
-        
-        <md-filled-button id="next-btn">Next</md-filled-button>
-      </div>
-      <form id="editor-container">
+      
+          <div id ="button-container-1" class="button-container">
+            <md-filled-button id="prev-btn">Previous</md-filled-button>
+          </div>
+          <div id="button-container-2" class="button-container">
+            <md-filled-button id="next-btn">Next</md-filled-button>
+          </div>
+      
+      <div id="editor-container">
         
         <div class="edit-content">
             <div class="editor" contenteditable="true" id="editor0"></div>    
         </div>
-
-      </form>
+      </div>
     </div>
     <script src="note.js" type="module"></script>
     <script src="script.js" type="module"></script>

@@ -1,4 +1,30 @@
+#container {
+  display: grid; 
+  grid-template-columns: 1.3fr 1.4fr 1.2fr; 
+  grid-template-rows: 0.2fr 1.3fr 0.2fr 1.8fr; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    ". title ."
+    "image image image"
+    "button1 . button2"
+    "editor editor editor"; 
+}
+
+#title-container {
+	grid-area: title;
+	display: flex;
+	justify-content: center;
+}
+
+#title {
+    font-family: 'Gabarito', serif;
+	font-weight: bold;
+  }
+   
+
+
 #img-container {
+	grid-area: image;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,42 +32,52 @@
 }
 
 #img-container img {
-    width: 100%; 
-    height: 100%; 
-    object-fit: contain; 
+	height: 100%;
+  	width: 100%;
+	max-width: 80vw;
+  	max-height: 100vh;
+   	height: auto;
+   	object-fit: contain;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+	
 }
+
+
+
   
 #editor-container{
+	grid-area: editor;
     overflow-y: auto;
 }
-  
-#button-container {
+
+#button-container-1{
+	grid-area: button1;
+}
+
+#button-container-2{
+	grid-area: button2;
+}
+
+.button-container {
     display: flex;
     justify-content: center;
+	align-items: center;
     padding: 20px;
+	max-width: 80vw;
+	text-align: center;
 }
   
-#button-container md-filled-button {
+.button-container md-filled-button {
     font-family: 'Gabarito';
     flex: 1;
-    margin: 0 10px;
+    margin: 0 5vw;
     color: "primary";
+	max-width: 80vw;
+	
     
 }
 
-.format-section {
-	text-align: center;
-	padding-top: 20px;
-	height: 6vh;
-	background-color: #ffffff;
-	margin-bottom: 20px;
-}
-.format-section span {
-	font-size: 24px;
-	margin: 2px 4px 0px 4px;
-	cursor: pointer;
-	color: #252525;
-}
+
 .editor {
 	min-height: 70vh;
 	width: 80%;
@@ -54,3 +90,4 @@
 	margin-right: 5%;
 	outline: none;
 }
+
