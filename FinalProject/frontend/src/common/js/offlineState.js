@@ -64,7 +64,7 @@ export async function anyOfflineNotes() {
  * This is faster than getNotes and should be used in any situation where
  * only the IDs are needed.
  * 
- * @returns {number[]} the list of note IDs in the offline database
+ * @returns {Promise<number[]>} the list of note IDs in the offline database
  */
 export async function getIDs() {
     let db = await getDB();
@@ -80,7 +80,7 @@ export async function getIDs() {
 /**
  * Get the list of notes currently in the offline database
  * 
- * @returns {Note[]} a list of notes
+ * @returns {Promise<Note[]>} a list of notes
  */
 export async function getNotes() {
     let db = await getDB();
