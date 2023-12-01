@@ -74,7 +74,10 @@ async function getSuggestedNotes(userID) {
 async function getNoteByID(noteID) {
     const q = await conPro.query('SELECT * FROM Note WHERE noteID = ?', [noteID]);
     const n = q.results.length > 0 ? new Note(q.results[0]) : undefined;
-    return n ? fillNoteTagIDs([n]) : n;
+    if (n)
+        return (await fillNoteTagIDs([n]))[0];
+    else
+        return undefined;
 }
 
 /**
