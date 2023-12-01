@@ -119,13 +119,16 @@ function setContentBySlideNumber(noteId) {
               editor.className = 'editor';
               editor.contentEditable = true;
               editor.id = 'editor' + slideNumber;
+              editor.setAttribute('hidden', '');
               newDiv.appendChild(editor);
-              outerDiv.appendChild(newDiv);
+              outerDiv.appendChild(editor);
           }
 
           // Set the innerHTML of the editor to the contents
           editor.innerHTML = contents;
       });
+
+      
   })
   .catch((error) => {
       console.error('Error:', error);
