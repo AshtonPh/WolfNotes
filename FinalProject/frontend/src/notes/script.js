@@ -5,17 +5,32 @@ var imageContainer = document.getElementById("img-container");
 var imageElement = document.getElementById("img");
 var prevButton = document.getElementById("prev-btn");
 var nextButton = document.getElementById("next-btn");
-const slide_length = 14;
+var noteId = "6";
+var size = "slide";
+
+const slide_length = 21;
 var images = [];
 
 for (let i = 0; i <= slide_length; i++) {
     var img = document.createElement('img');
     img.id = "img";
-    img.src = "../notes/images/" + i.toString() + ".jpg";
     img.style = "width: 100%";
     img.alt = i.toString();
+ 
+    // Use the fetch API to get the image data from the server
+    fetch(`http://localhost/api/${noteId}/${i}/${size}`)
+        //.then(response => response.blob())
+        .then(blob => {
+            // Create a Blob URL for the image
+            var url = URL.createObjectURL(blob);
+            //img.src = url;
+            img.src = blob;
+        })
+        .catch(err => console.error(err));
+ 
     images.push(img);
-}
+ }
+ 
 
 // Function to update the image source
 function updateImage() {
@@ -45,7 +60,43 @@ function nextImage() {
 }
 
 
+function saveNote(noteId, slideNumber, contents) {
+	fetch(`http://localhost/api/data/${noteId}/chunks`, {
+	 method: 'POST',
+	 headers: {
+	   'Content-Type': 'application/json',
+	 },
+	 body: JSON.stringify({ slideNumber, contents }),
+	})
+	.then(response => response.json())
+	.then(data => console.log(data))
+	.catch((error) => {
+	 console.error('Error:', error);
+	});
+}
+
+function getContent(elementId) {
+    var element = document.getElementById(elementId);
+    return element.innerHTML;
+}
+
+setInterval(() => {
+    contents = getContent("editor" + activeNote);
+	saveNote(noteId, activeNote, contents);
+}, 600000);
+
 prevButton.addEventListener("click", prevImage);
+
 nextButton.addEventListener("click", nextImage);
+
+prevButton.addEventListener("click", () => {
+    contents = getContent("editor" + activeNote);
+	saveNote(noteId, activeNote, contents);
+});
+
+nextButton.addEventListener("click", () => {
+    contents = getContent("editor" + activeNote);
+    saveNote(noteId, activeNote, contents);
+});
 
 updateImage();

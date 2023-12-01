@@ -68,8 +68,10 @@ prevBtn.addEventListener('click', () => {
 
 tinymce.init({
 	selector: '.edit-content',
-	//inline: true,
+	inline: true,
 	plugins: 'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
 	toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
 	branding: false
 });
+
+
