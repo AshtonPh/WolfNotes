@@ -4,7 +4,8 @@ const {TokenMiddleware, generateToken, removeToken} = require('../middleware/Tok
 const userDao = require('../accessObjects/userDao');
 
 //register, add a user
-router.post('/register', (req, res) => {
+router.post('/registration', (req, res) => {
+    console.log(req.body);
     userDao.addUser(req.body).then(result => { // try adding  a user
         generateToken(req, res, result.userID);
         res.json(result);

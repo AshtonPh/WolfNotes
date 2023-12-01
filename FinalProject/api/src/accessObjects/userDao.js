@@ -9,7 +9,7 @@ const KEYLEN = 64;
 const DIGEST = 'sha512';
 
 function getUserById(id){ // get a user by id
-  return db.query('SELECT * FROM users WHERE user_id=?', [id]).then(({results}) => {
+  return db.query('SELECT * FROM User WHERE userID=?', [id]).then(({results}) => {
       const user = new User(results[0]);
       if(user) {
           return user.toJSON();
@@ -20,16 +20,51 @@ function getUserById(id){ // get a user by id
   })
 }
 
-function addUser(userData){ // add a user
+// if an user already exist in the database
+function userExists(username) {
+  return db.query('SELECT * FROM User WHERE userName = ?', [username])
+    .then(({ results }) => {
+      console.log('User Exists Check:', results);
+      return results.length > 0;
+    });
+}
+
+function addUser(userData) {
   let salt = crypto.randomBytes(16).toString('hex');
   let key = crypto.pbkdf2Sync(userData.password, salt, ITERATIONS, KEYLEN, DIGEST).toString('hex');
-  console.log(key);
-  console.log(userData);
-  return db.query('INSERT INTO users (userID, userName, avatar, salt, passwordHash) VALUES (NULL, ?, ?, ?, ?)',
-  [userData.username, userData.email, salt, key, userData.displayname, `https://robohash.org/${userData.username}.png?size=64x64&set=set1`]).then(({results}) => {
-      return getUserById(results.insertId);
-  })
+  
+  console.log('Generated Salt:', salt);
+  console.log('Generated Key:', key);
+  console.log('User Data:', userData);
 
+  const avatarUrl = `https://robohash.org/${userData.username}.png?size=64x64&set=set1`;
+
+  return userExists(userData.username)
+    .then(exists => {
+      if (exists) {
+        throw new Error('User with the same username already exists');
+      }
+
+      // Proceed with user creation
+      return db.query(
+        'INSERT INTO User (userName, avatar, passwordHash, salt) VALUES (?, ?, ?, ?)',
+        [userData.username, avatarUrl, key, salt]
+      );
+    })
+    .then(({ results }) => {
+      console.log('User Added Successfully:', results);
+      return getUserById(results.insertId);
+    })
+    .catch(error => {
+      if (error.code === 'ER_DUP_ENTRY') {
+        // Handle duplicate entry error
+        console.error('Duplicate entry error:', error.message);
+      } else {
+        // Handle other errors
+        console.error('Error Adding User:', error);
+      }
+      throw error; // Re-throw the error for handling at a higher level if needed
+    });
 }
 
 function getUserByCredentials(username, password) {

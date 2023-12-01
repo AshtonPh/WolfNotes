@@ -53,3 +53,18 @@ body {
 .signin input[type="submit"]:hover {
     background-color: #b1d7b3;
 }
+
+/* Additional style for the registration link */
+.signin p {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.signin a {
+    color: #007BFF; 
+    text-decoration: none;
+}
+
+.signin a:hover {
+    text-decoration: underline;
+}

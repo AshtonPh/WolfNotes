@@ -3,21 +3,13 @@ import HTTPClient from "./HTTPClient.js";
 const API_BASE = '/api';
 
 export default {
-  getCurrentUser: () => {
-    return HTTPClient.get(API_BASE + '/users/current');
-  },
 
-  logIn: (username, password) => {
+  register: (username, password, confirmPassword) => {
     let data = {
-      username: username,
-      password: password
+        username: username,
+        password: password,
+        confirmPassword: confirmPassword
     }
-    console.log('\nAPIClient.js --> username = ' + username);
-    console.log('\nAPIClient.js --> password = ' + password);
-    return HTTPClient.post(API_BASE + '/users/login', data);
-  },
-
-  logOut: () => {
-    return HTTPClient.post(API_BASE + '/users/logout', {});
-  }
+    return HTTPClient.post(API_BASE + '/auth/registration', data);
+}
 };
