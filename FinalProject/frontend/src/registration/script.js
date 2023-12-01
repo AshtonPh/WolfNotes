@@ -21,7 +21,7 @@ function registerUser() {
     };
 
     // Send the user data to the backend for registration
-    fetch('/register', {
+    fetch('/registration', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -31,8 +31,8 @@ function registerUser() {
     .then(response => response.json())
     .then(data => {
         alert(data.message);
-        // Optionally, redirect to a different page upon successful registration
-        // window.location.href = '/login';
+        // redirect to a different page upon successful registration
+        window.location.href = '/login';
     })
     .catch(error => console.error('Error:', error));
 }

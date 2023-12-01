@@ -1,16 +1,19 @@
 import APIClient from './APIClient.js';
-import api from './APIClient.js';
+
 
 const registerButton = document.querySelector('#submit');
 const username = document.querySelector('#username');
 const password = document.querySelector('#password');
-const email = document.querySelector('#email');
+const confirmPassword = document.querySelector('#passwordConfirm');
 const errorBox = document.querySelector('#form-error');
 
 registerButton.addEventListener('click', e =>{
     e.preventDefault();
     errorBox.classList.add("hidden");
-    APIClient.register(username.value, password.value, email.value)
+    console.log(username.value);
+    console.log(password.value);
+    console.log(confirmPassword.value);
+    APIClient.register(username.value, password.value, confirmPassword.value)
     .then(userData => {
       console.log(userData);
       window.location.href = "/";
@@ -21,23 +24,6 @@ registerButton.addEventListener('click', e =>{
     });
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // document.addEventListener('DOMContentLoaded', function () {
