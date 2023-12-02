@@ -66,17 +66,9 @@
                 <md-icon slot="start">home</md-icon>
                 <div slot="headline">Home</div>
             </md-list-item>
-            <md-list-item id="nav-dictionary" href="../dictionary" type="link">
-                <md-icon slot="start">book_3</md-icon>
-                <div slot="headline">Dictionary</div>
-            </md-list-item>
             <md-list-item id="nav-tags" href="../tags" type="link">
                 <md-icon slot="start">style</md-icon>
                 <div slot="headline">Manage Tags</div>
-            </md-list-item>
-            <md-list-item id="nav-settings" href="../settings" type="link">
-                <md-icon slot="start">settings_account_box</md-icon>
-                <div slot="headline">User Settings</div>
             </md-list-item>
             <md-list-item id="nav-logout" type="button">
                 <md-icon slot="start">logout</md-icon>
@@ -127,20 +119,6 @@
                 <div slot="supporting-text">This note will no longer be viewable without internet</div>
             </md-menu-item>
         </md-menu>
-        <md-menu id="user-menu" anchor="user-picture">
-            <md-menu-item href="../tags">
-                <div slot="headline">Manage tags</div>
-                <md-icon slot="start">style</md-icon>
-            </md-menu-item>
-            <md-menu-item href="../settings">
-                <div slot="headline">User settings</div>
-                <md-icon slot="start">settings_account_box</md-icon>
-            </md-menu-item>
-            <md-menu-item id="um-logout">
-                <div slot="headline">Log out</div>
-                <md-icon slot="start">logout</md-icon>
-            </md-menu-item>
-        </md-menu>
         <md-menu positioning="fixed" id="sort-menu" anchor="chip-sorting">
         </md-menu>
         <md-dialog id="confirm-delete-dialog" data-for="">
@@ -174,10 +152,10 @@
                 </md-chip-set>
                 <div id="slides-upload-box">
                     <label id="new-note-slides-label" for="new-note-slides">
-                        Slide set
+                        Slide set*
                     </label>
                     <br>
-                    <input id="new-note-slides" type="file" accept=".pdf">
+                    <input required id="new-note-slides" type="file" accept=".pdf">
                 </div>
             </div>
             <div slot="actions">
