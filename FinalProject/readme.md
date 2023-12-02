@@ -79,21 +79,23 @@ For the development server, we use a different service worker that does not chec
 
 **Contributions**
 
-| Milestone 1| Team member | Team contributions |
-|------------|-------------|--------------------|
+**Milestone 1** 
+|Team member | Team contributions |
+|------------|--------------------|
 |  **Zelda Lu**  | -   Created all the signin and register API endpoints. <br />-   Created the register and login pages. |
 |  **Deci Horine**  | -   Created all the note data API endpoints.<br />-   Created the home page.<br />- Applied the Vite frontend tool to the project.<br />    |
 |  **Nam Pham** | -   Created all the note management API endpoints.<br />-   Created the note editor page.<br />
 
-| Milestone 2| Team member | Team contributions |
-|------------|-------------|--------------------|
+**Milestone 2** 
+|Team member | Team contributions |
+|------------|--------------------|
 | **Zelda Lu** | - Created authentication router and userDAO <br />- Updated the register and login pages. <br />- Created the token middleware<br /> - Created and populated the database<br />|
 | **Deci Horine** | - Created all of the updated tag endpoints<br />- Developed the home page.<br />- Implemented the connection provider, noteDAO, note router, tagDAO, and tag router<br /> - Created the common javascripts.<br />|
 | **Nam Pham** | - Created the dataDAO and data router.<br />- Updated the note editor. <br /> - Created the dictionary page. <br />|
 
-
-| Final Project | Team member | Team contributions |
-|---------------|-------------|--------------------|
+**Final Project** 
+|Team member | Team contributions |
+|------------|--------------------|
 | **Zelda Lu** | - Make sure all register and login endpoints are fully functional<br />- Updated token middleware and authenticate users correctly  <br />- Make sure new users can be registered and uploaded it in the database<br /> - Changed and updated the database.<br />|
 | **Deci Horine** | - created javascript modules for interacting with notes, interacting with tags, and making API requests<br />- created logo<br />- added offline functionality, service workers, and PWA installability.<br />|
 | **Nam Pham** | - Make sure all notes endpoints are working<br />- Make sure note editor can populate slides images and note data <br /> - Created the autosave feature to make sure users can update the progress on notetaking. <br />|
