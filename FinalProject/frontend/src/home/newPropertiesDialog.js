@@ -89,7 +89,7 @@ function confirmPropertySave() {
  * @returns 
  */
 function confirmCreate() {
-    if (!newNoteNameField.reportValidity())
+    if (!newNoteNameField.reportValidity() || !newNoteSlides.reportValidity())
         return;
 
     let newName = newNoteNameField.value;
