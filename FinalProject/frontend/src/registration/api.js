@@ -20,7 +20,7 @@ registerButton.addEventListener('click', e =>{
     })
     .catch(err => {
       errorBox.classList.remove("hidden");
-      errorBox.textContent = "Error during registration: " + (err.message || "Please try again.");
+      errorBox.textContent = "Error during registration: " + ("User already exist.");
     });
 
 });
