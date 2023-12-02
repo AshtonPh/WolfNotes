@@ -36,7 +36,7 @@ The "TokenMiddleware" is applied as middleware to routes that require authentica
 | Tag manager | User can access this page by having access to the home page | Users are able to edit existing tags and add more tags |
 | Editor | User are able to access this page through the home page | The editor page allow users to take notes and edit notes alongside the slides they have upload it through the home page |
 | Offline list | When user is offline, they will be able to acess to this page | Allows users to view a list of downloaded notes |
-| Offline viewer| This page can be access if the user is offline | This page allows users to view doanloaded notes |
+| Offline viewer| This page can be access if the user is offline | This page allows users to view downloaded notes |
 
 
 
