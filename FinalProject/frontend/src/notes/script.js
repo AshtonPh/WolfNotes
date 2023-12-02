@@ -1,4 +1,6 @@
 import '@material/web/button/filled-button';
+import '@material/web/icon/icon';
+import '@material/web/iconbutton/icon-button'
 
 import * as ns from '../common/js/noteState';
 import * as api from '../common/js/api';

@@ -4,6 +4,7 @@ body, html {
 	margin: 0;
 	color: var(--md-sys-color-on-background);
     background-color: var(--md-sys-color-background);
+    --md-icon-font: 'Material Symbols Rounded';
 }
 
 #container {
@@ -16,6 +17,8 @@ body, html {
 #title-container {
 	display: flex;
 	justify-content: center;
+        align-items: center;
+        gap: 12pt;
 	grid-row: 1;
 }
 
