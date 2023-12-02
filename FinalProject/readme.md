@@ -40,7 +40,7 @@ The "TokenMiddleware" is applied as middleware to routes that require authentica
 
 
 
-**Cashing Strategy**
+**Caching Strategy**
 
 For the production server, we use cache-first fetch requests. Whenever a request is made, our application checks the cache. If the request is not in the cache, it gets cached after a request. This allows us to utilize the cache for faster page loading times.
 
