@@ -45,7 +45,8 @@ ns.getNote(noteId).then(note => {
 		inline: true,
 		plugins: 'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
 		toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-		branding: false
+		branding: false,
+		toolbar_persist: true
 	});
  
   })
