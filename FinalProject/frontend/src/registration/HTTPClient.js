@@ -1,9 +1,9 @@
 const handleError = (res) => {
   if (!res.ok) {
-    return res.json().then((errorData) => {
-      console.error(`HTTP Error: ${res.status} - ${errorData.message}`);
-      let error = new Error(errorData.message);
-      error.status = res.status;
+    let error = new Error(res.statusText);
+    error.status = res.status;
+    return res.json().then(data => {
+      error.message = data.error || "An error occurred";
       throw error;
     });
   }
