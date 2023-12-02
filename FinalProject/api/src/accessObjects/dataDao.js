@@ -15,12 +15,12 @@ function getSlideAndContentsByNoteID(noteId) {
     });
 }
 
-function updateChunk(noteId, slideNumber, contents) {
-  return db.query(
+async function updateChunk(noteId, slideNumber, contents) {
+  const { results } = await db.query(
     "INSERT INTO NoteData (noteID, slideNumber, contents) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE contents = ?",
-   [noteId, slideNumber, contents, contents]).then(({results}) => {
-     getSlideAndContentsByNoteID(results.insertId)
-  });
+    [noteId, slideNumber, contents, contents]);
+  await db.query("UPDATE Note SET dateEdited = ? WHERE noteID = ?", [new Date(), noteId]);
+  getSlideAndContentsByNoteID(results.insertId);
 }
 
 

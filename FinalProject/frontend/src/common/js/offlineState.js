@@ -203,3 +203,12 @@ export async function update(notes) {
         await download(n.server);
     });
 }
+
+export async function clearAll() {
+    if (await anyOfflineNotes()) {
+        await new Promise((res, rej) => {
+            let e = window.indexedDB.deleteDatabase(IDB_NAME);
+            e.onsuccess = e.onerror = () => res();
+        });
+    }
+}
