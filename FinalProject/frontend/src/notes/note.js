@@ -67,7 +67,6 @@ function addNote()
 
 	let newEditor = document.createElement('div');
 	newEditor.className = 'editor';
-	newEditor.contentEditable = true;
 
 	newEditor.id = 'editor' + activeNote;
 
@@ -80,14 +79,13 @@ function addNote()
 function updateActiveNote() {
 	editors = document.querySelectorAll('.editor');
 	editors.forEach((editor) => {
-	editor.contentEditable = false;
 	if (editor.id !== 'editor' + activeNote) {
 	 editor.setAttribute('hidden', '');
 	} else {
 	 editor.removeAttribute('hidden');
 	}
 	});
-	document.querySelector('#editor' + activeNote).contentEditable = true;
+	
 	document.querySelector('#editor' + activeNote).addEventListener('keydown', function(e) {
 		if (e.key === 'Enter') {
 			e.preventDefault();

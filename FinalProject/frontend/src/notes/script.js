@@ -124,7 +124,6 @@ function setContentBySlideNumber(noteId) {
               newDiv.className = 'slide-note fade';
               editor = document.createElement('div');
               editor.className = 'editor';
-              editor.contentEditable = true;
               editor.id = 'editor' + slideNumber;
               editor.setAttribute('hidden', '');
               newDiv.appendChild(editor);
@@ -159,8 +158,3 @@ nextButton.addEventListener("click", () => {
     saveNote(noteId, currentIndex, contents);
 });
 
-document.getElementById('idContentEditable').addEventListener('keypress', (evt) => {
-    if (evt.which === 13) {
-        evt.preventDefault();
-    }
-});
