@@ -32,15 +32,15 @@ The "TokenMiddleware" is applied as middleware to routes that require authentica
 |-------|--------|-----------|
 | Login | Users are allow to sign in  |Allows users to log in to the app as an authenticated user |
 | Register | This can be access through login page and will return to homepage once user has register an account |Allows Users to create account wth a user name and password |
-| Home | This page can be accessed through user sucessfully log in as an user or register as an user| Allows users to browse notes they have created in the past and create new notes and upload slides. The users can also nUser can navgative to offline functionailty through this page |
-| Tag manager | 70% | [Wireframe](https://github.ncsu.edu/engr-csc342/csc342-2023Fall-GroupV/blob/main/Proposal/Wireframes/notes.png) |
-| Editor | 0% | |
-| Offline list | 25% | |
-| Offline viewer| 0% | |
+| Home | This page can be accessed through user sucessfully log in as an user or register as an user| Allows users to browse notes they have created in the past and create new notes and upload slides. The users can also view their notes using tags.User can navgative to offline functionailty through this page |
+| Tag manager | User can access this page by having access to the home page | Users are able to edit existing tags and add more tags |
+| Editor | User are able to access this page through the home page | The editor page allow users to take notes and edit notes alongside the slides they have upload it through the home page |
+| Offline list | When user is offline, they will be able to acess to this page | Allows users to view a list of downloaded notes |
+| Offline viewer| This page can be access if the user is offline | This page allows users to view doanloaded notes |
 
 
 
-**Cashing Strategy**
+**Caching Strategy**
 
 For the production server, we use cache-first fetch requests. Whenever a request is made, our application checks the cache. If the request is not in the cache, it gets cached after a request. This allows us to utilize the cache for faster page loading times.
 
@@ -55,8 +55,6 @@ For the development server, we use a different service worker that does not chec
 | POST | /api/auth/signin | User sign-in |
 | POST | /api/auth/signout | User sign-out |
 | GET | /api/auth/user/ | Get user information for the current user |
-| POST | /api/auth/avatar | A user profile setting |
-| GET | /api/auth/avatar | Getting the profile picture from the user |
 | POST | /api/notes/ | Create a new note |
 | GET | /api/notes/all | Get a list of all notes |
 | GET | /api/notes/suggested | Get a list of suggested notes |
@@ -79,12 +77,26 @@ For the development server, we use a different service worker that does not chec
 
 
 
-
 **Contributions**
 
-| Team member | Team contributions |
-|-------------|--------------------|
+**Milestone 1** 
+|Team member | Team contributions |
+|------------|--------------------|
+|  **Zelda Lu**  | -   Created all the signin and register API endpoints. <br />-   Created the register and login pages. |
+|  **Deci Horine**  | -   Created all the note data API endpoints.<br />-   Created the home page.<br />- Applied the Vite frontend tool to the project.<br />    |
+|  **Nam Pham** | -   Created all the note management API endpoints.<br />-   Created the note editor page.<br />
+
+**Milestone 2** 
+|Team member | Team contributions |
+|------------|--------------------|
 | **Zelda Lu** | - Created authentication router and userDAO <br />- Updated the register and login pages. <br />- Created the token middleware<br /> - Created and populated the database<br />|
 | **Deci Horine** | - Created all of the updated tag endpoints<br />- Developed the home page.<br />- Implemented the connection provider, noteDAO, note router, tagDAO, and tag router<br /> - Created the common javascripts.<br />|
 | **Nam Pham** | - Created the dataDAO and data router.<br />- Updated the note editor. <br /> - Created the dictionary page. <br />|
+
+**Final Project** 
+|Team member | Team contributions |
+|------------|--------------------|
+| **Zelda Lu** | - Make sure all register and login endpoints are fully functional<br />- Updated token middleware and authenticate users correctly  <br />- Make sure new users can be registered and uploaded it in the database<br /> - Changed and updated the database.<br />|
+| **Deci Horine** | - created javascript modules for interacting with notes, interacting with tags, and making API requests<br />- created logo<br />- added offline functionality, service workers, and PWA installability.<br />|
+| **Nam Pham** | - Make sure all notes endpoints are working<br />- Make sure note editor can populate slides images and note data <br /> - Created the autosave feature to make sure users can update the progress on notetaking. <br />|
 
