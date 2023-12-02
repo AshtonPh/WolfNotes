@@ -17,7 +17,7 @@
 
 **What Works and what doesn't work**
   
-Users are able to register as an authenticated user and have their information stored in the database. Once the user is registered and authenticated, they are able to sign in to the app. The home page of the app is fully working, meaning users are allowed to create new notes and browse all notes they have created in the past. They are able to use the tag feature to categorize notes on the home page. Users are also able to edit notes on the home screen. While using the editing notes feature, users are able to edit and take notes, changing the fonts and styles of their notes alongside loaded slides. The offline feature is able to allow users to download notes to view notes offline.
+Users are able to register as an authenticated user and have their information stored in the database. Once the user is registered and authenticated, they are able to sign in to the app. The home page of the app is fully working, meaning users are allowed to create new notes and browse all notes they have created in the past. They are able to use the tag feature to categorize notes on the home page. Users are also able to edit notes on the home screen. While using the editing notes feature, users are able to edit and take notes, changing the fonts and styles of their notes alongside loaded slides. The offline feature is able to allow users to download notes to view notes offline.**Only allow users to upload any pdf files less than 1MB**
 
   
 
