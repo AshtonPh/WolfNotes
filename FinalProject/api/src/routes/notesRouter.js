@@ -45,9 +45,16 @@ router.get('/suggested', tk.TokenMiddleware, (req, res) => {
 
 router.get('/:noteID', tk.TokenMiddleware, async (req, res) => {
     let note = await noteDao.getNoteByID(Number.parseInt(req.params.noteID))
+    
     if (note == undefined) {
         res.status(404);
         res.send({ 'error': 'no note found' });
+        return;
+    }
+
+    if (note.userID != req.userID) {
+        res.status(403);
+        res.send({'error': 'unauthorized'});
         return;
     }
     
