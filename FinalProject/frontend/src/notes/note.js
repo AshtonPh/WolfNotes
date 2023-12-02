@@ -43,8 +43,9 @@ ns.getNote(noteId).then(note => {
 	tinymce.init({
 		selector: '.edit-content',
 		inline: true,
-		plugins: 'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
-		toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+		plugins: 'advlist autolink link lists charmap preview hr anchor pagebreak spellchecker',
+		menubar: 'edit insert view format table',
+		toolbar: 'undo redo | styleselect | bold italic underline| bullist numlist outdent indent link',
 		branding: false,
 		toolbar_persist: true
 	});
@@ -67,7 +68,6 @@ function addNote()
 
 	let newEditor = document.createElement('div');
 	newEditor.className = 'editor';
-	newEditor.contentEditable = true;
 
 	newEditor.id = 'editor' + activeNote;
 
@@ -80,24 +80,24 @@ function addNote()
 function updateActiveNote() {
 	editors = document.querySelectorAll('.editor');
 	editors.forEach((editor) => {
-	editor.contentEditable = false;
 	if (editor.id !== 'editor' + activeNote) {
 	 editor.setAttribute('hidden', '');
 	} else {
 	 editor.removeAttribute('hidden');
 	}
 	});
-	document.querySelector('#editor' + activeNote).contentEditable = true;
-	document.querySelector('#editor' + activeNote).addEventListener('keydown', function(e) {
-		if (e.key === 'Enter') {
-			e.preventDefault();
-		}
-	 });
+	
 }
 
 
-document.querySelector('#editor' + activeNote).addEventListener('keydown', function(e) {
-	if (e.key === 'Enter') {
+document.querySelector('.edit-content').addEventListener('keydown', function(e) {
+	if (e.key === 'Enter' && !e.shiftKey) {
+		e.preventDefault();
+	}
+ });
+
+document.querySelector('.edit-content').addEventListener('keydown', function(e) {
+	if (e.key === 'Backspace' && (document.getElementById('editor'+ activeNote).value == '')) {
 		e.preventDefault();
 	}
  });
