@@ -1,3 +1,4 @@
+import { create } from 'handlebars';
 import * as ns from '../common/js/noteState';
 
 let nextBtn = document.querySelector('#next-btn');
@@ -96,12 +97,13 @@ document.querySelector('.edit-content').addEventListener('keydown', function(e) 
 	}
  });
 
-document.querySelector('.edit-content').addEventListener('keydown', function(e) {
-	if (e.key === 'Backspace' && (document.getElementById('editor'+ activeNote).value == '')) {
-		e.preventDefault();
+setInterval(() => {
+	if (!document.querySelector('#editor'+ activeNote)) {
+		addNote();
+		updateActiveNote();
 	}
- });
-
+	
+}, 500);
 
 
 
